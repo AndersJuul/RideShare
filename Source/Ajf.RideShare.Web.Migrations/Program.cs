@@ -12,7 +12,7 @@ namespace Ajf.RideShare.Web.Migrations
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             var connectionString = ConfigurationManager.AppSettings["DatabaseConnection"];
             //var connectionString = @"Server=ANDERS2014\SQLEXPRESS;Database=RideShare-localdev;Trusted_Connection=True;";
@@ -34,6 +34,7 @@ namespace Ajf.RideShare.Web.Migrations
 #if DEBUG
                 Console.ReadLine();
 #endif
+                return 1;
             }
         }
     }
