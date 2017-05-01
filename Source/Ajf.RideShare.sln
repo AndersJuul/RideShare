@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Web", "Ajf.RideShare.Web\Ajf.RideShare.Web.csproj", "{ECA24689-30AC-4897-97A8-B0A21B42BF98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Web.Migrations", "Ajf.RideShare.Web.Migrations\Ajf.RideShare.Web.Migrations.csproj", "{32CF4314-FC23-4E99-B3DE-52F152965170}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ECA24689-30AC-4897-97A8-B0A21B42BF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECA24689-30AC-4897-97A8-B0A21B42BF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECA24689-30AC-4897-97A8-B0A21B42BF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32CF4314-FC23-4E99-B3DE-52F152965170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32CF4314-FC23-4E99-B3DE-52F152965170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32CF4314-FC23-4E99-B3DE-52F152965170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32CF4314-FC23-4E99-B3DE-52F152965170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
