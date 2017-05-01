@@ -14,7 +14,7 @@ namespace Ajf.RideShare.Web.Migrations
     {
         static int Main(string[] args)
         {
-            var connectionString = ConfigurationManager.AppSettings["DatabaseConnection"];
+            var connectionString = ConfigurationManager.AppSettings["DefaultConnection"];
             //var connectionString = @"Server=ANDERS2014\SQLEXPRESS;Database=RideShare-localdev;Trusted_Connection=True;";
 
             var upgradeEngine = DeployChanges.To
