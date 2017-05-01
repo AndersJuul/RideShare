@@ -36,6 +36,8 @@ namespace Ajf.RideShare.Web.Migrations
 #endif
                 return 1;
             }
+
+            return 0;
         }
     }
 }
