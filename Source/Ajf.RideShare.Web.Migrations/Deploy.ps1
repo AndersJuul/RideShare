@@ -1,1 +1,0 @@
-& .\Ajf.RideShare.Web.Migrations.exe | Write-Host

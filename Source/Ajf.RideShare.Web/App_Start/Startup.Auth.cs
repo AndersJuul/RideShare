@@ -10,7 +10,6 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Ajf.RideShare.Web.Models;
 using Ajf.RideShare.Web.Providers;
-using System.Configuration;
 
 namespace Ajf.RideShare.Web
 {
@@ -23,8 +22,8 @@ namespace Ajf.RideShare.Web
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString( "/Token"),
-                AuthorizeEndpointPath = new PathString( "/Account/Authorize"),
+                TokenEndpointPath = new PathString("/Token"),
+                AuthorizeEndpointPath = new PathString("/Account/Authorize"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
@@ -47,7 +46,7 @@ namespace Ajf.RideShare.Web
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString( "/Account/Login"),
+                LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
@@ -84,11 +83,11 @@ namespace Ajf.RideShare.Web
             //    appId: "",
             //    appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "827505327283-u8lgot2devkkk6qbuivpe23mmpdjirip.apps.googleusercontent.com",
-                ClientSecret = "CZbcrM2E0gP6exLzGu4Y5-Vy"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "",
+            //    ClientSecret = ""
+            //});
         }
     }
 }
