@@ -23,7 +23,9 @@ namespace Ajf.RideShare.Web
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                AuthorizeEndpointPath = new PathString("/Account/Authorize"),
+                AuthorizeEndpointPath =Environment.MachineName.ToLower()=="andersjuulpc"? 
+                new PathString("/Account/Authorize"):
+                new PathString("/RideShare/Account/Authorize"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
