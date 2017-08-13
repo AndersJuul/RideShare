@@ -57,12 +57,22 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="Migrations\201708131745459_CarEventPassenger.cs" />
+    <Compile Include="Migrations\201708131745459_CarEventPassenger.Designer.cs">
+      <DependentUpon>201708131745459_CarEventPassenger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Passenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708131745459_CarEventPassenger.resx">
+      <DependentUpon>201708131745459_CarEventPassenger.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

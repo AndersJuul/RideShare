@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ajf.RideShare.Models;
 using Microsoft.Owin;
 using Owin;
 
@@ -13,6 +14,7 @@ namespace Ajf.RideShare.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ApplicationDbContext.UpdateDatabase();
         }
     }
 }

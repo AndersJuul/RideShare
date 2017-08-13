@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ajf.RideShare.Models
@@ -12,6 +13,15 @@ namespace Ajf.RideShare.Models
         {
         }
 
+        public static void UpdateDatabase()
+        {
+            Database.SetInitializer<ApplicationDbContext>(null);
+
+            var settings = new Migrations.Configuration();
+            var migrator = new DbMigrator(settings);
+            migrator.Update();
+
+        }
         public DbSet<Event> Events { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
