@@ -11,6 +11,7 @@ using Owin;
 using Ajf.RideShare.Web.Models;
 using Ajf.RideShare.Web.Providers;
 using System.Configuration;
+using Ajf.RideShare.Models;
 
 namespace Ajf.RideShare.Web
 {
