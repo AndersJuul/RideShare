@@ -10,8 +10,8 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using System.Xml.Linq;
 using Newtonsoft.Json;
+using System.Xml.Linq;
 
 namespace Ajf.RideShare.Web.Areas.HelpPage
 {
@@ -378,7 +378,7 @@ namespace Ajf.RideShare.Web.Areas.HelpPage
             try
             {
                 object parsedJson = JsonConvert.DeserializeObject(str);
-                return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                return JsonConvert.SerializeObject(parsedJson,Newtonsoft.Json.Formatting.Indented);
             }
             catch
             {
@@ -392,7 +392,7 @@ namespace Ajf.RideShare.Web.Areas.HelpPage
         {
             try
             {
-                XDocument xml = XDocument.Parse(str);
+                XDocument xml =XDocument.Parse(str);
                 return xml.ToString();
             }
             catch

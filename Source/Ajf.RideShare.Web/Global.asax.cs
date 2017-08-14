@@ -3,6 +3,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Ajf.Nuget.Logging;
+using Serilog;
 
 namespace Ajf.RideShare.Web
 {
@@ -10,6 +12,9 @@ namespace Ajf.RideShare.Web
     {
         protected void Application_Start()
         {
+            Log.Logger = StandardLoggerConfigurator.GetEnrichedLogger();
+            Log.Logger.Information("Starting...");
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
