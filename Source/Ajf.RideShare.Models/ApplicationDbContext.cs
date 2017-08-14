@@ -17,9 +17,9 @@ namespace Ajf.RideShare.Models
         {
             Database.SetInitializer<ApplicationDbContext>(null);
 
-            var settings = new Migrations.Configuration();
-            var migrator = new DbMigrator(settings);
-            migrator.Update();
+            //var settings = new Migrations.Configuration();
+            //var migrator = new DbMigrator(settings);
+            //migrator.Update();
 
         }
         public DbSet<Event> Events { get; set; }
