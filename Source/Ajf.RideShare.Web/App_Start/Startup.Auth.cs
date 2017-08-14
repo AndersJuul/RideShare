@@ -10,8 +10,6 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Ajf.RideShare.Web.Models;
 using Ajf.RideShare.Web.Providers;
-using System.Configuration;
-using Ajf.RideShare.Models;
 
 namespace Ajf.RideShare.Web
 {
@@ -25,7 +23,7 @@ namespace Ajf.RideShare.Web
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                AuthorizeEndpointPath =new PathString(ConfigurationManager.AppSettings["webappname"]+ "/Account/Authorize"),
+                AuthorizeEndpointPath = new PathString("/Account/Authorize"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
@@ -48,7 +46,7 @@ namespace Ajf.RideShare.Web
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString(ConfigurationManager.AppSettings["webappname"]+"/Account/Login"),
+                LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.

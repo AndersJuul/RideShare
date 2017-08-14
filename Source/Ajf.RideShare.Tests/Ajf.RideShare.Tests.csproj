@@ -90,12 +90,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ajf.RideShare.Web\Ajf.RideShare.Web.csproj">
-      <Project>{C98F4C7A-F04C-42CC-92B5-B8B91255623A}</Project>
-      <Name>Ajf.RideShare.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
