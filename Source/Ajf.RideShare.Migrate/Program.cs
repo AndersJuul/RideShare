@@ -1,5 +1,8 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System;
+using System.Data.Entity.Migrations;
+using Ajf.Nuget.Logging;
 using Ajf.RideShare.Models.Migrations;
+using Serilog;
 
 namespace Ajf.RideShare.Migrate
 {
@@ -7,9 +10,21 @@ namespace Ajf.RideShare.Migrate
     {
         static void Main(string[] args)
         {
-            var settings = new Configuration(){};
-            var migrator = new DbMigrator(settings);
-            migrator.Update();
+            Log.Logger = StandardLoggerConfigurator.GetEnrichedLogger();
+            Log.Logger.Information("Starting...");
+
+            try
+            {
+                var settings = new Configuration() { };
+                var migrator = new DbMigrator(settings);
+                migrator.Update();
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error(e,"Error during migration");
+                throw;
+            }
+            Log.Logger.Information("Done...");
         }
     }
 }
