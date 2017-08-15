@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Models", "Ajf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Web", "Ajf.RideShare.Web\Ajf.RideShare.Web.csproj", "{2CEC6BC4-37AE-4FB4-8EED-B74EF917CABA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Migrate", "Ajf.RideShare.Migrate\Ajf.RideShare.Migrate.csproj", "{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2CEC6BC4-37AE-4FB4-8EED-B74EF917CABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CEC6BC4-37AE-4FB4-8EED-B74EF917CABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CEC6BC4-37AE-4FB4-8EED-B74EF917CABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
