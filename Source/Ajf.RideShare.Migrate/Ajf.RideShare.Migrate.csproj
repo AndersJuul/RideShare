@@ -99,7 +99,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AfterDeploy.ps1">
+    <Content Include="Deploy.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
