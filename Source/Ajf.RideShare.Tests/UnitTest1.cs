@@ -2,9 +2,6 @@
 
 namespace Ajf.RideShare.Tests
 {
-    /// <summary>
-    /// Summary description for UnitTest1
-    /// </summary>
     [TestFixture]
     public class UnitTest1
     {
@@ -12,9 +9,7 @@ namespace Ajf.RideShare.Tests
         [TestCase]
         public void TestMethod1()
         {
-            //
-            // TODO: Add test logic here
-            //
+            Assert.AreEqual(1,1);
         }
     }
 }
