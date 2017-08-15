@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.Migrations;
+using Ajf.RideShare.Models.Migrations;
 
 namespace Ajf.RideShare.Migrate
 {
@@ -10,6 +7,9 @@ namespace Ajf.RideShare.Migrate
     {
         static void Main(string[] args)
         {
+            var settings = new Configuration(){};
+            var migrator = new DbMigrator(settings);
+            migrator.Update();
         }
     }
 }
