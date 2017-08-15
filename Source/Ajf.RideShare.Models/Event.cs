@@ -16,6 +16,8 @@ namespace Ajf.RideShare.Models
         public DateTime TimeFrom { get; set; }
         [Required]
         public DateTime TimeTo { get; set; }
+        [Required]
+        public DateTime CreateTime { get; set; }
 
         [Required]
         public ICollection<Car> Cars { get; set; }

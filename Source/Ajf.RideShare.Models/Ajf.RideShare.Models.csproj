@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201708131745459_CarEventPassenger.Designer.cs">
       <DependentUpon>201708131745459_CarEventPassenger.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708151439482_EventFields.cs" />
+    <Compile Include="Migrations\201708151439482_EventFields.Designer.cs">
+      <DependentUpon>201708151439482_EventFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Passenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +77,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708131745459_CarEventPassenger.resx">
       <DependentUpon>201708131745459_CarEventPassenger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708151439482_EventFields.resx">
+      <DependentUpon>201708151439482_EventFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
