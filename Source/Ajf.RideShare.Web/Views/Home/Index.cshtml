@@ -1,5 +1,13 @@
-﻿@section SPAViews {
+﻿@model Ajf.RideShare.Web.Controllers.HomeIndexViewModel
+
+@section SPAViews {
     @Html.Partial("_Home")
+
+    <div>Events</div>
+    @foreach (var eventViewModel in Model.Events)
+    {
+        <div>@eventViewModel.Description</div>
+    }
 }
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")
