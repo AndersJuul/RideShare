@@ -3,17 +3,20 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Ajf.Nuget.Logging;
 using Ajf.RideShare.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ajf.RideShare.Web.Models;
+using Serilog;
 
 namespace Ajf.RideShare.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly IMailSender _mailSender;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -21,8 +24,9 @@ namespace Ajf.RideShare.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IMailSender mailSender)
         {
+            _mailSender = mailSender;
             UserManager = userManager;
             SignInManager = signInManager;
         }
@@ -87,6 +91,9 @@ namespace Ajf.RideShare.Web.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+            Log.Logger.Information($"User tried to log in : {result}, {model.Email}");
+
             switch (result)
             {
                 case SignInStatus.Success:
