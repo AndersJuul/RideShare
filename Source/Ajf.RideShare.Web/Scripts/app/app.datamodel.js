@@ -2,7 +2,7 @@
     var self = this;
     // Routes
     self.userInfoUrl = "/api/Me";
-    self.siteUrl = "/";
+    self.siteUrl = "/rideshare";
 
     // Route operations
 

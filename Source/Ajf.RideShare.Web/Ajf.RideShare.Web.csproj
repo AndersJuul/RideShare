@@ -17,7 +17,7 @@
     <AssemblyName>Ajf.RideShare.Web</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -410,7 +410,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56875</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51023/RideShare</IISUrl>
+          <IISUrl>http://localhost/RideShare</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://localhost:51023/RideShare</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

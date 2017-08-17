@@ -22,7 +22,17 @@ namespace Ajf.RideShare.Web.Providers
         {
             if (context.ClientId == _publicClientId)
             {
-                Uri expectedRootUri = new Uri(context.Request.Uri, "/");
+                Uri expectedRootUri;
+                var returnUrl = context.Request.Query["returnUrl"];
+
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    expectedRootUri = new Uri(returnUrl);
+                }
+                else
+                {
+                    expectedRootUri = new Uri(context.Request.Uri, "/RideShare/");
+                }
 
                 if (expectedRootUri.AbsoluteUri == context.RedirectUri)
                 {
@@ -30,8 +40,16 @@ namespace Ajf.RideShare.Web.Providers
                 }
                 else if (context.ClientId == "web")
                 {
-                    var expectedUri = new Uri(context.Request.Uri, "/");
-                    context.Validated(expectedUri.AbsoluteUri);
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        var expectedUri = new Uri(returnUrl);
+                        context.Validated(expectedUri.AbsoluteUri);
+                    }
+                    else
+                    {
+                        expectedRootUri = new Uri(context.Request.Uri, "/RideShare/");
+                        context.Validated(expectedRootUri.AbsoluteUri);
+                    }
                 }
             }
 
