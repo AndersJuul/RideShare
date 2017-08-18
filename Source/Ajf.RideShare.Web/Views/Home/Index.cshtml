@@ -1,13 +1,9 @@
-﻿@model Ajf.RideShare.Web.Controllers.HomeIndexViewModel
+﻿@model Ajf.RideShare.Web.Models.Home.HomeIndexViewModel
 
 @section SPAViews {
     @Html.Partial("_Home")
 
-    <div>Events</div>
-    @foreach (var eventViewModel in Model.Events)
-    {
-        <div>@eventViewModel.Description</div>
-    }
+    @Html.Partial("_EventList", Model.Events);
 }
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")

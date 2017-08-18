@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Web.Mvc;
+using Ajf.RideShare.Web.Models;
+using Ajf.RideShare.Web.Models.Home;
 
 namespace Ajf.RideShare.Web.Controllers
 {
