@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Web.Mvc;
-using Ajf.RideShare.Web.Models;
+using Ajf.RideShare.Models;
 using Ajf.RideShare.Web.Models.Home;
+using AutoMapper;
 
 namespace Ajf.RideShare.Web.Controllers
 {
@@ -10,15 +12,17 @@ namespace Ajf.RideShare.Web.Controllers
     {
         public ActionResult Index()
         {
-            var homeIndexViewModel = new HomeIndexViewModel
+            using (var context = new ApplicationDbContext())
             {
-                Events = new Collection<EventViewModel>
+                var events = context.Events; //.Where(x => x.OwnerUserId == "");
+                var eventViewModels = events.Select(Mapper.Map<EventViewModel>).ToArray();
+
+                var homeIndexViewModel = new HomeIndexViewModel
                 {
-                    new EventViewModel {Description = "Abc"},
-                    new EventViewModel {Description = "Def"}
-                }
-            };
-            return View(homeIndexViewModel);
+                    Events = new Collection<EventViewModel>(eventViewModels)
+                };
+                return View(homeIndexViewModel);
+            }
         }
     }
 }
