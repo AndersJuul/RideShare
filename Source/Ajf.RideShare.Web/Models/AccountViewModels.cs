@@ -63,7 +63,7 @@ namespace Ajf.RideShare.Web.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Husk mig?")]
         public bool RememberMe { get; set; }
     }
 
