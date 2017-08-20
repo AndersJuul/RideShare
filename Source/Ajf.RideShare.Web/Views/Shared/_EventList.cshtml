@@ -1,6 +1,6 @@
 ﻿@model ICollection<Ajf.RideShare.Web.Models.Home.EventViewModel>
 
-@foreach (var eventViewModel in Model)
+@foreach (var eventViewModel in Model.OrderBy(x=>x.TimeFrom))
 {
     @Html.Partial("_Event", eventViewModel)
 }
