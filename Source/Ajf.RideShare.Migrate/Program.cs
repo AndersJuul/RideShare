@@ -11,11 +11,11 @@ namespace Ajf.RideShare.Migrate
         static void Main(string[] args)
         {
             Log.Logger = StandardLoggerConfigurator.GetEnrichedLogger();
-            Log.Logger.Information("Starting...");
+            Log.Logger.Information("Starting migration...");
 
             try
             {
-                var settings = new Configuration() { };
+                var settings = new Configuration();
                 var migrator = new DbMigrator(settings);
                 migrator.Update();
             }
@@ -24,7 +24,7 @@ namespace Ajf.RideShare.Migrate
                 Log.Logger.Error(e,"Error during migration");
                 throw;
             }
-            Log.Logger.Information("Done...");
+            Log.Logger.Information("Migration done without problems...");
         }
     }
 }

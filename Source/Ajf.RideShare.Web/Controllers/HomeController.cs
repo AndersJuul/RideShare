@@ -14,7 +14,8 @@ namespace Ajf.RideShare.Web.Controllers
         {
             using (var context = new ApplicationDbContext())
             {
-                var events = context.Events; //.Where(x => x.OwnerUserId == "");
+                var applicationUser = context.Users.Single(x=>x.UserName==User.Identity.Name);
+                var events = context.Events.Where(x => x.OwnerUserId == applicationUser.Id);
                 var eventViewModels = events.Select(Mapper.Map<EventViewModel>).ToArray();
 
                 var homeIndexViewModel = new HomeIndexViewModel

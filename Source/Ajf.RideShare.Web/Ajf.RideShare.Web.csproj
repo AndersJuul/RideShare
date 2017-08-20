@@ -350,7 +350,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\_Event.cshtml" />
-    <Content Include="Views\Home\_EventList.cshtml" />
+    <Content Include="Views\Shared\_EventList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

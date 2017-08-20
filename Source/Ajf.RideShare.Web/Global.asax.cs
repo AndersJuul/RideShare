@@ -4,6 +4,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Ajf.Nuget.Logging;
+using Ajf.RideShare.Models;
+using Ajf.RideShare.Web.Models.Home;
+using AutoMapper;
 using Serilog;
 
 namespace Ajf.RideShare.Web
@@ -14,6 +17,11 @@ namespace Ajf.RideShare.Web
         {
             Log.Logger = StandardLoggerConfigurator.GetEnrichedLogger();
             Log.Logger.Information("Starting...");
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Event, EventViewModel>();
+            });
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
