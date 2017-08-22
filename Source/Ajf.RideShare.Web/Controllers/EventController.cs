@@ -18,7 +18,6 @@ namespace Ajf.RideShare.Web.Controllers
                 var eventDetailsViewModel = Mapper.Map<EventDetailsViewModel>(event1);
                 return View("EventDetails", eventDetailsViewModel);
             }
-
         }
     }
 
