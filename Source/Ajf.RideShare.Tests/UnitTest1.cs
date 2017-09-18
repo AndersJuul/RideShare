@@ -8,6 +8,7 @@ namespace Ajf.RideShare.Tests
     public class UnitTest1
     {
         [Test]
+        [Category("Selenium")]
         public void TestMethod1()
         {
             using (var chromeDriver = new ChromeDriver())
@@ -23,6 +24,12 @@ namespace Ajf.RideShare.Tests
                 passwordTextBox.SendKeys("Frank1");
 
             }
+        }
+        [Test]
+        //[Category("Selenium")]
+        public void TestMethod2()
+        {
+            Assert.AreEqual(1,1);
         }
     }
 }
