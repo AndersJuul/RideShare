@@ -1,15 +1,28 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Ajf.RideShare.Tests
 {
     [TestFixture]
     public class UnitTest1
     {
-
-        [TestCase]
+        [Test]
         public void TestMethod1()
         {
-            Assert.AreEqual(1,1);
+            using (var chromeDriver = new ChromeDriver())
+            {
+                chromeDriver.Manage().Window.Maximize();
+                chromeDriver.Navigate().GoToUrl("http://localhost/RideShare");
+                var emailTextBox = chromeDriver.FindElementById("Email");
+                emailTextBox.Clear();
+                emailTextBox.SendKeys("frank@email.dk");
+
+                var passwordTextBox = chromeDriver.FindElementById("Password");
+                passwordTextBox.Clear();
+                passwordTextBox.SendKeys("Frank1");
+
+            }
         }
     }
 }

@@ -354,6 +354,8 @@
     <Content Include="Views\Shared\_Event.cshtml" />
     <Content Include="Views\Shared\_EventList.cshtml" />
     <Content Include="Views\Event\EventDetails.cshtml" />
+    <Content Include="Views\Event\AddCar.cshtml" />
+    <Content Include="Views\Event\AddPassenger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

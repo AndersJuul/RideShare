@@ -19,6 +19,16 @@ namespace Ajf.RideShare.Web.Controllers
                 return View("EventDetails", eventDetailsViewModel);
             }
         }
+
+        public ActionResult AddCar()
+        {
+            return View();
+        }
+
+        public ActionResult AddPassenger()
+        {
+            return View();
+        }
     }
     [Authorize]
     public class CarsController : Controller

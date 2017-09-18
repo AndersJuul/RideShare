@@ -48,3 +48,7 @@ textarea {
     display: inline-block;
     width: 150px;
 }
+.event-time {
+    display: inline-block;
+    font-weight: bold;
+}

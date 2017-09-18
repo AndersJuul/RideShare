@@ -1,0 +1,12 @@
+﻿@model Ajf.RideShare.Web.Models.Home.EventDetailsViewModel
+
+@{
+    ViewBag.Title = "Event";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Description</h2>
+<span class="event-time">@Model.TimeFrom</span>-<span class="event-time">@Model.TimeTo</span>
+
+<p><a class="btn btn-default" href="~/Event/AddCar">Tilføj bil&raquo;</a></p>
+<p><a class="btn btn-default" href="~/Event/AddPassenger">Tilføj passager&raquo;</a></p>
