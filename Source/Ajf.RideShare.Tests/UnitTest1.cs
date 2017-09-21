@@ -28,7 +28,7 @@ namespace Ajf.RideShare.Tests
         //[Category("Selenium")]
         public void TestMethod2()
         {
-            Assert.AreEqual(1, 1);
+            Assert.Pass("This is good");
         }
     }
 }
