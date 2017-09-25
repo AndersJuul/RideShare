@@ -71,7 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeleniumTests.cs" />
+    <Compile Include="Selenium\BaseSeleniumTests.cs" />
+    <Compile Include="Selenium\SeleniumTests.cs" />
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
