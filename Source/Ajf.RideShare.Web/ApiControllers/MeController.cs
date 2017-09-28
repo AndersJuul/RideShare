@@ -1,10 +1,10 @@
 ﻿using System.Web;
 using System.Web.Http;
+using Ajf.RideShare.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Ajf.RideShare.Web.Models;
 
-namespace Ajf.RideShare.Web.Controllers
+namespace Ajf.RideShare.Web.ApiControllers
 {
     [Authorize]
     public class MeController : ApiController
