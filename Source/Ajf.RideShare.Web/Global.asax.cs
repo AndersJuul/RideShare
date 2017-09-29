@@ -8,6 +8,7 @@ using Ajf.RideShare.Models;
 using Ajf.RideShare.Web.Models.ViewModels.Home;
 using AutoMapper;
 using Serilog;
+using WebApi.StructureMap;
 
 namespace Ajf.RideShare.Web
 {
@@ -17,6 +18,10 @@ namespace Ajf.RideShare.Web
         {
             Log.Logger = StandardLoggerConfigurator.GetEnrichedLogger();
             Log.Logger.Information("Starting...");
+
+            GlobalConfiguration
+                .Configuration
+                .UseStructureMap(x => { x.AddRegistry<WebRegistry>(); });
 
             Mapper.Initialize(config =>
             {
