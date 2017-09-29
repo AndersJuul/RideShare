@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Ajf.RideShare.Tests.Selenium
 {
@@ -12,6 +13,14 @@ namespace Ajf.RideShare.Tests.Selenium
             LoginFrank();
 
             Assert.AreEqual("Hovedside - Samkørsel", ChromeDriver.Title);
+        }
+
+        [Test]
+        public void ThatApiReturnsEvents()
+        {
+            ChromeDriver.Navigate().GoToUrl(new Uri(BaseUri,"api/event"));
+
+            //Assert.AreEqual("Hovedside - Samkørsel", ChromeDriver.Title);
         }
     }
 }

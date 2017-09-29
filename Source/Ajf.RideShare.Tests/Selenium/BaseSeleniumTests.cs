@@ -1,3 +1,4 @@
+using System;
 using System.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
@@ -9,12 +10,16 @@ namespace Ajf.RideShare.Tests.Selenium
     {
         public RemoteWebDriver ChromeDriver { get; set; }
 
+        public Uri BaseUri { get; set; }
+
         [SetUp]
         public void SetUp()
         {
+            BaseUri = new Uri(ConfigurationManager.AppSettings["urlRideShareWeb"]);
+
             ChromeDriver = new ChromeDriver();
             ChromeDriver.Manage().Window.Maximize();
-            ChromeDriver.Navigate().GoToUrl(ConfigurationManager.AppSettings["urlRideShareWeb"]);
+            ChromeDriver.Navigate().GoToUrl(BaseUri);
         }
 
         [TearDown]
