@@ -19,17 +19,8 @@ namespace Ajf.RideShare.Web.Api
         // GET api/<controller>
         public Event[] Get()
         {
-            using (var context = new ApplicationDbContext())
-            {
-                var contextEvents = context
-                    .Events.ToArray();
-                var queryable = contextEvents
-                    .Select(Mapper.Map<Event>);
-                var events = queryable
-                    .ToArray();
-
-                return events;
-            }
+            return _eventService
+                .GetEvents();
         }
     }
 }
