@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Ajf.RideShare.Web.Services;
+using NUnit.Framework;
 
 namespace Ajf.RideShare.Tests
 {
@@ -9,6 +10,7 @@ namespace Ajf.RideShare.Tests
         //[Category("Selenium")]
         public void TestMethod2()
         {
+            var eventService = new EventService(null);
             Assert.Pass("This is good");
         }
     }
