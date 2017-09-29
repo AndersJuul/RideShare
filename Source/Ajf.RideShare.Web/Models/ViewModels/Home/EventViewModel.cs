@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ajf.RideShare.Web.Models.Home
+namespace Ajf.RideShare.Web.Models.ViewModels.Home
 {
     public class EventViewModel
     {

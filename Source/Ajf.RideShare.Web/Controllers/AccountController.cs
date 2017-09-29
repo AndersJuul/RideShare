@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ajf.RideShare.Web.Models;
+using Ajf.RideShare.Web.Models.ViewModels;
 using Serilog;
 
 namespace Ajf.RideShare.Web.Controllers

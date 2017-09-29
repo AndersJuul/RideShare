@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ajf.RideShare.Web.Models;
+using Ajf.RideShare.Web.Models.ViewModels;
 
 namespace Ajf.RideShare.Web.Controllers
 {

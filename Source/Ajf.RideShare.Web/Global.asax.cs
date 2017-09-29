@@ -5,7 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Ajf.Nuget.Logging;
 using Ajf.RideShare.Models;
-using Ajf.RideShare.Web.Models.Home;
+using Ajf.RideShare.Web.Models.ViewModels.Home;
 using AutoMapper;
 using Serilog;
 

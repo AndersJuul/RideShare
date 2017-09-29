@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
 using Ajf.RideShare.Web.Models;
+using Ajf.RideShare.Web.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 

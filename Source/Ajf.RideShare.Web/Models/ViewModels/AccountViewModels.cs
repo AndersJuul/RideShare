@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ajf.RideShare.Web.Models
+namespace Ajf.RideShare.Web.Models.ViewModels
 {
     // Models returned by AccountController actions.
     public class ExternalLoginConfirmationViewModel

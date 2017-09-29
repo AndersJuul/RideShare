@@ -5,9 +5,9 @@ using System.Web.Http;
 namespace Ajf.RideShare.Web.Api
 {
     public class DashController : ApiController
-    {
+        {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+            public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }

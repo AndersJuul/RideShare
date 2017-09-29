@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ajf.RideShare.Models;
-using Ajf.RideShare.Web.Models.Home;
+using Ajf.RideShare.Web.Models.ViewModels.Home;
 using AutoMapper;
 
 namespace Ajf.RideShare.Web.Controllers

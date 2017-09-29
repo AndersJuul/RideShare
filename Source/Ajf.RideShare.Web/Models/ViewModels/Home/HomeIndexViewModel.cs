@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Ajf.RideShare.Web.Models.Home
+namespace Ajf.RideShare.Web.Models.ViewModels.Home
 {
     public class HomeIndexViewModel
     {
