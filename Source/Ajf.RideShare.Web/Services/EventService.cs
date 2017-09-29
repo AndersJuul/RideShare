@@ -1,24 +1,20 @@
-using System.Linq;
-using Ajf.RideShare.Models;
-using AutoMapper;
+using Ajf.RideShare.Web.Models.ApiModels;
+using Ajf.RideShare.Web.Repositories;
 
 namespace Ajf.RideShare.Web.Services
 {
     public class EventService : IEventService
     {
-        public Models.ApiModels.Event[] GetEvents()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var contextEvents = context
-                    .Events.ToArray();
-                var queryable = contextEvents
-                    .Select(Mapper.Map<Models.ApiModels.Event>);
-                var events = queryable
-                    .ToArray();
+        private readonly IEventRepository _eventRepository;
 
-                return events;
-            }
+        public EventService(IEventRepository eventRepository)
+        {
+            _eventRepository = eventRepository;
+        }
+
+        public Event[] GetEvents()
+        {
+            return _eventRepository.GetEvents();
         }
     }
 }

@@ -226,7 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\EventController.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Services\IEventService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
