@@ -22,6 +22,7 @@ namespace Ajf.RideShare.Web
             {
                 config.CreateMap<Event, EventViewModel>();
                 config.CreateMap<Event, EventDetailsViewModel>();
+                config.CreateMap<Event, Models.ApiModels.Event>();
             });
 
             AreaRegistration.RegisterAllAreas();

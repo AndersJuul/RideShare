@@ -12,10 +12,14 @@ namespace Ajf.RideShare.Web.Api
         {
             using (var context = new ApplicationDbContext())
             {
-                return context
-                    .Events
-                    .Select(x=>Mapper.Map<Web.Models.ApiModels.Event>(x))
+                var contextEvents = context
+                    .Events.ToArray();
+                var queryable = contextEvents
+                    .Select(Mapper.Map<Models.ApiModels.Event>);
+                var events = queryable
                     .ToArray();
+
+                return events;
             }
         }
     }
