@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace Ajf.RideShare.Web.ApiControllers
+namespace Ajf.RideShare.Web.Api
 {
     public class DashController : ApiController
     {
