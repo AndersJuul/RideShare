@@ -226,6 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\EventController.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Repositories\IEventRepository.cs" />

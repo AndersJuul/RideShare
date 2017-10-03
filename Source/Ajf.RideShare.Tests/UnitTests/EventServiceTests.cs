@@ -11,6 +11,12 @@ namespace Ajf.RideShare.Tests.UnitTests
     [TestFixture]
     public class EventServiceTests:BaseUnitTests
     {
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
+        }
+
         [Test]
         public void ThatServicePassesGetResultFromRepository()
         {

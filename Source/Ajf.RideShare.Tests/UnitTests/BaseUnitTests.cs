@@ -8,7 +8,7 @@ namespace Ajf.RideShare.Tests.UnitTests
         protected Fixture _fixture;
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             _fixture = new Fixture();
         }

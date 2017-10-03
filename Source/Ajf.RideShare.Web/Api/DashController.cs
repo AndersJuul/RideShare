@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Ajf.RideShare.Web.Services;
+using System.Linq;
 
 namespace Ajf.RideShare.Web.Api
 {
     public class DashController : ApiController
         {
-        // GET api/<controller>
+            private readonly IEventService _eventService;
+
+            public DashController(IEventService eventService)
+            {
+                _eventService = eventService;
+            }
+
+            // GET api/<controller>
             public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -15,9 +24,11 @@ namespace Ajf.RideShare.Web.Api
         // GET api/<controller>/5
         public StatResult Get(int id)
         {
-            return new StatResult()
+            return new StatResult
             {
-                Sec = DateTime.Now.Second
+                Sec = DateTime.Now.Second,
+                Count = _eventService
+                    .GetEvents().Length
             };
         }
 
@@ -40,5 +51,6 @@ namespace Ajf.RideShare.Web.Api
     public class StatResult
     {
         public int Sec { get; set; }
+        public int Count { get; set; }
     }
 }

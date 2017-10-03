@@ -1,4 +1,5 @@
 using Ajf.RideShare.Web.Api;
+using Ajf.RideShare.Web.Repositories;
 using Ajf.RideShare.Web.Services;
 using StructureMap;
 
@@ -9,6 +10,7 @@ namespace Ajf.RideShare.Web
         public WebRegistry()
         {
             For<IEventService>().Use<EventService>();
+            For<IEventRepository>().Use<EventRepository>();
         }
     }
 }
