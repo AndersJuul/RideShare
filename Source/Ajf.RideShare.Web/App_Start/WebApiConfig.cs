@@ -37,16 +37,16 @@ namespace Ajf.RideShare.Web
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             base.OnActionExecuted(actionExecutedContext);
-            actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
+            switch (actionExecutedContext.Request.Headers.Host)
+            {
+                case "localhost":
+                    actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Origin", actionExecutedContext.Request.Headers.Host);
+                    break;
+            }
+            //actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Methods","GET, POST, PATCH, PUT, DELETE, OPTIONS");
             actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Headers","Origin, Content-Type, X-Auth-Token");
         }
     }
-    //public class AddCustomHeaderFilter : ActionFilterAttribute
-    //{
-    //    public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-    //    {
-    //        actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-    //    }
-    //}
 }
