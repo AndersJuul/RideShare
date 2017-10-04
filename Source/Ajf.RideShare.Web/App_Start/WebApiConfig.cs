@@ -17,8 +17,7 @@ namespace Ajf.RideShare.Web
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            config.Filters.Add(new AddCustomHeaderFilter());
-
+            config.Filters.Add(new AddCustomHeaderActionFilterAttribute());
             // Use camel case for JSON data.
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
@@ -32,11 +31,22 @@ namespace Ajf.RideShare.Web
             );
         }
     }
-    public class AddCustomHeaderFilter : ActionFilterAttribute
+
+    public class AddCustomHeaderActionFilterAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            base.OnActionExecuted(actionExecutedContext);
+            actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Methods","GET, POST, PATCH, PUT, DELETE, OPTIONS");
+            actionExecutedContext.ActionContext.Response.Headers.Add("Access-Control-Allow-Headers","Origin, Content-Type, X-Auth-Token");
         }
     }
+    //public class AddCustomHeaderFilter : ActionFilterAttribute
+    //{
+    //    public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+    //    {
+    //        actionExecutedContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+    //    }
+    //}
 }
