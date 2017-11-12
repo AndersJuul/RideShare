@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Tests", "Ajf.RideShare.Tests\Ajf.RideShare.Tests.csproj", "{933B698A-C28A-4DA8-A10E-A613D18B14D3}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Web", "Ajf.RideShare.Web\Ajf.RideShare.Web.csproj", "{2CEC6BC4-37AE-4FB4-8EED-B74EF917CABA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Migrate", "Ajf.RideShare.Migrate\Ajf.RideShare.Migrate.csproj", "{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.Security.Client", "Ajf.Security.Client\Ajf.Security.Client.csproj", "{23FB7736-3CFB-4A51-A029-B29308A735E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Api", "Ajf.RideShare.Api\Ajf.RideShare.Api.csproj", "{ACDB5C82-C2A3-457D-B5DA-0E64682FDEAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +37,19 @@ Global
 		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{752FA731-29A2-4FF4-8AC4-6ABF7A19D000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23FB7736-3CFB-4A51-A029-B29308A735E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23FB7736-3CFB-4A51-A029-B29308A735E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23FB7736-3CFB-4A51-A029-B29308A735E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23FB7736-3CFB-4A51-A029-B29308A735E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACDB5C82-C2A3-457D-B5DA-0E64682FDEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDB5C82-C2A3-457D-B5DA-0E64682FDEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDB5C82-C2A3-457D-B5DA-0E64682FDEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACDB5C82-C2A3-457D-B5DA-0E64682FDEAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEF0CBA2-86D5-4F9A-BC21-FD774596519E}
 	EndGlobalSection
 EndGlobal

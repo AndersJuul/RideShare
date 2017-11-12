@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IdentityModel.Claims;
+using System.Web.Helpers;
+using System.Web.Http;
 using Ajf.RideShare.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,6 +14,9 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Ajf.RideShare.Web.Models;
 using Ajf.RideShare.Web.Providers;
+using IdentityServer3.AccessTokenValidation;
+using Microsoft.Owin.Security.OpenIdConnect;
+
 
 namespace Ajf.RideShare.Web
 {
@@ -24,7 +30,7 @@ namespace Ajf.RideShare.Web
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                AuthorizeEndpointPath = new PathString("/Account/Authorize"),
+                AuthorizeEndpointPath = new PathString("/Ajf.IdentityServer3/Core"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
@@ -39,37 +45,67 @@ namespace Ajf.RideShare.Web
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            //app.CreatePerOwinContext(ApplicationDbContext.Create);
+            //app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            //app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
-                Provider = new CookieAuthenticationProvider
-                {
-                    // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(20),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
+                AuthenticationType ="Cookies",// DefaultAuthenticationTypes.ApplicationCookie,
+                //LoginPath = new PathString("/Account/Login"),
+                //Provider = new CookieAuthenticationProvider
+                //{
+                //    // Enables the application to validate the security stamp when the user logs in.
+                //    // This is a security feature which is used when you change a password or add an external login to your account.  
+                //    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                //        validateInterval: TimeSpan.FromMinutes(20),
+                //        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                //}
             });
             // Use a cookie to temporarily store information about a user logging in with a third party login provider
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
-            app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
+            //app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
 
             // Enables the application to remember the second login verification factor such as phone or email.
             // Once you check this option, your second step of verification during the login process will be remembered on the device where you logged in from.
             // This is similar to the RememberMe option when you log in.
-            app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+            //app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Enable the application to use bearer tokens to authenticate users
-            app.UseOAuthBearerTokens(OAuthOptions);
+            //app.UseOAuthBearerTokens(OAuthOptions);
+
+            //app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions()
+            //{
+            //    Authority = "http://localhost/ajf.identityserver3/Core",
+            //    RequiredScopes = new[] {"RideShare.Events.Read"}
+            //});
+
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
+            {
+                ClientId = "ridesharemvc",
+                Authority = "http://localhost/Ajf.IdentityServer3/Core",
+                RedirectUri = "http://localhost:56875/",
+                SignInAsAuthenticationType = "Cookies",
+                ResponseType = "code id_token",
+                Scope = "openid profile",
+                Notifications = new OpenIdConnectAuthenticationNotifications()
+                {
+                    SecurityTokenValidated = async n =>
+                    {
+                        TokenHelper.DecodeAndWrite(n.ProtocolMessage.IdToken);
+                    }
+                }
+            });
+
+            //HttpConfiguration config = WebApiConfig.Register(new HttpConfiguration());
+            //app.UseWebApi(config);
+           
+
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
@@ -92,3 +128,4 @@ namespace Ajf.RideShare.Web
         }
     }
 }
+

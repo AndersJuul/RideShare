@@ -11,7 +11,7 @@ namespace Ajf.RideShare.Web
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        public static HttpConfiguration Register(HttpConfiguration config)
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
@@ -29,6 +29,7 @@ namespace Ajf.RideShare.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            return config;
         }
     }
 

@@ -17,6 +17,8 @@ namespace Ajf.RideShare.Web.Api
         }
 
         // GET api/<controller>
+        //[Authorize(Roles= "RideShare.Events.Read")]
+        [Authorize]
         public Event[] Get()
         {
             return _eventService
