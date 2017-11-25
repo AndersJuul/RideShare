@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Claims;
+using System.IdentityModel.Tokens;
 using System.Web.Helpers;
 using System.Web.Http;
 using Ajf.RideShare.Models;
@@ -44,6 +46,8 @@ namespace Ajf.RideShare.Web
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            JwtSecurityTokenHandler.InboundClaimTypeMap=new Dictionary<string, string>();
+
             // Configure the db context, user manager and signin manager to use a single instance per request
             //app.CreatePerOwinContext(ApplicationDbContext.Create);
             //app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

@@ -410,7 +410,7 @@ namespace Ajf.RideShare.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Request.GetOwinContext().Authentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
