@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Ajf.RideShare.Web
+namespace TripGallery.MVCClient
 {
     public class FilterConfig
     {
