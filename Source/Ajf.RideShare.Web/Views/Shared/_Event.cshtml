@@ -1,6 +1,0 @@
-﻿@model Ajf.RideShare.Web.Models.ViewModels.Home.EventViewModel
-
-<div class="event">
-    <div class="eventdescription">@Model.Description</div><div class="eventtimefrom">@Model.TimeFrom</div>
-    @Html.ActionLink("Vis", "Get", "Event", new { id = @Model.Id }, null)
-</div>
