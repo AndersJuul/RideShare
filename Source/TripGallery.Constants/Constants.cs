@@ -6,7 +6,7 @@ namespace TripGallery
 
         public const string TripGalleryAPI = "https://localhost:44315/";
         public const string TripGalleryMVC = "https://localhost:44318/";
-        public const string TripGalleryMVCSTSCallback = "https://localhost:44318/stscallback";
+        //public const string TripGalleryMVCSTSCallback = "https://localhost:44318/stscallback";
         public const string TripGalleryAngular = "https://localhost:44316/";
 
         public const string TripGalleryClientSecret = "myrandomclientsecret";

@@ -44,7 +44,7 @@ namespace TripGallery.MVCClient
 
                 ClientId = "tripgalleryhybrid",
                 Authority = ConfigurationManager.AppSettings["IdentityServerApplicationUrl"],
-                RedirectUri = Constants.TripGalleryMVC,
+                RedirectUri = ConfigurationManager.AppSettings["urlRideShareWeb"],
                 SignInAsAuthenticationType = "Cookies",
                 ResponseType = "code id_token token",
                 Scope = "openid profile address gallerymanagement roles offline_access",
