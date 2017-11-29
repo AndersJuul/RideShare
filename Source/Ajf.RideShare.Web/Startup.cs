@@ -44,12 +44,12 @@ namespace TripGallery.MVCClient
 
                 ClientId = "tripgalleryhybrid",
                 Authority = ConfigurationManager.AppSettings["IdentityServerApplicationUrl"],
-                RedirectUri = ConfigurationManager.AppSettings["urlRideShareWeb"],
+                RedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
                 SignInAsAuthenticationType = "Cookies",
                 ResponseType = "code id_token token",
                 Scope = "openid profile address gallerymanagement roles offline_access",
                 UseTokenLifetime = false,
-                PostLogoutRedirectUri = Constants.TripGalleryMVC,
+                PostLogoutRedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
                  
                 Notifications = new OpenIdConnectAuthenticationNotifications()
                 {
@@ -108,7 +108,7 @@ namespace TripGallery.MVCClient
                         var refreshResponse = await
                             tokenClientForRefreshToken.RequestAuthorizationCodeAsync(
                             n.ProtocolMessage.Code,
-                            Constants.TripGalleryMVC);
+                                ConfigurationManager.AppSettings["UrlRideShareWeb"]);
 
                         var expirationDateAsRoundtripString
                             = DateTime.SpecifyKind(DateTime.UtcNow.AddSeconds(refreshResponse.ExpiresIn)

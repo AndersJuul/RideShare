@@ -15,7 +15,7 @@ namespace Ajf.RideShare.Tests.Selenium
         [SetUp]
         public void SetUp()
         {
-            BaseUri = new Uri(ConfigurationManager.AppSettings["urlRideShareWeb"]);
+            BaseUri = new Uri(ConfigurationManager.AppSettings["UrlRideShareWeb"]);
 
             ChromeDriver = new ChromeDriver();
             ChromeDriver.Manage().Window.Maximize();
