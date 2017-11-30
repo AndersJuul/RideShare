@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -21,7 +22,7 @@ namespace TripGallery.API.Helpers
 
         protected override string ResolveCore(Repository.Entities.Trip source)
         {
-            string fullUri = Constants.TripGalleryAPI + source.MainPictureUri;
+            string fullUri = ConfigurationManager.AppSettings["UrlRideShareApi"] + source.MainPictureUri;
             return fullUri;
         }
     }
@@ -34,10 +35,11 @@ namespace TripGallery.API.Helpers
         {
             string partialUri = source.MainPictureUri;
             // find
-            var indexOfUri = partialUri.IndexOf(Constants.TripGalleryAPI);
+            var tripGalleryApi = ConfigurationManager.AppSettings["UrlRideShareApi"];
+            var indexOfUri = partialUri.IndexOf(tripGalleryApi);
             if (indexOfUri > -1)
             {
-                partialUri = partialUri.Substring(Constants.TripGalleryAPI.Length);
+                partialUri = partialUri.Substring(tripGalleryApi.Length);
             }
            
             return partialUri;

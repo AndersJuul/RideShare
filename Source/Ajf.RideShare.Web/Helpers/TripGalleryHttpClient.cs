@@ -23,7 +23,7 @@ namespace TripGallery.MVCClient.Helpers
 
             client.SetBearerToken(GetAccessToken());
 
-            client.BaseAddress = new Uri(Constants.TripGalleryAPI);
+            client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlRideShareApi"]);
 
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
