@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripGallery.API", "TripGallery.API\TripGallery.API.csproj", "{9CED9E31-53ED-4F00-A135-D7C2972B57D2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripGallery.DTO", "TripGallery.DTO\TripGallery.DTO.csproj", "{BB37F09A-7FD4-4480-A065-4511A7899191}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripGallery.Repository", "TripGallery.Repository\TripGallery.Repository.csproj", "{95C07FA1-F974-4E4A-A169-C4F4F881965E}"
@@ -48,16 +46,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Migrate", "Aj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Models", "Ajf.RideShare.Models\Ajf.RideShare.Models.csproj", "{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ajf.RideShare.Api", "Ajf.RideShare.Api\Ajf.RideShare.Api.csproj", "{9CED9E31-53ED-4F00-A135-D7C2972B57D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB37F09A-7FD4-4480-A065-4511A7899191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB37F09A-7FD4-4480-A065-4511A7899191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB37F09A-7FD4-4480-A065-4511A7899191}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,12 +86,15 @@ Global
 		{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CED9E31-53ED-4F00-A135-D7C2972B57D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9CED9E31-53ED-4F00-A135-D7C2972B57D2} = {7A0FEB1D-E2D7-47B7-82A4-C3500D6D4636}
 		{BB37F09A-7FD4-4480-A065-4511A7899191} = {721C2FED-DFCE-45E2-A338-03182174E949}
 		{95C07FA1-F974-4E4A-A169-C4F4F881965E} = {7A0FEB1D-E2D7-47B7-82A4-C3500D6D4636}
 		{1BEC8DBC-04F3-4EEA-B3D7-422D80A6ACD1} = {721C2FED-DFCE-45E2-A338-03182174E949}
