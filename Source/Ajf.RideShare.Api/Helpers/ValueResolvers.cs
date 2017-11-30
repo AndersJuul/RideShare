@@ -12,7 +12,7 @@ namespace TripGallery.API.Helpers
 
         protected override string ResolveCore(Repository.Entities.Picture source)
         { 
-            string fullUri = "https://localhost:44315/" + source.Uri;
+            string fullUri =ConfigurationManager.AppSettings["UrlRideShareApi"]  + source.Uri;
             return fullUri;
         }
     }
