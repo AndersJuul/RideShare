@@ -137,17 +137,17 @@ namespace TripGallery.MVCClient
                                 n.ProtocolMessage.IdTokenHint = identityTokenHint.Value;
                             }
                         }
-                        else if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.AuthenticationRequest)
-                        {
-                            string existingAcrValues = null;
-                            if (n.ProtocolMessage.Parameters.TryGetValue("acr_values", out existingAcrValues))
-                            {     
-                                // add "2fa" - acr_values are separated by a space
-                                n.ProtocolMessage.Parameters["acr_values"] = existingAcrValues + " 2fa";
-                            }
+                        //else if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.AuthenticationRequest)
+                        //{
+                        //    string existingAcrValues = null;
+                        //    if (n.ProtocolMessage.Parameters.TryGetValue("acr_values", out existingAcrValues))
+                        //    {     
+                        //        // add "2fa" - acr_values are separated by a space
+                        //        n.ProtocolMessage.Parameters["acr_values"] = existingAcrValues + " 2fa";
+                        //    }
                        
-                            n.ProtocolMessage.Parameters["acr_values"] = "2fa";
-                        }
+                        //    n.ProtocolMessage.Parameters["acr_values"] = "2fa";
+                        //}
                     }
                 }
             });
