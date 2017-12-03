@@ -14,7 +14,7 @@
     <RootNamespace>TripGallery.API</RootNamespace>
     <AssemblyName>TripGallery.API</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort>44315</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -158,7 +158,9 @@
     <Content Include="Images\476865_3614613286879_254524626_o.jpg" />
     <Content Include="Images\477325_3615590111299_1614737679_o.jpg" />
     <Content Include="Images\77719_4638524004007_595705513_o.jpg" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -224,7 +226,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21476</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44315/</IISUrl>
+          <IISUrl>http://localhost/Ajf.RideShare.Api</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

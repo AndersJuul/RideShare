@@ -5,7 +5,7 @@
                     ["ngResource"])
       	.constant("appSettings",
         {
-            tripGalleryAPI: "https://localhost:44315" 
+            tripGalleryAPI: "http://localhost/Ajf.RideShare.Api" 
         });
 
 

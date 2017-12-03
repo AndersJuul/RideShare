@@ -35,7 +35,7 @@ namespace TripGallery.MVCClient.Controllers
 
             var httpClient = TripGalleryHttpClient.GetClient();
 
-            var rspTrips = await httpClient.GetAsync("api/trips").ConfigureAwait(false);
+            var rspTrips = await httpClient.GetAsync("Api/Trips").ConfigureAwait(false);
 
             if (rspTrips.IsSuccessStatusCode)
             {
