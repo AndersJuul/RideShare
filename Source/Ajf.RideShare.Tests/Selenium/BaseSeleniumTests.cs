@@ -18,7 +18,7 @@ namespace Ajf.RideShare.Tests.Selenium
             BaseUri = new Uri(ConfigurationManager.AppSettings["UrlRideShareWeb"]);
 
             ChromeDriver = new ChromeDriver();
-            ChromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            ChromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
             ChromeDriver.Navigate().GoToUrl(BaseUri);
         }
 
