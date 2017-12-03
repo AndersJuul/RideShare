@@ -4,8 +4,8 @@ namespace TripGallery
     public class Constants
     {
 
-        //public const string TripGalleryMVC = "https://localhost:44318/";
-        //public const string TripGalleryMVCSTSCallback = "https://localhost:44318/stscallback";
+        //public const string TripGalleryMVC = "https://localhost/Ajf.RideShare.Web/";
+        //public const string TripGalleryMVCSTSCallback = "https://localhost/Ajf.RideShare.Webstscallback/";
         public const string TripGalleryAngular = "https://localhost:44316/";
 
         public const string TripGalleryClientSecret = "myrandomclientsecret";
