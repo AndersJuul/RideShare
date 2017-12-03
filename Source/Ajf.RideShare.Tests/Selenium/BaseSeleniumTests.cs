@@ -18,7 +18,7 @@ namespace Ajf.RideShare.Tests.Selenium
             BaseUri = new Uri(ConfigurationManager.AppSettings["UrlRideShareWeb"]);
 
             ChromeDriver = new ChromeDriver();
-            ChromeDriver.Manage().Window.Maximize();
+            ChromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             ChromeDriver.Navigate().GoToUrl(BaseUri);
         }
 
@@ -28,17 +28,17 @@ namespace Ajf.RideShare.Tests.Selenium
             ChromeDriver?.Dispose();
         }
 
-        protected void LoginFrank()
+        protected void LoginKevin()
         {
-            var emailTextBox = ChromeDriver.FindElementById("Email");
+            var emailTextBox = ChromeDriver.FindElementById("username");
             emailTextBox.Clear();
-            emailTextBox.SendKeys("frank@email.dk");
+            emailTextBox.SendKeys("Kevin");
 
-            var passwordTextBox = ChromeDriver.FindElementById("Password");
+            var passwordTextBox = ChromeDriver.FindElementById("password");
             passwordTextBox.Clear();
-            passwordTextBox.SendKeys("Frank1");
+            passwordTextBox.SendKeys("secret");
 
-            var logInElement = ChromeDriver.FindElementById("LogIn");
+            var logInElement = ChromeDriver.FindElementByClassName("btn-primary");
             logInElement.Click();
         }
     }
