@@ -19,7 +19,7 @@
             //    redirect_uri:  window.location.protocol + "//" + window.location.host + "/callback.html",
             //    response_type: "id_token token",
             //    scope: "openid profile address gallerymanagement roles",               
-            //    authority: "https://localhost:44317/identity"
+            //    authority: "https://localhost/identity"
             //};
 
             // configure manager with post logout redirect
@@ -29,7 +29,7 @@
             //    post_logout_redirect_uri: window.location.protocol + "//" + window.location.host + "/index.html",
             //    response_type: "id_token token",
             //    scope: "openid profile address gallerymanagement roles",
-            //    authority: "https://localhost:44317/identity" 
+            //    authority: "https://localhost/identity" 
             //};
 
             //// configure manager, including session management support
@@ -39,7 +39,7 @@
                 post_logout_redirect_uri: window.location.protocol + "//" + window.location.host + "/index.html",
                 response_type: "id_token token",
                 scope: "openid profile address gallerymanagement roles",
-                authority: "https://localhost:44317/identity",
+                authority: "https://localhost/identity",
                 silent_redirect_uri: window.location.protocol + "//" + window.location.host + "/silentrefreshframe.html",
                 silent_renew: true,
                 acr_values: "2fa"
