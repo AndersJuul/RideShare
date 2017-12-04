@@ -1,6 +1,8 @@
 using System;
 using System.Configuration;
+using System.IO;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 
@@ -8,9 +10,24 @@ namespace Ajf.RideShare.Tests.Selenium
 {
     public class BaseSeleniumTests
     {
-        public RemoteWebDriver ChromeDriver { get; set; }
+        protected RemoteWebDriver ChromeDriver { get; set; }
 
-        public Uri BaseUri { get; set; }
+        private Uri BaseUri { get; set; }
+
+
+        protected void RunTest(Action a)
+        {
+            try
+            {
+                a();
+            }
+            catch (Exception e)
+            {
+                ChromeDriver.GetScreenshot().SaveAsFile(Path.GetTempFileName(),ScreenshotImageFormat.Bmp);
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         [SetUp]
         public void SetUp()

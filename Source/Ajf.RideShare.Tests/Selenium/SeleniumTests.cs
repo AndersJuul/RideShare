@@ -9,9 +9,12 @@ namespace Ajf.RideShare.Tests.Selenium
         [Test]
         public void ThatKevinCanLogin()
         {
-            LoginKevin();
+            RunTest(() =>
+            {
+                LoginKevin();
 
-            Assert.AreEqual("RideShare", ChromeDriver.Title);
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
+            });
         }
     }
 }
