@@ -19,7 +19,7 @@ using TripGallery.MVCClient.Models;
 namespace TripGallery.MVCClient.Controllers
 {
     [Authorize]
-    public class TripsController : Controller
+    public class HomeController : Controller
     {
         // GET: Trips
         public async Task<ActionResult> Index()
@@ -50,7 +50,7 @@ namespace TripGallery.MVCClient.Controllers
             {
                 return View("Error",
                          new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(rspTrips),
-                        "Trips", "Index"));              
+                        "Home", "Index"));              
             }        
         }
 
@@ -92,7 +92,7 @@ namespace TripGallery.MVCClient.Controllers
             else
             {          
                 var exception = new Exception("Problem getting your address.  Please contact your administrator.");
-                return View("Error", new HandleErrorInfo(exception, "Trips", "Album"));    
+                return View("Error", new HandleErrorInfo(exception, "Home", "Album"));    
             }             
         }
 
@@ -117,18 +117,18 @@ namespace TripGallery.MVCClient.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Index", "Trips");                        
+                    return RedirectToAction("Index", "Home");                        
                 }
                 else
                 {
                     return View("Error", 
                             new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response), 
-                            "Trips", "Create"));    
+                            "Home", "Create"));    
                 } 
             }
             catch  (Exception ex)
             {  
-                return View("Error", new HandleErrorInfo(ex, "Trips", "Create"));    
+                return View("Error", new HandleErrorInfo(ex, "Home", "Create"));    
             }
         }
 
@@ -150,13 +150,13 @@ namespace TripGallery.MVCClient.Controllers
             if (rspPatchTrip.IsSuccessStatusCode)
             {
                 // the patch was succesful.  Reload.
-                return RedirectToAction("Index", "Trips");                          
+                return RedirectToAction("Index", "Home");                          
             }
             else
             {
                 return View("Error",
                          new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(rspPatchTrip),
-                        "Trips", "SwitchPrivacyLevel"));              
+                        "Home", "SwitchPrivacyLevel"));              
             }
         } 
     }
