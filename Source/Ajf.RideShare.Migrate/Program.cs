@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
 using Ajf.Nuget.Logging;
-using Ajf.RideShare.Models.Migrations;
 using Serilog;
 
 namespace Ajf.RideShare.Migrate
