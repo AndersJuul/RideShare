@@ -1,17 +1,13 @@
-﻿using AutoMapper;
-using Owin;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripGallery.API.Helpers;
-using System.Web.Http.Cors;
-using IdentityServer3.AccessTokenValidation;
 using System.IdentityModel.Tokens;
+using AutoMapper;
+using IdentityServer3.AccessTokenValidation;
+using Owin;
+using TripGallery.API;
+using TripGallery.API.Helpers;
 
-namespace TripGallery.API
+namespace Ajf.RideShare.Api
 {
     public class Startup
     { 
@@ -36,33 +32,33 @@ namespace TripGallery.API
 
         private void InitAutoMapper()
         {
-            Mapper.CreateMap<Repository.Entities.Trip,
-                DTO.Trip>().ForMember(dest => dest.MainPictureUri,
+            Mapper.CreateMap<TripGallery.Repository.Entities.Trip,
+                TripGallery.DTO.Trip>().ForMember(dest => dest.MainPictureUri,
                 op => op.ResolveUsing(typeof(InjectImageBaseForTripResolver)));
 
-            Mapper.CreateMap<Repository.Entities.Picture,
-                DTO.Picture>()
+            Mapper.CreateMap<TripGallery.Repository.Entities.Picture,
+                TripGallery.DTO.Picture>()
                 .ForMember(dest => dest.Uri,
                 op => op.ResolveUsing(typeof(InjectImageBaseForPictureResolver)));
 
-            Mapper.CreateMap<DTO.Picture,
-              Repository.Entities.Picture>();
+            Mapper.CreateMap<TripGallery.DTO.Picture,
+              TripGallery.Repository.Entities.Picture>();
         
 
-            Mapper.CreateMap<DTO.Trip,
-                Repository.Entities.Trip>().ForMember(dest => dest.MainPictureUri,
+            Mapper.CreateMap<TripGallery.DTO.Trip,
+                TripGallery.Repository.Entities.Trip>().ForMember(dest => dest.MainPictureUri,
                 op => op.ResolveUsing(typeof(RemoveImageBaseForTripResolver))); ;
 
-            Mapper.CreateMap<DTO.PictureForCreation,
-                Repository.Entities.Picture>()
+            Mapper.CreateMap<TripGallery.DTO.PictureForCreation,
+                TripGallery.Repository.Entities.Picture>()
                 .ForMember(o => o.Id, o => o.Ignore())
                 .ForMember(o => o.TripId, o => o.Ignore())
                 .ForMember(o => o.OwnerId, o => o.Ignore())
                 .ForMember(o => o.Uri, o => o.Ignore());
 
 
-            Mapper.CreateMap<DTO.TripForCreation,
-         Repository.Entities.Trip>()
+            Mapper.CreateMap<TripGallery.DTO.TripForCreation,
+         TripGallery.Repository.Entities.Trip>()
             .ForMember(o => o.Id, o => o.Ignore())
             .ForMember(o => o.MainPictureUri, o => o.Ignore())
             .ForMember(o => o.Pictures, o => o.Ignore())
