@@ -1,0 +1,49 @@
+﻿using System;
+using System.Security.Claims;
+using System.Web.Http;
+using System.Web.Http.Cors;
+
+namespace Ajf.RideShare.Api.Controllers
+{
+    //[Authorize]
+    [EnableCors("https://localhost:44316", "*", "GET, POST, PATCH")]
+    public class UserInfoController : ApiController
+    {
+        //[Authorize(Roles = "PayingUser")]
+        [Route("api/userinfo")]
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] ClaimsIdentity claimsIdentity)
+        {
+            try
+            {
+                //var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+
+                //using (var uow = new CreateTrip(ownerId))
+                //{
+                //    var uowResult = uow.Execute(tripForCreation);
+
+                //    switch (uowResult.Status)
+                //    {
+                //        case UnitOfWorkStatus.Ok:
+                //            return Created
+                //                (Request.RequestUri + "/" + uowResult.Result.Id, uowResult.Result);
+
+                //        case UnitOfWorkStatus.Forbidden:
+                //            return StatusCode(HttpStatusCode.Forbidden);
+
+                //        case UnitOfWorkStatus.Invalid:
+                //            return BadRequest();
+
+                //        default:
+                //            return InternalServerError();
+                //    }
+                //}
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
+    }
+}

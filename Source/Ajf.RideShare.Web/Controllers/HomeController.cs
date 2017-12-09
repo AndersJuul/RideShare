@@ -1,6 +1,4 @@
-﻿using Marvin.JsonPatch;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
@@ -9,14 +7,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using IdentityModel.Client;
+using Marvin.JsonPatch;
+using Newtonsoft.Json;
 using TripGallery.DTO;
 using TripGallery.MVCClient.Helpers;
 using TripGallery.MVCClient.Models;
 
-namespace TripGallery.MVCClient.Controllers
+namespace Ajf.RideShare.Web.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -24,7 +23,7 @@ namespace TripGallery.MVCClient.Controllers
         // GET: Trips
         public async Task<ActionResult> Index()
         {
-            if (this.User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 var identity = this.User.Identity as ClaimsIdentity;
                 foreach (var claim in identity.Claims)
