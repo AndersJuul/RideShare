@@ -1,25 +1,31 @@
-﻿using Microsoft.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OpenIdConnect;
-using Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IdentityModel.Tokens;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Helpers;
+using System.Web.Mvc;
+using Ajf.RideShare.Web;
+using Ajf.RideShare.Web.Helpers;
 using IdentityModel.Client;
-using TripGallery.MVCClient.Helpers;
 using Microsoft.IdentityModel.Protocols;
+using Microsoft.Owin;
+using Microsoft.Owin.Extensions;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OpenIdConnect;
+using Newtonsoft.Json;
+using Owin;
+using TripGallery;
+using TripGallery.MVCClient.Helpers;
 
-
-[assembly: OwinStartup(typeof(TripGallery.MVCClient.Startup))]
-namespace TripGallery.MVCClient
+[assembly: OwinStartup(typeof(Startup))]
+namespace Ajf.RideShare.Web
 {
     public class Startup
     {
@@ -39,6 +45,12 @@ namespace TripGallery.MVCClient
                 SlidingExpiration = true
             });
 
+            app.Use((context, next) =>
+            {
+                Debug.WriteLine("Hello world");
+                return next.Invoke();
+            });
+
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
 
@@ -55,8 +67,8 @@ namespace TripGallery.MVCClient
                 {
                     SecurityTokenValidated = async n =>
                     {
-                        Helpers.TokenHelper.DecodeAndWrite(n.ProtocolMessage.IdToken);
-                        Helpers.TokenHelper.DecodeAndWrite(n.ProtocolMessage.AccessToken);
+                        TokenHelper.DecodeAndWrite(n.ProtocolMessage.IdToken);
+                        TokenHelper.DecodeAndWrite(n.ProtocolMessage.AccessToken);
 
                         var givenNameClaim = n.AuthenticationTicket
                             .Identity.FindFirst(IdentityModel.JwtClaimTypes.GivenName);
@@ -119,11 +131,15 @@ namespace TripGallery.MVCClient
                         newClaimsIdentity.AddClaim(new Claim("refresh_token", refreshResponse.RefreshToken));
                         newClaimsIdentity.AddClaim(new Claim("access_token", refreshResponse.AccessToken));
                         newClaimsIdentity.AddClaim(new Claim("expires_at", expirationDateAsRoundtripString));
+                        newClaimsIdentity.AddClaim(new Claim("sub", subClaim.Value));
 
                         // create a new authentication ticket, overwriting the old one.
                         n.AuthenticationTicket = new AuthenticationTicket(
                                                  newClaimsIdentity,
                                                  n.AuthenticationTicket.Properties);
+
+                        await UserService.CreateUserIfNotExisting(newClaimsIdentity);
+
                     },
                     RedirectToIdentityProvider = async n =>
                     {
@@ -151,6 +167,24 @@ namespace TripGallery.MVCClient
                     }
                 }
             });
+        }
+    }
+
+    public static class UserService
+    {
+
+
+        public static async Task CreateUserIfNotExisting(ClaimsIdentity newClaimsIdentity)
+        {
+            //.Select(x => x.ValueType).OrderBy(x => x).ToDictionary();
+            var dict = newClaimsIdentity.Claims.Select(t => new { t.Type, t.Value})
+                .ToDictionary(t => t.Type, t => t.Value);
+
+            var httpClient = TripGalleryHttpClient.GetClient(newClaimsIdentity);
+            var content = new StringContent(JsonConvert.SerializeObject(dict), Encoding.UTF8, "application/json");
+            var httpResponseMessage = await httpClient.PostAsync("api/userinfo/", content).ConfigureAwait(false);
+
+            Debug.WriteLine(httpResponseMessage.ToString());
         }
     }
 }

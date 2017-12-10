@@ -6,9 +6,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Ajf.RideShare.Web.Models;
 using TripGallery.DTO;
 using TripGallery.MVCClient.Helpers;
-using TripGallery.MVCClient.Models;
 
 namespace TripGallery.MVCClient.Controllers
 {

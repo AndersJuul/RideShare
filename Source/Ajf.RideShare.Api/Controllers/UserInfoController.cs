@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -12,7 +13,7 @@ namespace Ajf.RideShare.Api.Controllers
         //[Authorize(Roles = "PayingUser")]
         [Route("api/userinfo")]
         [HttpPost]
-        public IHttpActionResult Post([FromBody] ClaimsIdentity claimsIdentity)
+        public IHttpActionResult Post([FromBody] Dictionary<string,string> claimsIdentity)
         {
             try
             {

@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
-namespace TripGallery.MVCClient.Helpers
+namespace Ajf.RideShare.Web.Helpers
 {
     // code adjusted from Thinktecture's client model (thinktecture.github.com)
     public static class TokenHelper

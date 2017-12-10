@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using TripGallery.API.Helpers;
 using TripGallery.API.UnitOfWork.Picture;
 
-namespace TripGallery.API.Controllers
+namespace Ajf.RideShare.Api.Controllers
 {
     [Authorize]
     [EnableCors("https://localhost:44316", "*", "GET, POST, DELETE")]
@@ -29,13 +26,13 @@ namespace TripGallery.API.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Ok:
                             return Ok(uowResult.Result);
 
-                        case UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.NotFound:
                             return NotFound();
 
-                        case UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
 
                         default:
@@ -53,7 +50,7 @@ namespace TripGallery.API.Controllers
    
         [Route("api/trips/{tripId}/pictures")]
         [HttpPost]
-        public IHttpActionResult Post(Guid tripId, [FromBody]DTO.PictureForCreation pictureForCreation)
+        public IHttpActionResult Post(Guid tripId, [FromBody]TripGallery.DTO.PictureForCreation pictureForCreation)
         {
             try
             {
@@ -66,17 +63,17 @@ namespace TripGallery.API.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
-                            return Created<DTO.Picture>
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Ok:
+                            return Created<TripGallery.DTO.Picture>
                             (Request.RequestUri + "/" + uowResult.Result.Id.ToString(), uowResult.Result);
                             
-                        case UnitOfWork.UnitOfWorkStatus.Invalid:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Invalid:
                             return BadRequest();
 
-                        case UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.NotFound:
                             return NotFound();
 
-                        case UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
 
                         default:
@@ -108,16 +105,16 @@ namespace TripGallery.API.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Ok:
                             return StatusCode(HttpStatusCode.NoContent);
 
-                        case UnitOfWork.UnitOfWorkStatus.Invalid:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Invalid:
                             return BadRequest();
 
-                        case UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.NotFound:
                             return NotFound();
 
-                        case UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
                         default:
                             return InternalServerError();

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Ajf.RideShare.Web.Models;
 using Newtonsoft.Json;
 using TripGallery.DTO;
 using TripGallery.MVCClient.Helpers;
-using TripGallery.MVCClient.Models;
 
 namespace Ajf.RideShare.Web.Controllers
 {
@@ -16,14 +17,15 @@ namespace Ajf.RideShare.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var httpClient = TripGalleryHttpClient.GetClient();
-                var rspTrips = await httpClient.GetAsync("Api/Events").ConfigureAwait(false);
+                var sub = ((ClaimsIdentity)User.Identity).Claims.Single(x=>x.Type=="sub").Value;
+                var rspTrips = await httpClient.GetAsync("Api/Events/"+sub).ConfigureAwait(false);
 
                 if (rspTrips.IsSuccessStatusCode)
                 {
                     var lstTripsAsString = await rspTrips.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     var vm = new TripsIndexViewModel();
-                    vm.Trips = JsonConvert.DeserializeObject<IList<Trip>>(lstTripsAsString).ToList();
+                    var sList= JsonConvert.DeserializeObject<IList<string>>(lstTripsAsString).ToList();
 
                     return View(vm);
                 }

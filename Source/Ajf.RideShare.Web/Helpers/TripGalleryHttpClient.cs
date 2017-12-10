@@ -16,12 +16,12 @@ namespace TripGallery.MVCClient.Helpers
     public static class TripGalleryHttpClient
     {
 
-        public static HttpClient GetClient()
+        public static HttpClient GetClient(ClaimsIdentity newClaimsIdentity=null)
         {
       
             HttpClient client = new HttpClient();
 
-            client.SetBearerToken(GetAccessToken());
+            client.SetBearerToken(GetAccessToken(newClaimsIdentity));
 
             client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlRideShareApi"]);
 
@@ -32,9 +32,10 @@ namespace TripGallery.MVCClient.Helpers
             return client;
         }
 
-        private static string GetAccessToken()
+        private static string GetAccessToken(ClaimsIdentity newClaimsIdentity=null)
         {
-            var currentClaimsIdentity = HttpContext.Current.User.Identity as ClaimsIdentity;
+            var currentClaimsIdentity =
+                newClaimsIdentity ?? HttpContext.Current.User.Identity as ClaimsIdentity;
             var expiresAtFromClaims =
                   DateTime.Parse(currentClaimsIdentity.FindFirst("expires_at").Value,
                   null, DateTimeStyles.RoundtripKind);

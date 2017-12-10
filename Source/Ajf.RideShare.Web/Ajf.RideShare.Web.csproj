@@ -181,6 +181,7 @@
     <Compile Include="Helpers\HttpClientExtensions.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />
     <Compile Include="Helpers\TripGalleryHttpClient.cs" />
+    <Compile Include="Models\EventCreateViewModel.cs" />
     <Compile Include="Models\PictureCreateViewModel.cs" />
     <Compile Include="Models\PicturesIndexViewModel.cs" />
     <Compile Include="Models\TripCreateViewModel.cs" />

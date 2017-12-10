@@ -12,13 +12,19 @@ namespace Ajf.RideShare.Tests.Selenium
         {
             RunTest(() =>
             {
-                //LoginKevin();
-
-                //Assert.AreEqual("RideShare", ChromeDriver.Title);
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
 
                 ChromeDriver.FindElement(By.Id("addEvent")).Click();
+                
+                Assert.AreEqual("Ajf Security Token Service", ChromeDriver.Title);
+
+                LoginKevin();
 
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
+
+                //ChromeDriver.FindElement(By.Id("addEvent")).Click();
+
+                //Assert.AreEqual("RideShare - Tilføj en samkørsel", ChromeDriver.Title);
             });
         }
     }
