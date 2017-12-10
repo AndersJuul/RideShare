@@ -1,4 +1,4 @@
-﻿@model TripGallery.MVCClient.Models.TripsIndexViewModel 
+﻿@model TripGallery.MVCClient.Models.TripsIndexViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,21 +6,19 @@
 
 <h2 class="leftMarginDefault">Hovedside - RideShare</h2>
 
+<div class="btn btn-default leftMarginDefault bottomMarginDefault">@Html.ActionLink("Tilføj en samkørsel", "Create", "Event",null,new { @id = "addEvent"})</div>
 
-@if (User.Identity.IsAuthenticated && User.IsInRole("PayingUser"))
-{
-<div class="btn btn-default leftMarginDefault bottomMarginDefault">@Html.ActionLink("Add a Trip", "Create")</div> 
-}
- 
 <div class="container">
-    @foreach (var item in Model.Trips)
+    @if (User.Identity.IsAuthenticated)
     {
-        <div class="col-md-6 bottomMarginDefault">
+        @*foreach (var item in Model.Trips)
+        {
+            <div class="col-md-6 bottomMarginDefault">
 
-            <div class="pull-left rightMarginDefault"> 
-                <img class="tripImage img-circle" src="@item.MainPictureUri" />
+                <div class="pull-left rightMarginDefault">
+                    <img class="tripImage img-circle" src="@item.MainPictureUri" />
 
-                
+
                     @if (item.IsPublic)
                     {
                         <div class="privacyStyle">
@@ -35,40 +33,41 @@
                             <span>Private trip</span>
                         </div>
                     }
-               
-            </div>
-            <div >
-                <div class="h3">@item.Name</div>
-                <div>@item.Description</div>
-
-                <div>
-
-                @if (item.OwnerId == this.User.Identity.Name)
-                {
-                    if (item.IsPublic)
-                    {
-                        @Html.ActionLink("Make private", "SwitchPrivacyLevel", 
-                            new { id = item.Id, isPublic = item.IsPublic });
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Make public", "SwitchPrivacyLevel", 
-                            new { id = item.Id, isPublic = item.IsPublic });
-                    }
-                    @Html.Raw(" | ");
-                }
-                
-                    @Html.ActionLink("Pictures", "Index", "Pictures", new { tripId = item.Id }, null)
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @Html.Raw(" | ");
-
-                        @Html.ActionLink("Create album", "Album", "Home", new { tripId = item.Id }, null)
-                    }
 
                 </div>
+                <div>
+                    <div class="h3">@item.Name</div>
+                    <div>@item.Description</div>
+
+                    <div>
+
+                        @if (item.OwnerId == this.User.Identity.Name)
+                        {
+                            if (item.IsPublic)
+                            {
+                                @Html.ActionLink("Make private", "SwitchPrivacyLevel",
+                            new { id = item.Id, isPublic = item.IsPublic });
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Make public", "SwitchPrivacyLevel",
+                            new { id = item.Id, isPublic = item.IsPublic });
+                            }
+                            @Html.Raw(" | ");
+                        }
+
+                        @Html.ActionLink("Pictures", "Index", "Pictures", new { tripId = item.Id }, null)
+
+                        @if (User.Identity.IsAuthenticated)
+                    {
+                            @Html.Raw(" | ");
+
+                            @Html.ActionLink("Create album", "Album", "Home", new { tripId = item.Id }, null)
+                        }
+
+                    </div>
+                </div>
             </div>
-        </div>
+        }*@
     }
 </div> 

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Ajf.RideShare.Tests.Selenium
 {
@@ -11,7 +12,11 @@ namespace Ajf.RideShare.Tests.Selenium
         {
             RunTest(() =>
             {
-                LoginKevin();
+                //LoginKevin();
+
+                //Assert.AreEqual("RideShare", ChromeDriver.Title);
+
+                ChromeDriver.FindElement(By.Id("addEvent")).Click();
 
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
             });
