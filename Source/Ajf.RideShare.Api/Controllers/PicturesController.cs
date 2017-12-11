@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Ajf.RideShare.Api.Helpers;
 using TripGallery.API.Helpers;
 using TripGallery.API.UnitOfWork.Picture;
 

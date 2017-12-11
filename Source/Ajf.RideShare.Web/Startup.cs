@@ -9,13 +9,11 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-using System.Web.Mvc;
 using Ajf.RideShare.Web;
 using Ajf.RideShare.Web.Helpers;
 using IdentityModel.Client;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
-using Microsoft.Owin.Extensions;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
@@ -59,7 +57,7 @@ namespace Ajf.RideShare.Web
                 RedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
                 SignInAsAuthenticationType = "Cookies",
                 ResponseType = "code id_token token",
-                Scope = "openid profile address gallerymanagement roles offline_access",
+                Scope = "openid profile address gallerymanagement roles offline_access email",
                 UseTokenLifetime = false,
                 PostLogoutRedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
                  
@@ -82,6 +80,9 @@ namespace Ajf.RideShare.Web
                         var roleClaim = n.AuthenticationTicket
                             .Identity.FindFirst(IdentityModel.JwtClaimTypes.Role);
 
+                        var emailClaim = n.AuthenticationTicket
+                            .Identity.FindFirst(IdentityModel.JwtClaimTypes.Email);
+
                         // create a new claims, issuer + sub as unique identifier
                         var nameClaim = new Claim(IdentityModel.JwtClaimTypes.Name,
                                     Constants.TripGalleryIssuerUri + subClaim.Value);
@@ -91,10 +92,7 @@ namespace Ajf.RideShare.Web
                            IdentityModel.JwtClaimTypes.Name,
                            IdentityModel.JwtClaimTypes.Role);
 
-                        if (nameClaim != null)
-                        {
-                            newClaimsIdentity.AddClaim(nameClaim);
-                        }
+                        newClaimsIdentity.AddClaim(nameClaim);
 
                         if (givenNameClaim != null)
                         {
@@ -109,6 +107,11 @@ namespace Ajf.RideShare.Web
                         if (roleClaim != null)
                         {
                             newClaimsIdentity.AddClaim(roleClaim);
+                        }
+
+                        if (emailClaim != null)
+                        {
+                            newClaimsIdentity.AddClaim(emailClaim);
                         }
 
                         // request a refresh token

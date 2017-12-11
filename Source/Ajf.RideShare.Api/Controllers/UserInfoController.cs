@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Ajf.RideShare.Api.Helpers;
+using TripGallery.API.Helpers;
 
 namespace Ajf.RideShare.Api.Controllers
 {
@@ -17,7 +19,7 @@ namespace Ajf.RideShare.Api.Controllers
         {
             try
             {
-                //var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+                var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
                 //using (var uow = new CreateTrip(ownerId))
                 //{
