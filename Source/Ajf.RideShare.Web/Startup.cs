@@ -141,11 +141,13 @@ namespace Ajf.RideShare.Web
                                                  newClaimsIdentity,
                                                  n.AuthenticationTicket.Properties);
 
-                        await UserService.CreateUserIfNotExisting(newClaimsIdentity);
+                        //await UserService.CreateUserIfNotExisting(newClaimsIdentity);
 
                     },
                     RedirectToIdentityProvider = async n =>
                     {
+                        await Task.FromResult(0);
+
                         // get id token to add as id token hint
                         if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.LogoutRequest)
                         {
@@ -183,7 +185,7 @@ namespace Ajf.RideShare.Web
             var dict = newClaimsIdentity.Claims.Select(t => new { t.Type, t.Value})
                 .ToDictionary(t => t.Type, t => t.Value);
 
-            var httpClient = TripGalleryHttpClient.GetClient(newClaimsIdentity);
+            var httpClient = RideShareHttpClient.GetClient(newClaimsIdentity);
             var content = new StringContent(JsonConvert.SerializeObject(dict), Encoding.UTF8, "application/json");
             var httpResponseMessage = await httpClient.PostAsync("api/userinfo/", content).ConfigureAwait(false);
 

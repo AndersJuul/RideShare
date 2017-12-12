@@ -29,7 +29,7 @@ namespace Ajf.RideShare.Web.Controllers
 
                 //vm.Picture.PictureBytes = uploadedImage;
 
-                //var httpClient = TripGalleryHttpClient.GetClient();
+                //var httpClient = RideShareHttpClient.GetClient();
 
                 //var serializedTrip = JsonConvert.SerializeObject(vm.Picture);
 

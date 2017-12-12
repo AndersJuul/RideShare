@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using IdentityModel.Client;
-using System.Globalization;
+using TripGallery;
 
-namespace TripGallery.MVCClient.Helpers
+namespace Ajf.RideShare.Web.Helpers
 {
-    public static class TripGalleryHttpClient
+    public static class RideShareHttpClient
     {
 
         public static HttpClient GetClient(ClaimsIdentity newClaimsIdentity=null)

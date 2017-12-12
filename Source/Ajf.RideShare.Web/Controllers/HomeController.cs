@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
 using Newtonsoft.Json;
 using TripGallery.DTO;
@@ -16,7 +17,7 @@ namespace Ajf.RideShare.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var httpClient = TripGalleryHttpClient.GetClient();
+                var httpClient = RideShareHttpClient.GetClient();
                 var sub = ((ClaimsIdentity)User.Identity).Claims.Single(x=>x.Type=="sub").Value;
                 var rspTrips = await httpClient.GetAsync("Api/Events/"+sub).ConfigureAwait(false);
 

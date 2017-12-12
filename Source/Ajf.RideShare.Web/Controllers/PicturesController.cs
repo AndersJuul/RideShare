@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
 using TripGallery.DTO;
 using TripGallery.MVCClient.Helpers;
@@ -19,7 +20,7 @@ namespace TripGallery.MVCClient.Controllers
 
         public async Task<ActionResult> Index(Guid tripId)
         {
-            var httpClient = TripGalleryHttpClient.GetClient();
+            var httpClient = RideShareHttpClient.GetClient();
 
             var rspPictures = await httpClient.GetAsync("api/trips/" + tripId.ToString() + "/pictures").ConfigureAwait(false);
 
@@ -60,7 +61,7 @@ namespace TripGallery.MVCClient.Controllers
 
                 vm.Picture.PictureBytes = uploadedImage;
 
-                var httpClient = TripGalleryHttpClient.GetClient();
+                var httpClient = RideShareHttpClient.GetClient();
 
                 var serializedTrip = JsonConvert.SerializeObject(vm.Picture);
 
@@ -88,7 +89,7 @@ namespace TripGallery.MVCClient.Controllers
 
         public async Task<ActionResult> Delete(Guid tripId, Guid pictureId)
         {
-            var httpClient = TripGalleryHttpClient.GetClient();
+            var httpClient = RideShareHttpClient.GetClient();
 
             var response = await httpClient.DeleteAsync("api/trips/" + tripId.ToString() + "/pictures/" + pictureId.ToString())
                 .ConfigureAwait(false);

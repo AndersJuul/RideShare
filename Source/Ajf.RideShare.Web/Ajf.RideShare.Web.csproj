@@ -180,7 +180,7 @@
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\HttpClientExtensions.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />
-    <Compile Include="Helpers\TripGalleryHttpClient.cs" />
+    <Compile Include="Helpers\RideShareHttpClient.cs" />
     <Compile Include="Models\EventCreateViewModel.cs" />
     <Compile Include="Models\PictureCreateViewModel.cs" />
     <Compile Include="Models\PicturesIndexViewModel.cs" />
