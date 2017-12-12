@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -18,7 +20,7 @@ namespace Ajf.RideShare.Models
             Database.SetInitializer<ApplicationDbContext>(null);
         }
 
-        //public DbSet<Event> Events { get; set; }
+        public DbSet<Event> Events { get; set; }
         //public DbSet<Car> Cars { get; set; }
         //public DbSet<Passenger> Passengers { get; set; }
 
@@ -26,5 +28,15 @@ namespace Ajf.RideShare.Models
         {
             return new ApplicationDbContext();
         }
+    }
+
+    public class Event
+    {
+        [Key]
+        public Guid EventId { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
+        [Required]
+        public Guid UserSub { get; set; }
     }
 }
