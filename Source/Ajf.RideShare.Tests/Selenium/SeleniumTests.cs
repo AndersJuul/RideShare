@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Ajf.RideShare.Tests.Selenium
@@ -22,9 +23,15 @@ namespace Ajf.RideShare.Tests.Selenium
 
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
 
-                //ChromeDriver.FindElement(By.Id("addEvent")).Click();
+                var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
+                txtDate.Clear();
+                txtDate.SendKeys(DateTime.Now.AddDays(3).ToString("yyyy-MM-dd"));
 
-                //Assert.AreEqual("RideShare - Tilføj en samkørsel", ChromeDriver.Title);
+                var txtDescription = ChromeDriver.FindElement(By.Id("txtDescription"));
+                txtDescription.Clear();
+                txtDescription.SendKeys("Description "+  new Random().Next());
+
+                ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
             });
         }
     }
