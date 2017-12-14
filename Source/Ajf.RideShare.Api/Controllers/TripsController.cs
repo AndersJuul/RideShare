@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
+using Ajf.RideShare.Api.UnitOfWork;
+using Ajf.RideShare.Api.UnitOfWork.Events;
 using TripGallery.API.Helpers;
 using TripGallery.API.UnitOfWork.Trip;
 
@@ -33,7 +35,7 @@ namespace TripGallery.API.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
+                        case UnitOfWorkStatus.Ok:
                             return Ok(uowResult.Result);
 
                         default:
@@ -63,13 +65,13 @@ namespace TripGallery.API.Controllers
 
                         switch (uowResult.Status)
                         {
-                            case UnitOfWork.UnitOfWorkStatus.Ok:
+                            case UnitOfWorkStatus.Ok:
                                 return Ok(uowResult.Result);
 
-                            case UnitOfWork.UnitOfWorkStatus.NotFound:
+                            case UnitOfWorkStatus.NotFound:
                                 return NotFound();
 
-                            case UnitOfWork.UnitOfWorkStatus.Forbidden:
+                            case UnitOfWorkStatus.Forbidden:
                                 return  StatusCode(HttpStatusCode.Forbidden);
                             
                             default:
@@ -86,42 +88,42 @@ namespace TripGallery.API.Controllers
 
 
 
-        [Authorize(Roles="PayingUser")]
-        [Route("api/trips")]
-        [HttpPost]
-        public IHttpActionResult Post([FromBody]DTO.TripForCreation tripForCreation)
-        {
-            try
-            {                 
-                string ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+        //[Authorize(Roles="PayingUser")]
+        //[Route("api/trips")]
+        //[HttpPost]
+        //public IHttpActionResult Post([FromBody]DTO.TripForCreation tripForCreation)
+        //{
+        //    try
+        //    {                 
+        //        string ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new CreateTrip(ownerId))
-                {
-                    var uowResult = uow.Execute(tripForCreation);
+        //        //using (var uow = new CreateEvent(ownerId))
+        //        //{
+        //        //    var uowResult = uow.Execute(tripForCreation);
 
-                    switch (uowResult.Status)
-                    {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
-                            return Created<DTO.Trip>
-                            (Request.RequestUri + "/" + uowResult.Result.Id.ToString(), uowResult.Result);
+        //        //    switch (uowResult.Status)
+        //        //    {
+        //        //        case UnitOfWorkStatus.Ok:
+        //        //            return Created<DTO.Trip>
+        //        //            (Request.RequestUri + "/" + uowResult.Result.Id.ToString(), uowResult.Result);
 
-                        case UnitOfWork.UnitOfWorkStatus.Forbidden:
-                            return StatusCode(HttpStatusCode.Forbidden);
+        //        //        case UnitOfWorkStatus.Forbidden:
+        //        //            return StatusCode(HttpStatusCode.Forbidden);
 
-                        case UnitOfWork.UnitOfWorkStatus.Invalid:
-                            return BadRequest();
+        //        //        case UnitOfWorkStatus.Invalid:
+        //        //            return BadRequest();
 
-                        default:
-                            return InternalServerError();
-                    }
-                }
-            }
-            catch (Exception)
-            {
+        //        //        default:
+        //        //            return InternalServerError();
+        //        //    }
+        //        //}
+        //    }
+        //    catch (Exception)
+        //    {
              
-                return InternalServerError();
-            }
-        }
+        //        return InternalServerError();
+        //    }
+        //}
  
 
         [Route("api/trips/{tripId}")]
@@ -142,16 +144,16 @@ namespace TripGallery.API.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
+                        case UnitOfWorkStatus.Ok:
                             return Ok(uowResult.Result);
 
-                        case UnitOfWork.UnitOfWorkStatus.Invalid:
+                        case UnitOfWorkStatus.Invalid:
                             return BadRequest();
 
-                        case UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
 
-                        case UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case UnitOfWorkStatus.NotFound:
                             return NotFound();
 
                         default:

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ajf.RideShare.Api.UnitOfWork;
 using TripGallery.Repository;
 using TripGallery.Repository.Entities;
 

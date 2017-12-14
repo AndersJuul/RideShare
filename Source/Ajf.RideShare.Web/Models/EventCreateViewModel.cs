@@ -6,5 +6,6 @@ namespace Ajf.RideShare.Web.Models
     {
         public DateTime Date { get; set; }
         public Guid EventId { get; set; }
+        public string Description { get; set; }
     }
 }

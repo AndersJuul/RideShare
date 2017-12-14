@@ -1,4 +1,5 @@
 ﻿using System;
+using Ajf.RideShare.Api.UnitOfWork;
 
 namespace TripGallery.API.UnitOfWork
 {
@@ -11,7 +12,7 @@ namespace TripGallery.API.UnitOfWork
         {
             get
             {
-                return Status != UnitOfWork.UnitOfWorkStatus.Ok;
+                return Status != UnitOfWorkStatus.Ok;
             }
         }
 
@@ -45,7 +46,7 @@ namespace TripGallery.API.UnitOfWork
         {
             get
             {
-                return Status != UnitOfWork.UnitOfWorkStatus.Ok;
+                return Status != UnitOfWorkStatus.Ok;
             }
         }
 

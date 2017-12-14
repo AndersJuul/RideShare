@@ -13,11 +13,18 @@
     @Html.HiddenFor(model => model.EventId)
     <div class="form-horizontal leftMarginDefault">
 
+        @Html.ValidationSummary()
 
         <div class="form-group">
             <div>Dato for samkørsel</div>
             <div>
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("Date")
+            </div>
+            <div>Beskrivelse</div>
+            <div>
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("Description")
             </div>
         </div>
 

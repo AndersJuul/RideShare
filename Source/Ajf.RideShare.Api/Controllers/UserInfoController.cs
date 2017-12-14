@@ -21,7 +21,7 @@ namespace Ajf.RideShare.Api.Controllers
             {
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                //using (var uow = new CreateTrip(ownerId))
+                //using (var uow = new CreateEvent(ownerId))
                 //{
                 //    var uowResult = uow.Execute(tripForCreation);
 

@@ -3,6 +3,7 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
+using Ajf.RideShare.Api.UnitOfWork;
 using TripGallery.API.Helpers;
 using TripGallery.API.UnitOfWork.Picture;
 
@@ -27,13 +28,13 @@ namespace Ajf.RideShare.Api.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Ok:
+                        case UnitOfWorkStatus.Ok:
                             return Ok(uowResult.Result);
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case UnitOfWorkStatus.NotFound:
                             return NotFound();
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
 
                         default:
@@ -64,17 +65,17 @@ namespace Ajf.RideShare.Api.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Ok:
+                        case UnitOfWorkStatus.Ok:
                             return Created<TripGallery.DTO.Picture>
                             (Request.RequestUri + "/" + uowResult.Result.Id.ToString(), uowResult.Result);
                             
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Invalid:
+                        case UnitOfWorkStatus.Invalid:
                             return BadRequest();
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case UnitOfWorkStatus.NotFound:
                             return NotFound();
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
 
                         default:
@@ -106,16 +107,16 @@ namespace Ajf.RideShare.Api.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Ok:
+                        case UnitOfWorkStatus.Ok:
                             return StatusCode(HttpStatusCode.NoContent);
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Invalid:
+                        case UnitOfWorkStatus.Invalid:
                             return BadRequest();
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.NotFound:
+                        case UnitOfWorkStatus.NotFound:
                             return NotFound();
 
-                        case TripGallery.API.UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
                         default:
                             return InternalServerError();

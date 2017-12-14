@@ -1,5 +1,5 @@
 ﻿
-namespace TripGallery.API.UnitOfWork
+namespace Ajf.RideShare.Api.UnitOfWork
 {
     public enum UnitOfWorkStatus
     {
