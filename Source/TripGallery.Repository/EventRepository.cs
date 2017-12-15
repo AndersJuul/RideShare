@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ajf.RideShare.Models;
 
 namespace TripGallery.Repository
@@ -25,9 +27,15 @@ namespace TripGallery.Repository
             }
         }
 
-        //public void SaveChanges()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IEnumerable<Event> GetEvents(string ownerId)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return db
+                    .Events
+                    .Where(x=>x.OwnerId==ownerId)
+                    .ToArray();
+            }
+        }
     }
 }

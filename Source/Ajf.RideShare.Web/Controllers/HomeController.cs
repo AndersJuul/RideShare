@@ -3,8 +3,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Ajf.RideShare.Models;
 using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
+using AutoMapper;
 using Newtonsoft.Json;
 using TripGallery.DTO;
 using TripGallery.MVCClient.Helpers;
@@ -25,8 +27,11 @@ namespace Ajf.RideShare.Web.Controllers
                 {
                     var lstTripsAsString = await rspTrips.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                    var vm = new TripsIndexViewModel();
-                    var sList= JsonConvert.DeserializeObject<IList<string>>(lstTripsAsString).ToList();
+                    var models= JsonConvert.DeserializeObject<IList<Event>>(lstTripsAsString).ToList();
+                    var eventViewModels = models.Select(x=> Mapper.Map<EventViewModel>(x));
+
+                    var vm = new HomeIndexViewModel();
+                    vm.Events.AddRange(eventViewModels);
 
                     return View(vm);
                 }

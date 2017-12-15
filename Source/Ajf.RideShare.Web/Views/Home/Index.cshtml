@@ -1,4 +1,4 @@
-﻿@model Ajf.RideShare.Web.Models.TripsIndexViewModel
+﻿@model Ajf.RideShare.Web.Models.HomeIndexViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -11,63 +11,21 @@
 <div class="container">
     @if (User.Identity.IsAuthenticated)
     {
-        @*foreach (var item in Model.Trips)
+        foreach (var item in Model.Events)
         {
             <div class="col-md-6 bottomMarginDefault">
 
-                <div class="pull-left rightMarginDefault">
-                    <img class="tripImage img-circle" src="@item.MainPictureUri" />
-
-
-                    @if (item.IsPublic)
-                    {
-                        <div class="privacyStyle">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span>Public trip</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="privacyStyle">
-                            <span class="glyphicon glyphicon-eye-close"></span>
-                            <span>Private trip</span>
-                        </div>
-                    }
-
-                </div>
                 <div>
-                    <div class="h3">@item.Name</div>
+                    <div class="h3">@item.Date</div>
                     <div>@item.Description</div>
 
                     <div>
 
-                        @if (item.OwnerId == this.User.Identity.Name)
-                        {
-                            if (item.IsPublic)
-                            {
-                                @Html.ActionLink("Make private", "SwitchPrivacyLevel",
-                            new { id = item.Id, isPublic = item.IsPublic });
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Make public", "SwitchPrivacyLevel",
-                            new { id = item.Id, isPublic = item.IsPublic });
-                            }
-                            @Html.Raw(" | ");
-                        }
-
-                        @Html.ActionLink("Pictures", "Index", "Pictures", new { tripId = item.Id }, null)
-
-                        @if (User.Identity.IsAuthenticated)
-                    {
-                            @Html.Raw(" | ");
-
-                            @Html.ActionLink("Create album", "Album", "Home", new { tripId = item.Id }, null)
-                        }
+                        @*@Html.ActionLink("Pictures", "Index", "Pictures", new { tripId = item.Id }, null)*@
 
                     </div>
                 </div>
             </div>
-        }*@
+        }
     }
 </div> 

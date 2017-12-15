@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ajf.RideShare.Models;
 
 namespace TripGallery.Repository
@@ -6,6 +7,6 @@ namespace TripGallery.Repository
     public interface IEventRepository:IDisposable
     {
         void InsertEvent(Event @event);
-        //void SaveChanges();
+        IEnumerable<Event> GetEvents(string ownerId);
     }
 }

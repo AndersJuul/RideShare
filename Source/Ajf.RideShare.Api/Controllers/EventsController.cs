@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
+using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Api.UnitOfWork.Events;
 using Ajf.RideShare.Models;
 using TripGallery.API.UnitOfWork.Trip;
@@ -17,7 +18,29 @@ namespace Ajf.RideShare.Api.Controllers
         [Route("api/Events/{sub}")]
         public async Task<IHttpActionResult> Get(string sub)
         {
-            return Ok(new[] { "A", "B" });
+                try
+                {
+                    string ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+
+                    using (var uow = new GetEvents(ownerId))
+                    {
+                        var uowResult = uow.Execute();
+
+                        switch (uowResult.Status)
+                        {
+                            case UnitOfWorkStatus.Ok:
+                                return Ok(uowResult.Result);
+
+                            default:
+                                return InternalServerError();
+                        }
+                    }
+
+                }
+                catch (Exception)
+                {
+                    return InternalServerError();
+                }
         }
 
         [Route("api/Events")]
@@ -51,7 +74,6 @@ namespace Ajf.RideShare.Api.Controllers
             }
             catch (Exception ex)
             {
-
                 return InternalServerError();
             }
         }

@@ -9,8 +9,11 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using Ajf.RideShare.Models;
 using Ajf.RideShare.Web;
 using Ajf.RideShare.Web.Helpers;
+using Ajf.RideShare.Web.Models;
+using AutoMapper;
 using IdentityModel.Client;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
@@ -30,6 +33,9 @@ namespace Ajf.RideShare.Web
 
         public void Configuration(IAppBuilder app)
         {
+            Mapper.CreateMap<Event, EventViewModel>();
+
+            Mapper.AssertConfigurationIsValid();
 
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
