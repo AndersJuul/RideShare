@@ -25,11 +25,11 @@ namespace Ajf.RideShare.Tests.Selenium
 
                 var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
                 txtDate.Clear();
-                txtDate.SendKeys(DateTime.Now.AddDays(3).ToString("yyyy-MM-dd´HH:mm"));
+                txtDate.SendKeys(DateTime.Now.AddDays(3).ToString("yyyy-MM-dd HH:mm"));
 
                 var txtDescription = ChromeDriver.FindElement(By.Id("txtDescription"));
                 txtDescription.Clear();
-                txtDescription.SendKeys("Description "+  new Random().Next());
+                txtDescription.SendKeys("Selenium test Description "+  new Random().Next());
 
                 ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
             });
