@@ -23,7 +23,7 @@ namespace Ajf.RideShare.Tests.Selenium
 
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
 
-                var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
+                var txtDate = ChromeDriver.FindElement(By.Id("Date"));
                 txtDate.Clear();
                 txtDate.SendKeys(DateTime.Now.AddDays(3).ToString("yyyy-MM-dd"));
 
