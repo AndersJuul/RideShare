@@ -2,8 +2,10 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Ajf.RideShare.Models;
 using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
+using AutoMapper;
 using Newtonsoft.Json;
 using TripGallery.MVCClient.Helpers;
 
@@ -11,7 +13,6 @@ namespace Ajf.RideShare.Web.Controllers
 {
     public class EventsController : Controller
     {
-
         [Authorize]
         public ActionResult Create()
         {
@@ -21,6 +22,39 @@ namespace Ajf.RideShare.Web.Controllers
                 Date = DateTime.Now
             };
             return View(eventCreateViewModel);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Edit(Guid eventId)
+        {
+            try
+            {
+                var httpClient = RideShareHttpClient.GetClient();
+                
+                var response = await httpClient.GetAsync("api/event/"+eventId)
+                    .ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var @event = JsonConvert.DeserializeObject<Event>(responseString);
+
+                    var eventViewModel = Mapper.Map<Event,EventViewModel>(@event);
+
+                    return View(eventViewModel);
+                }
+                else
+                {
+                    return View("Error",
+                        new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
+                            "Pictures", "Create"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Events", "Create"));
+            }
+
         }
 
         [Authorize]
@@ -40,7 +74,6 @@ namespace Ajf.RideShare.Web.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index", "Home");
-                    //return RedirectToAction("Edit", "Events", new { eventId = eventCreateViewModel.EventId });
                 }
                 else
                 {
