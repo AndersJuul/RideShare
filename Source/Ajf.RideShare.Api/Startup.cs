@@ -35,44 +35,29 @@ namespace Ajf.RideShare.Api
 
         private void InitAutoMapper()
         {
-            Mapper.CreateMap<Trip,
-                TripGallery.DTO.Trip>().ForMember(dest => dest.MainPictureUri,
-                op => op.ResolveUsing(typeof(InjectImageBaseForTripResolver)));
-
-            Mapper.CreateMap<Picture,
-                    TripGallery.DTO.Picture>()
-                .ForMember(dest => dest.Uri,
-                    op => op.ResolveUsing(typeof(InjectImageBaseForPictureResolver)));
-
-            Mapper.CreateMap<TripGallery.DTO.Picture,
-                Picture>();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<PictureForCreation,
+                        Picture>()
+                    .ForMember(o => o.Id, o => o.Ignore())
+                    .ForMember(o => o.TripId, o => o.Ignore())
+                    .ForMember(o => o.OwnerId, o => o.Ignore())
+                    .ForMember(o => o.Uri, o => o.Ignore());
 
 
-            Mapper.CreateMap<TripGallery.DTO.Trip,
-                Trip>().ForMember(dest => dest.MainPictureUri,
-                op => op.ResolveUsing(typeof(RemoveImageBaseForTripResolver)));
-            ;
+                cfg.CreateMap<TripForCreation,
+                        Trip>()
+                    .ForMember(o => o.Id, o => o.Ignore())
+                    .ForMember(o => o.MainPictureUri, o => o.Ignore())
+                    .ForMember(o => o.Pictures, o => o.Ignore())
+                    .ForMember(o => o.OwnerId, o => o.Ignore());
 
-            Mapper.CreateMap<PictureForCreation,
-                    Picture>()
-                .ForMember(o => o.Id, o => o.Ignore())
-                .ForMember(o => o.TripId, o => o.Ignore())
-                .ForMember(o => o.OwnerId, o => o.Ignore())
-                .ForMember(o => o.Uri, o => o.Ignore());
+                cfg.CreateMap<EventForCreation, Event>()
+                    .ForMember(o => o.EventId, o => o.Ignore())
+                    .ForMember(o => o.OwnerId, o => o.Ignore());
 
-
-            Mapper.CreateMap<TripForCreation,
-                    Trip>()
-                .ForMember(o => o.Id, o => o.Ignore())
-                .ForMember(o => o.MainPictureUri, o => o.Ignore())
-                .ForMember(o => o.Pictures, o => o.Ignore())
-                .ForMember(o => o.OwnerId, o => o.Ignore());
-
-            Mapper.CreateMap<EventForCreation, Event>()
-                .ForMember(o => o.EventId, o => o.Ignore())
-                .ForMember(o => o.OwnerId, o => o.Ignore());
-
-            Mapper.AssertConfigurationIsValid();
+            });
+            Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }

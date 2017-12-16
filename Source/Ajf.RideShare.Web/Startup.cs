@@ -33,9 +33,11 @@ namespace Ajf.RideShare.Web
 
         public void Configuration(IAppBuilder app)
         {
-            Mapper.CreateMap<Event, EventViewModel>();
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<Event, EventViewModel>();
 
-            Mapper.AssertConfigurationIsValid();
+            });
+            Mapper.Configuration.AssertConfigurationIsValid();
 
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 

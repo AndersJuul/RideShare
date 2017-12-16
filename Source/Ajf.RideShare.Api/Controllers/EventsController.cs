@@ -7,7 +7,6 @@ using Ajf.RideShare.Api.Helpers;
 using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Api.UnitOfWork.Events;
 using Ajf.RideShare.Models;
-using TripGallery.API.UnitOfWork.Trip;
 
 namespace Ajf.RideShare.Api.Controllers
 {
