@@ -244,6 +244,7 @@
     <Content Include="rideshare.jpg" />
     <Content Include="RideShare.png" />
     <Content Include="rideshare2.png" />
+    <Content Include="rideshare3.png" />
     <Content Include="RideShareLogo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
