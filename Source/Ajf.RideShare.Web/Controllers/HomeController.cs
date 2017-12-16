@@ -20,8 +20,8 @@ namespace Ajf.RideShare.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var httpClient = RideShareHttpClient.GetClient();
-                var sub = ((ClaimsIdentity)User.Identity).Claims.Single(x=>x.Type=="sub").Value;
-                var rspTrips = await httpClient.GetAsync("Api/Events/"+sub).ConfigureAwait(false);
+
+                var rspTrips = await httpClient.GetAsync("Api/Events/").ConfigureAwait(false);
 
                 if (rspTrips.IsSuccessStatusCode)
                 {

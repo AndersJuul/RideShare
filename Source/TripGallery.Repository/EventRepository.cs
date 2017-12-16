@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using Ajf.RideShare.Models;
 
@@ -36,6 +37,24 @@ namespace TripGallery.Repository
                     .Where(x=>x.OwnerId==ownerId)
                     .ToArray();
             }
+        }
+
+        public void UpdateEvent(Event @event)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var single = db.Events.Single(x=>x.EventId==@event.EventId);
+
+                single.Date = @event.Date;
+                single.Description = @event.Description;
+
+                db.SaveChanges();
+            }
+        }
+
+        public Event GetSingleEvent(string eventId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

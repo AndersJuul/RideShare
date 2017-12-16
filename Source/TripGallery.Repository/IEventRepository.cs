@@ -8,5 +8,7 @@ namespace TripGallery.Repository
     {
         void InsertEvent(Event @event);
         IEnumerable<Event> GetEvents(string ownerId);
+        void UpdateEvent(Event @event);
+        Event GetSingleEvent(string eventId);
     }
 }

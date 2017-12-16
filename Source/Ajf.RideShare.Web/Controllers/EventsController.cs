@@ -24,14 +24,26 @@ namespace Ajf.RideShare.Web.Controllers
             return View(eventCreateViewModel);
         }
 
+        //[Route("api/Events/Edit/{eventId}")]
+        //public async Task<IHttpActionResult> Edit(Guid eventId)
+        //{
+        //    return View(new EditEventViewModel());
+        //}
+        //public class EditEventViewModel
+        //{
+        //    public Guid EventId { get; set; }
+        //    public DateTime Date { get; set; }
+        //    public string Description { get; set; }
+        //}
         [Authorize]
+        [Route("api/Events/Edit/{eventId}")]
         public async Task<ActionResult> Edit(Guid eventId)
         {
             try
             {
                 var httpClient = RideShareHttpClient.GetClient();
                 
-                var response = await httpClient.GetAsync("api/event/"+eventId)
+                var response = await httpClient.GetAsync("api/events/"+eventId)
                     .ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
@@ -59,6 +71,36 @@ namespace Ajf.RideShare.Web.Controllers
 
         [Authorize]
         [HttpPost]
+        public async Task<ActionResult> Edit(EventViewModel eventViewModel)
+        {
+            try
+            {
+                var httpClient = RideShareHttpClient.GetClient();
+
+                var serializedTrip = JsonConvert.SerializeObject(eventViewModel);
+
+                var response = await httpClient.PutAsync("api/events/"+eventViewModel.EventId,
+                        new StringContent(serializedTrip, System.Text.Encoding.Unicode, "application/json"))
+                    .ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View("Error",
+                        new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
+                            "Events", "Edit"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Events", "Edit"));
+            }
+        }
+        [Authorize]
+        [HttpPost]
         public async Task<ActionResult> Create(EventCreateViewModel eventCreateViewModel)
         {
             try
@@ -68,7 +110,7 @@ namespace Ajf.RideShare.Web.Controllers
                 var serializedTrip = JsonConvert.SerializeObject(eventCreateViewModel);
 
                 var response = await httpClient.PostAsync("api/events/",
-                    new StringContent(serializedTrip, System.Text.Encoding.Unicode, "application/json"))
+                        new StringContent(serializedTrip, System.Text.Encoding.Unicode, "application/json"))
                     .ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)

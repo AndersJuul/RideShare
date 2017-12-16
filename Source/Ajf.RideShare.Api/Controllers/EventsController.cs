@@ -15,40 +15,68 @@ namespace Ajf.RideShare.Api.Controllers
     public class EventsController : ApiController
     {
         [Route("api/Events/{sub}")]
-        public async Task<IHttpActionResult> Get(string sub)
+        public async Task<IHttpActionResult> GetSingleEvent(string sub)
         {
-                try
-                {
-                    string ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+            try
+            {
+                await Task.FromResult(0);
+                var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                    using (var uow = new GetEvents(ownerId))
+                using (var uow = new GetSingleEvent(sub,ownerId))
+                {
+                    var uowResult = uow.Execute();
+
+                    switch (uowResult.Status)
                     {
-                        var uowResult = uow.Execute();
+                        case UnitOfWorkStatus.Ok:
+                            return Ok(uowResult.Result);
 
-                        switch (uowResult.Status)
-                        {
-                            case UnitOfWorkStatus.Ok:
-                                return Ok(uowResult.Result);
-
-                            default:
-                                return InternalServerError();
-                        }
+                        default:
+                            return InternalServerError();
                     }
+                }
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
 
-                }
-                catch (Exception)
+        [Route("api/Events/")]
+        public async Task<IHttpActionResult> Get()
+        {
+            try
+            {
+                await Task.FromResult(0);
+                var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+
+                using (var uow = new GetEvents(ownerId))
                 {
-                    return InternalServerError();
+                    var uowResult = uow.Execute();
+
+                    switch (uowResult.Status)
+                    {
+                        case UnitOfWorkStatus.Ok:
+                            return Ok(uowResult.Result);
+
+                        default:
+                            return InternalServerError();
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
         }
 
         [Route("api/Events")]
         [HttpPost]
-        public async Task<IHttpActionResult> Post([FromBody]EventForCreation eventForCreation)
+        public async Task<IHttpActionResult> Post([FromBody] EventForCreation eventForCreation)
         {
             try
             {
-                string ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+                var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
                 using (var uow = new CreateEvent(ownerId))
                 {
@@ -56,14 +84,50 @@ namespace Ajf.RideShare.Api.Controllers
 
                     switch (uowResult.Status)
                     {
-                        case UnitOfWork.UnitOfWorkStatus.Ok:
-                            return Created<Event>
+                        case UnitOfWorkStatus.Ok:
+                            return Created
                                 (Request.RequestUri + "/" + uowResult.Result.EventId, uowResult.Result);
 
-                        case UnitOfWork.UnitOfWorkStatus.Forbidden:
+                        case UnitOfWorkStatus.Forbidden:
                             return StatusCode(HttpStatusCode.Forbidden);
 
-                        case UnitOfWork.UnitOfWorkStatus.Invalid:
+                        case UnitOfWorkStatus.Invalid:
+                            return BadRequest();
+
+                        default:
+                            return InternalServerError();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
+
+        [Route("api/Events/{eventId}")]
+        [HttpPut]
+        public async Task<IHttpActionResult> Put([FromBody] Event @event)
+        {
+            try
+            {
+                await Task.FromResult(0);
+                var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
+
+                using (var uow = new UpdateEvent(ownerId))
+                {
+                    var uowResult = uow.Execute(@event);
+
+                    switch (uowResult.Status)
+                    {
+                        case UnitOfWorkStatus.Ok:
+                            return Created
+                                (Request.RequestUri + "/" + uowResult.Result.EventId, uowResult.Result);
+
+                        case UnitOfWorkStatus.Forbidden:
+                            return StatusCode(HttpStatusCode.Forbidden);
+
+                        case UnitOfWorkStatus.Invalid:
                             return BadRequest();
 
                         default:

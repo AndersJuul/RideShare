@@ -246,6 +246,8 @@
     <Compile Include="Helpers\TokenIdentityHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UnitOfWork\Events\GetSingleEvent.cs" />
+    <Compile Include="UnitOfWork\Events\UpdateEvent.cs" />
     <Compile Include="UnitOfWork\Events\GetEvents.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\Picture\CreatePicture.cs" />
