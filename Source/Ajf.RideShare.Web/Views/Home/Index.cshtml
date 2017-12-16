@@ -16,7 +16,7 @@
             <div class="col-md-6 bottomMarginDefault">
 
                 <div>
-                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new { eventId = item.EventId }, null)</div>
+                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new { eventId = item.EventId }, new { @id = "btnEditEvent" })</div>
                     
                     <div>@item.Description</div>
 

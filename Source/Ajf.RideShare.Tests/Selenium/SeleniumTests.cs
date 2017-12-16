@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -32,6 +33,10 @@ namespace Ajf.RideShare.Tests.Selenium
                 txtDescription.SendKeys("Selenium test Description "+  new Random().Next());
 
                 ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
+
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
+
+                ChromeDriver.FindElementsById("btnEditEvent").First().Click();
 
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
             });
