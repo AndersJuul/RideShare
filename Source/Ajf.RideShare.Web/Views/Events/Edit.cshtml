@@ -11,6 +11,7 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(model => model.EventId)
+    @Html.HiddenFor(model => model.OwnerId)
     <div class="form-horizontal leftMarginDefault">
 
         @Html.ValidationSummary()
@@ -30,7 +31,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" id="btnSubmit"/>
+                <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit"/>
             </div>
         </div>
     </div>

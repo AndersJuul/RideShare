@@ -28,22 +28,15 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
             GC.SuppressFinalize(this);
         }
 
-        public UnitOfWorkResult<Event> Execute(Event input)
+        public UnitOfWorkResult<Event> Execute(Event @event)
         {
-            if (input == null)
+            if (@event == null)
                 return new UnitOfWorkResult<Event>(null, UnitOfWorkStatus.Invalid);
 
-            if (_ownerId == null || _ownerId!=input.OwnerId)
+            if (_ownerId == null || _ownerId!= @event.OwnerId)
                 return new UnitOfWorkResult<Event>(null, UnitOfWorkStatus.Forbidden);
 
-            // map to entity
-            var @event = Mapper.Map<Event, Event>(input);
-
             // create guid
-            var id = Guid.NewGuid();
-            @event.EventId = id;
-            @event.OwnerId = _ownerId;
-
             _eventRepository.UpdateEvent(@event);
 
             // return a dto

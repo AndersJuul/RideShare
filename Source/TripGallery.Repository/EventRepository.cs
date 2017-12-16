@@ -54,7 +54,12 @@ namespace TripGallery.Repository
 
         public Event GetSingleEvent(string eventId)
         {
-            throw new NotImplementedException();
+            using (var db = new ApplicationDbContext())
+            {
+                var single = db.Events.Single(x => x.EventId.ToString() == eventId);
+
+                return single;
+            }
         }
     }
 }
