@@ -6,7 +6,6 @@ using AutoMapper;
 using IdentityServer3.AccessTokenValidation;
 using Owin;
 using TripGallery.API;
-using TripGallery.API.Helpers;
 using TripGallery.DTO;
 using Picture = TripGallery.Repository.Entities.Picture;
 using Trip = TripGallery.Repository.Entities.Trip;

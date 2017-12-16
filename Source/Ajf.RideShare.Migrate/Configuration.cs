@@ -3,15 +3,11 @@ using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Ajf.RideShare.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ajf.RideShare.Migrate
 {
     public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
-        private string _frankEmailDk;
-        private string _claireEmailDk;
 
         public Configuration()
         {
