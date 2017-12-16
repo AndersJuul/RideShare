@@ -32,6 +32,8 @@ namespace Ajf.RideShare.Tests.Selenium
                 txtDescription.SendKeys("Selenium test Description "+  new Random().Next());
 
                 ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
+
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
             });
         }
     }
