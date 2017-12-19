@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using Ajf.Nuget.Logging;
 using Ajf.RideShare.Models;
 using Ajf.RideShare.Web;
 using Ajf.RideShare.Web.Helpers;
@@ -22,6 +23,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Newtonsoft.Json;
 using Owin;
+using Serilog;
+using Serilog.Configuration;
 using TripGallery;
 using TripGallery.MVCClient.Helpers;
 
@@ -33,10 +36,19 @@ namespace Ajf.RideShare.Web
 
         public void Configuration(IAppBuilder app)
         {
+            var loggerConfig = StandardLoggerConfigurator.GetLoggerConfig();
+            ;
+            Log.Logger = loggerConfig
+                .MinimumLevel
+                .Debug()
+                .CreateLogger();
+
+            Log.Logger.Error("Starting...");
+
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Event, EventViewModel>();
-
             });
+
             Mapper.Configuration.AssertConfigurationIsValid();
 
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

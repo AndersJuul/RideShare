@@ -8,6 +8,7 @@ using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
 using AutoMapper;
 using Newtonsoft.Json;
+using Serilog;
 using TripGallery.DTO;
 using TripGallery.MVCClient.Helpers;
 
@@ -25,6 +26,7 @@ namespace Ajf.RideShare.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                Log.Logger.Debug("Trace: User is authenticated." );
                 var httpClient = RideShareHttpClient.GetClient();
 
                 var rspTrips = await httpClient.GetAsync("Api/Events/").ConfigureAwait(false);
@@ -41,6 +43,9 @@ namespace Ajf.RideShare.Web.Controllers
 
                     return View(vm);
                 }
+
+                Log.Logger.Error("Non-successful call to API: " + rspTrips.Content.ReadAsStringAsync());
+
                 return View("Error",
                     new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(rspTrips),
                         "Home", "Index"));

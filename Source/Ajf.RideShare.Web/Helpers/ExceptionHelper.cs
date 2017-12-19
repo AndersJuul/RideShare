@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TripGallery.MVCClient.Helpers
+namespace Ajf.RideShare.Web.Helpers
 {
     public static class ExceptionHelper
     {
