@@ -23,7 +23,7 @@ namespace Ajf.RideShare.Tests.Selenium
             }
             catch (Exception e)
             {
-                ChromeDriver.GetScreenshot().SaveAsFile(Path.GetTempFileName(),ScreenshotImageFormat.Bmp);
+                ChromeDriver.GetScreenshot().SaveAsFile(@"c:\temp\"+DateTime.Now.ToString("yyyyMMddHHmmss")+".bmp",ScreenshotImageFormat.Bmp);
                 Console.WriteLine(e);
                 throw;
             }
