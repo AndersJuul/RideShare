@@ -15,6 +15,12 @@ namespace Ajf.RideShare.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
+        public ActionResult RedirectToIndex()
+        {
+            return RedirectToAction("Index");
+        }
+
         public async Task<ActionResult> Index()
         {
             if (User.Identity.IsAuthenticated)
