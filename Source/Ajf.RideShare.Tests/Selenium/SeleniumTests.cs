@@ -16,11 +16,9 @@ namespace Ajf.RideShare.Tests.Selenium
             {
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
 
-                ChromeDriver.FindElement(By.Id("addEvent")).Click();
-                
-                Assert.AreEqual("Ajf Security Token Service", ChromeDriver.Title);
-
                 LoginKevin();
+
+                ChromeDriver.FindElement(By.Id("addEvent")).Click();
 
                 Assert.AreEqual("RideShare", ChromeDriver.Title);
 
