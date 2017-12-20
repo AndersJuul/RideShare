@@ -22,9 +22,5 @@ namespace Ajf.RideShare.Models
         //public DbSet<Car> Cars { get; set; }
         //public DbSet<Passenger> Passengers { get; set; }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
     }
 }
