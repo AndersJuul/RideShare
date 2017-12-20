@@ -43,25 +43,25 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
 
         public UnitOfWorkResult<IEnumerable<Event>> Execute()
         {
-            Log.Logger.Debug("GetEvents.Execute(1)");
+            Log.Logger.Debug("UOW.GetEvents.Execute(1)");
 
             if (string.IsNullOrEmpty( _ownerId))
             {
-                Log.Logger.Debug("GetEvents.Execute(2)");
+                Log.Logger.Debug("UOW.GetEvents.Execute(2)");
                 return new UnitOfWorkResult<IEnumerable<Event>>(null, UnitOfWorkStatus.Invalid);
             }
 
             if (_ownerId == null)
             {
-                Log.Logger.Debug("GetEvents.Execute(3)");
+                Log.Logger.Debug("UOW.GetEvents.Execute(3)");
                 return new UnitOfWorkResult<IEnumerable<Event>>(null, UnitOfWorkStatus.Forbidden);
             }
 
-            Log.Logger.Debug("GetEvents.Execute(4)");
+            Log.Logger.Debug("UOW.GetEvents.Execute(4)");
             var events = _eventRepository.GetEvents(_ownerId);
 
             // return a dto
-            Log.Logger.Debug("GetEvents.Execute(5)");
+            Log.Logger.Debug("UOW.GetEvents.Execute(5)");
             return new UnitOfWorkResult<IEnumerable<Event>>(events, UnitOfWorkStatus.Ok);
         }
     }
