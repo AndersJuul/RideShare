@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ajf.RideShare.Models;
+using Serilog;
 using TripGallery.API.UnitOfWork;
 using TripGallery.Repository;
 
@@ -42,20 +43,25 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
 
         public UnitOfWorkResult<IEnumerable<Event>> Execute()
         {
+            Log.Logger.Debug("GetEvents.Execute(1)");
+
             if (string.IsNullOrEmpty( _ownerId))
             {
+                Log.Logger.Debug("GetEvents.Execute(2)");
                 return new UnitOfWorkResult<IEnumerable<Event>>(null, UnitOfWorkStatus.Invalid);
             }
 
             if (_ownerId == null)
             {
-                // cannot create a trip when there's no owner id
+                Log.Logger.Debug("GetEvents.Execute(3)");
                 return new UnitOfWorkResult<IEnumerable<Event>>(null, UnitOfWorkStatus.Forbidden);
             }
 
+            Log.Logger.Debug("GetEvents.Execute(4)");
             var events = _eventRepository.GetEvents(_ownerId);
 
             // return a dto
+            Log.Logger.Debug("GetEvents.Execute(5)");
             return new UnitOfWorkResult<IEnumerable<Event>>(events, UnitOfWorkStatus.Ok);
         }
     }
