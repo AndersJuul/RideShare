@@ -31,9 +31,9 @@ namespace Ajf.RideShare.Web.Controllers
 
                 var rspTrips = await httpClient.GetAsync("Api/Events/").ConfigureAwait(false);
 
+                var lstTripsAsString = await rspTrips.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (rspTrips.IsSuccessStatusCode)
                 {
-                    var lstTripsAsString = await rspTrips.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     var models= JsonConvert.DeserializeObject<IList<Event>>(lstTripsAsString).ToList();
                     var eventViewModels = models.Select(x=> Mapper.Map<EventViewModel>(x));
@@ -44,7 +44,11 @@ namespace Ajf.RideShare.Web.Controllers
                     return View(vm);
                 }
 
-                Log.Logger.Error("Non-successful call to API: " + rspTrips.Content.ReadAsStringAsync());
+                Log.Logger.Error("Non-successful call to API: " + rspTrips.StatusCode);
+                foreach (var s in lstTripsAsString)
+                {
+                    Log.Logger.Error("Non-successful call to API: " + s);
+                }
 
                 return View("Error",
                     new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(rspTrips),
