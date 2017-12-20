@@ -12,7 +12,7 @@ using Serilog;
 namespace Ajf.RideShare.Api.Controllers
 {
     [Authorize]
-    [EnableCors("https://localhost:44316", "*", "GET, POST, DELETE")]
+    [EnableCors("*", "*", "GET, POST, DELETE")]
     public class EventsController : ApiController
     {
         [Route("api/Events/{sub}")]
