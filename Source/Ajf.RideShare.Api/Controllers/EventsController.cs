@@ -37,8 +37,10 @@ namespace Ajf.RideShare.Api.Controllers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Logger.Error(ex, "During EventsController.GetSingleEvent");
+
                 return InternalServerError();
             }
         }
@@ -66,8 +68,9 @@ namespace Ajf.RideShare.Api.Controllers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Logger.Error(ex,"During EventsController.Get");
                 return InternalServerError();
             }
         }
@@ -103,6 +106,7 @@ namespace Ajf.RideShare.Api.Controllers
             }
             catch (Exception ex)
             {
+                Log.Logger.Error(ex, "During EventsController.Post");
                 return InternalServerError();
             }
         }
@@ -139,6 +143,7 @@ namespace Ajf.RideShare.Api.Controllers
             }
             catch (Exception ex)
             {
+                Log.Logger.Error(ex, "During EventsController.Put");
                 return InternalServerError();
             }
         }
