@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using Ajf.RideShare.Models;
+using Serilog;
 
 namespace TripGallery.Repository
 {
@@ -30,6 +31,8 @@ namespace TripGallery.Repository
 
         public IEnumerable<Event> GetEvents(string ownerId)
         {
+            Log.Logger.Debug("EventRepository.GetEvents.Execute(4)");
+
             using (var db = new ApplicationDbContext())
             {
                 return db
