@@ -42,6 +42,7 @@ namespace Ajf.RideShare.Web
                 .CreateLogger();
 
             Log.Logger.Error("Starting...");
+            Log.Logger.Error("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"]);
 
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Event, EventViewModel>();
