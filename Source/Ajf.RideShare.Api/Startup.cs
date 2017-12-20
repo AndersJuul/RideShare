@@ -24,6 +24,7 @@ namespace Ajf.RideShare.Api
                 .CreateLogger();
 
             Log.Logger.Error("Starting...");
+            Log.Logger.Error("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"] );
 
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
