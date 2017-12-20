@@ -29,6 +29,8 @@ namespace Ajf.RideShare.Web.Controllers
                 Log.Logger.Debug("Trace: User is authenticated." );
                 var httpClient = RideShareHttpClient.GetClient();
 
+                Log.Logger.Debug("HttpClient base url :" +httpClient.BaseAddress.AbsolutePath);
+
                 var rspTrips = await httpClient.GetAsync("Api/Events/").ConfigureAwait(false);
 
                 var lstTripsAsString = await rspTrips.Content.ReadAsStringAsync().ConfigureAwait(false);
