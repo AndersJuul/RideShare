@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.IdentityModel.Tokens;
+using Ajf.Nuget.Logging;
 using Ajf.RideShare.Models;
 using AutoMapper;
 using IdentityServer3.AccessTokenValidation;
 using Owin;
+using Serilog;
 using TripGallery.API;
 using TripGallery.DTO;
 using Picture = TripGallery.Repository.Entities.Picture;
@@ -16,6 +18,13 @@ namespace Ajf.RideShare.Api
     {
         public void Configuration(IAppBuilder app)
         {
+            Log.Logger = StandardLoggerConfigurator
+                .GetLoggerConfig().MinimumLevel
+                .Debug()
+                .CreateLogger();
+
+            Log.Logger.Error("Starting...");
+
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseIdentityServerBearerTokenAuthentication(

@@ -36,10 +36,8 @@ namespace Ajf.RideShare.Web
 
         public void Configuration(IAppBuilder app)
         {
-            var loggerConfig = StandardLoggerConfigurator.GetLoggerConfig();
-            ;
-            Log.Logger = loggerConfig
-                .MinimumLevel
+            Log.Logger = StandardLoggerConfigurator
+                .GetLoggerConfig().MinimumLevel
                 .Debug()
                 .CreateLogger();
 

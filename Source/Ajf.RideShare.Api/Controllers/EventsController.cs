@@ -7,6 +7,7 @@ using Ajf.RideShare.Api.Helpers;
 using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Api.UnitOfWork.Events;
 using Ajf.RideShare.Models;
+using Serilog;
 
 namespace Ajf.RideShare.Api.Controllers
 {
@@ -47,6 +48,7 @@ namespace Ajf.RideShare.Api.Controllers
         {
             try
             {
+                Log.Logger.Debug("api/events/ : Get");
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
