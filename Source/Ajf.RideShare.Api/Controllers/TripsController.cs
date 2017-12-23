@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Ajf.RideShare.Api.Controllers;
 using Ajf.RideShare.Api.Helpers;
 using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Api.UnitOfWork.Events;
@@ -17,7 +18,7 @@ namespace TripGallery.API.Controllers
 
     //[Authorize]
     [EnableCors("https://localhost:44316", "*", "GET, POST, PATCH")]
-    public class TripsController : ApiController
+    public class TripsController : RideShareApiController
     {
 
         // anyone can get trips

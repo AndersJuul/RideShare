@@ -10,7 +10,7 @@ namespace Ajf.RideShare.Api.Controllers
 {
     //[Authorize]
     [EnableCors("https://localhost:44316", "*", "GET, POST, PATCH")]
-    public class UserInfoController : ApiController
+    public class UserInfoController : RideShareApiController
     {
         //[Authorize(Roles = "PayingUser")]
         [Route("api/userinfo")]

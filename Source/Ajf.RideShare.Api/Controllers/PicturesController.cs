@@ -11,7 +11,7 @@ namespace Ajf.RideShare.Api.Controllers
 {
     [Authorize]
     [EnableCors("https://localhost:44316", "*", "GET, POST, DELETE")]
-    public class PicturesController : ApiController
+    public class PicturesController : RideShareApiController
     {
 
         [Route("api/trips/{tripId}/pictures")]
