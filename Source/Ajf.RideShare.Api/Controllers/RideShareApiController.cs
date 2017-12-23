@@ -3,7 +3,7 @@ using Ajf.Nuget.Logging;
 
 namespace Ajf.RideShare.Api.Controllers
 {
-    [LoggingFilter]
+    [ApiLoggingFilter]
     public abstract class RideShareApiController:ApiController
     {
     }
