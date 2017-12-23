@@ -15,6 +15,7 @@ using Ajf.RideShare.Web;
 using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
 using AutoMapper;
+using IdentityModel;
 using IdentityModel.Client;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
@@ -24,16 +25,14 @@ using Microsoft.Owin.Security.OpenIdConnect;
 using Newtonsoft.Json;
 using Owin;
 using Serilog;
-using Serilog.Configuration;
 using TripGallery;
-using TripGallery.MVCClient.Helpers;
 
 [assembly: OwinStartup(typeof(Startup))]
+
 namespace Ajf.RideShare.Web
 {
     public class Startup
     {
-
         public void Configuration(IAppBuilder app)
         {
             Log.Logger = StandardLoggerConfigurator
@@ -41,19 +40,17 @@ namespace Ajf.RideShare.Web
                 .Debug()
                 .CreateLogger();
 
-            Log.Logger.Error("Starting...");
-            Log.Logger.Error("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"]);
+            Log.Logger.Information("Starting...");
+            Log.Logger.Information("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"]);
 
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<Event, EventViewModel>();
-            });
+            Mapper.Initialize(cfg => { cfg.CreateMap<Event, EventViewModel>(); });
 
             Mapper.Configuration.AssertConfigurationIsValid();
 
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = 
-                IdentityModel.JwtClaimTypes.Name;
+            AntiForgeryConfig.UniqueClaimTypeIdentifier =
+                JwtClaimTypes.Name;
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -70,7 +67,6 @@ namespace Ajf.RideShare.Web
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-
                 ClientId = "tripgalleryhybrid",
                 Authority = ConfigurationManager.AppSettings["IdentityServerApplicationUrl"],
                 RedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
@@ -79,8 +75,8 @@ namespace Ajf.RideShare.Web
                 Scope = "openid profile address gallerymanagement roles offline_access email",
                 UseTokenLifetime = false,
                 PostLogoutRedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
-                 
-                Notifications = new OpenIdConnectAuthenticationNotifications()
+
+                Notifications = new OpenIdConnectAuthenticationNotifications
                 {
                     SecurityTokenValidated = async n =>
                     {
@@ -88,65 +84,57 @@ namespace Ajf.RideShare.Web
                         TokenHelper.DecodeAndWrite(n.ProtocolMessage.AccessToken);
 
                         var givenNameClaim = n.AuthenticationTicket
-                            .Identity.FindFirst(IdentityModel.JwtClaimTypes.GivenName);
+                            .Identity.FindFirst(JwtClaimTypes.GivenName);
 
                         var familyNameClaim = n.AuthenticationTicket
-                            .Identity.FindFirst(IdentityModel.JwtClaimTypes.FamilyName);
+                            .Identity.FindFirst(JwtClaimTypes.FamilyName);
 
                         var subClaim = n.AuthenticationTicket
-                            .Identity.FindFirst(IdentityModel.JwtClaimTypes.Subject);
+                            .Identity.FindFirst(JwtClaimTypes.Subject);
 
                         var roleClaim = n.AuthenticationTicket
-                            .Identity.FindFirst(IdentityModel.JwtClaimTypes.Role);
+                            .Identity.FindFirst(JwtClaimTypes.Role);
 
                         var emailClaim = n.AuthenticationTicket
-                            .Identity.FindFirst(IdentityModel.JwtClaimTypes.Email);
+                            .Identity.FindFirst(JwtClaimTypes.Email);
 
                         // create a new claims, issuer + sub as unique identifier
-                        var nameClaim = new Claim(IdentityModel.JwtClaimTypes.Name,
-                                    Constants.TripGalleryIssuerUri + subClaim.Value);
+                        var nameClaim = new Claim(JwtClaimTypes.Name,
+                            Constants.TripGalleryIssuerUri + subClaim.Value);
 
                         var newClaimsIdentity = new ClaimsIdentity(
-                           n.AuthenticationTicket.Identity.AuthenticationType,
-                           IdentityModel.JwtClaimTypes.Name,
-                           IdentityModel.JwtClaimTypes.Role);
+                            n.AuthenticationTicket.Identity.AuthenticationType,
+                            JwtClaimTypes.Name,
+                            JwtClaimTypes.Role);
 
                         newClaimsIdentity.AddClaim(nameClaim);
 
                         if (givenNameClaim != null)
-                        {
                             newClaimsIdentity.AddClaim(givenNameClaim);
-                        }
 
                         if (familyNameClaim != null)
-                        {
                             newClaimsIdentity.AddClaim(familyNameClaim);
-                        }
 
                         if (roleClaim != null)
-                        {
                             newClaimsIdentity.AddClaim(roleClaim);
-                        }
 
                         if (emailClaim != null)
-                        {
                             newClaimsIdentity.AddClaim(emailClaim);
-                        }
 
                         // request a refresh token
                         var tokenClientForRefreshToken = new TokenClient(
-                                  ConfigurationManager.AppSettings["IdentityServerApplicationUrl"] + "/connect/token" ,
-                                   "tripgalleryhybrid",
-                                   Constants.TripGalleryClientSecret);
+                            ConfigurationManager.AppSettings["IdentityServerApplicationUrl"] + "/connect/token",
+                            "tripgalleryhybrid",
+                            Constants.TripGalleryClientSecret);
 
                         var refreshResponse = await
                             tokenClientForRefreshToken.RequestAuthorizationCodeAsync(
-                            n.ProtocolMessage.Code,
+                                n.ProtocolMessage.Code,
                                 ConfigurationManager.AppSettings["UrlRideShareWeb"]);
 
                         var expirationDateAsRoundtripString
                             = DateTime.SpecifyKind(DateTime.UtcNow.AddSeconds(refreshResponse.ExpiresIn)
-                            , DateTimeKind.Utc).ToString("o");
+                                , DateTimeKind.Utc).ToString("o");
 
 
                         newClaimsIdentity.AddClaim(new Claim("id_token", n.ProtocolMessage.IdToken));
@@ -157,11 +145,10 @@ namespace Ajf.RideShare.Web
 
                         // create a new authentication ticket, overwriting the old one.
                         n.AuthenticationTicket = new AuthenticationTicket(
-                                                 newClaimsIdentity,
-                                                 n.AuthenticationTicket.Properties);
+                            newClaimsIdentity,
+                            n.AuthenticationTicket.Properties);
 
                         //await UserService.CreateUserIfNotExisting(newClaimsIdentity);
-
                     },
                     RedirectToIdentityProvider = async n =>
                     {
@@ -173,9 +160,7 @@ namespace Ajf.RideShare.Web
                             var identityTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token");
 
                             if (identityTokenHint != null)
-                            {
                                 n.ProtocolMessage.IdTokenHint = identityTokenHint.Value;
-                            }
                         }
                         //else if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.AuthenticationRequest)
                         //{
@@ -185,7 +170,7 @@ namespace Ajf.RideShare.Web
                         //        // add "2fa" - acr_values are separated by a space
                         //        n.ProtocolMessage.Parameters["acr_values"] = existingAcrValues + " 2fa";
                         //    }
-                       
+
                         //    n.ProtocolMessage.Parameters["acr_values"] = "2fa";
                         //}
                     }
@@ -196,12 +181,10 @@ namespace Ajf.RideShare.Web
 
     public static class UserService
     {
-
-
         public static async Task CreateUserIfNotExisting(ClaimsIdentity newClaimsIdentity)
         {
             //.Select(x => x.ValueType).OrderBy(x => x).ToDictionary();
-            var dict = newClaimsIdentity.Claims.Select(t => new { t.Type, t.Value})
+            var dict = newClaimsIdentity.Claims.Select(t => new {t.Type, t.Value})
                 .ToDictionary(t => t.Type, t => t.Value);
 
             var httpClient = RideShareHttpClient.GetClient(newClaimsIdentity);

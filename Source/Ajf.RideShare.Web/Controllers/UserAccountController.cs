@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
-namespace TripGallery.MVCClient.Controllers
+namespace Ajf.RideShare.Web.Controllers
 {
-    public class UserAccountController : Controller
+    public class UserAccountController : RideShareController
     {
         public ActionResult Logout()
         {

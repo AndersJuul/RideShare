@@ -1,21 +1,19 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
+using Newtonsoft.Json;
 using TripGallery.DTO;
-using TripGallery.MVCClient.Helpers;
 
-namespace TripGallery.MVCClient.Controllers
+namespace Ajf.RideShare.Web.Controllers
 {
 
     [Authorize]
-    public class PicturesController : Controller
+    public class PicturesController : RideShareController
     {
 
         public async Task<ActionResult> Index(Guid tripId)

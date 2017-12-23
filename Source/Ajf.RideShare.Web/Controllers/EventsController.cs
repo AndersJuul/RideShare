@@ -11,7 +11,7 @@ using TripGallery.MVCClient.Helpers;
 
 namespace Ajf.RideShare.Web.Controllers
 {
-    public class EventsController : Controller
+    public class EventsController : RideShareController
     {
         [Authorize]
         public ActionResult Create()

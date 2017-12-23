@@ -22,13 +22,13 @@
                         {
                             @Html.ActionLink(string.Format("Logout ({0} {1})",
                             
-                            ((User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("given_name") == null
-                             ? "" : (User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("given_name").Value),
+                                ((User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("given_name") == null
+                                    ? "" : (User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("given_name").Value),
 
-                            ((User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("family_name") == null
-                            ? "" : (User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("family_name").Value))
+                                ((User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("family_name") == null
+                                    ? "" : (User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst("family_name").Value))
                             
-                            , "Logout", "UserAccount")
+                                , "Logout", "UserAccount")
                         }
 			        else
 			        {

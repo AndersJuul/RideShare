@@ -21,7 +21,7 @@
                 @if (item.OwnerId == this.User.Identity.Name)
                 {
                     @Html.ActionLink("Delete picture", "Delete", "Pictures",
-                    new { tripId = item.TripId, pictureId = item.Id }, null)
+                        new { tripId = item.TripId, pictureId = item.Id }, null)
                 }
             </div>
         </div>

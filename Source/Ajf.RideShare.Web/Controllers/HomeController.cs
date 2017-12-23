@@ -14,7 +14,7 @@ using TripGallery.MVCClient.Helpers;
 
 namespace Ajf.RideShare.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : RideShareController
     {
         [Authorize]
         public ActionResult RedirectToIndex()
