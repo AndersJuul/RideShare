@@ -1,8 +1,9 @@
 using System.Web.Mvc;
+using Ajf.Nuget.Logging;
 
 namespace Ajf.RideShare.Web.Controllers
 {
-    [CachingFilter]
+    [LoggingFilter]
     public abstract class RideShareController:Controller
     {
     }
