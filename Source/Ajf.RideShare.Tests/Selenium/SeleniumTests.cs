@@ -10,7 +10,7 @@ namespace Ajf.RideShare.Tests.Selenium
     public class SeleniumTests : BaseSeleniumTests
     {
         [Test]
-        public void ThatKevinCanLogin()
+        public void ThatKevinCanLoginAndDoStuff()
         {
             RunTest(() =>
             {
