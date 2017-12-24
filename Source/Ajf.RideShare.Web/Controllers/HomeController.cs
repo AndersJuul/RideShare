@@ -31,14 +31,18 @@ namespace Ajf.RideShare.Web.Controllers
 
                 Log.Logger.Debug("HttpClient base url :" +httpClient.BaseAddress.AbsolutePath);
 
-                var rspTrips = await httpClient.GetAsync("Api/Events/").ConfigureAwait(false);
+                var activeEvents = await httpClient
+                    .GetAsync("Api/Events/")
+                    .ConfigureAwait(false);
 
-                var lstTripsAsString = await rspTrips.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (rspTrips.IsSuccessStatusCode)
+                var activeEventsAsString = await activeEvents
+                    .Content.ReadAsStringAsync()
+                    .ConfigureAwait(false);
+
+                if (activeEvents.IsSuccessStatusCode)
                 {
-
-                    var models= JsonConvert.DeserializeObject<IList<Event>>(lstTripsAsString).ToList();
-                    var eventViewModels = models.Select(x=> Mapper.Map<EventViewModel>(x));
+                    var models= JsonConvert.DeserializeObject<IList<Event>>(activeEventsAsString).ToList();
+                    var eventViewModels = models.Select(Mapper.Map<EventViewModel>);
 
                     var vm = new HomeIndexViewModel();
                     vm.Events.AddRange(eventViewModels);
@@ -46,14 +50,14 @@ namespace Ajf.RideShare.Web.Controllers
                     return View(vm);
                 }
 
-                Log.Logger.Error("Non-successful call to API: " + rspTrips.StatusCode);
-                foreach (var s in lstTripsAsString)
+                Log.Logger.Error("Non-successful call to API: " + activeEvents.StatusCode);
+                foreach (var s in activeEventsAsString)
                 {
                     Log.Logger.Error("Non-successful call to API: " + s);
                 }
 
                 return View("Error",
-                    new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(rspTrips),
+                    new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(activeEvents),
                         "Home", "Index"));
             }
             return View();

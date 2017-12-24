@@ -261,7 +261,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="UnitOfWork\Events\GetSingleEvent.cs" />
     <Compile Include="UnitOfWork\Events\UpdateEvent.cs" />
-    <Compile Include="UnitOfWork\Events\GetEvents.cs" />
+    <Compile Include="UnitOfWork\Events\GetActiveEvents.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\Picture\CreatePicture.cs" />
     <Compile Include="UnitOfWork\Picture\DeletePicture.cs" />
@@ -317,7 +317,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21476</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Ajf.RideShare.Api</IISUrl>
+          <IISUrl>https://localhost/Ajf.RideShare.Api</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

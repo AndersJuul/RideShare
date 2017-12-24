@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -50,13 +51,16 @@ namespace Ajf.RideShare.Api.Controllers
         {
             try
             {
-                Log.Logger.Debug("api/events/ : Get");
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new GetEvents(ownerId))
+                using (var uow = new GetActiveEvents(ownerId))
                 {
                     var uowResult = uow.Execute();
+
+                    var count = uowResult.Result?.Count() ?? 0;
+
+                    Log.Logger.Debug($"ActiveEvents returned {uowResult.Status} and {count}" );
 
                     switch (uowResult.Status)
                     {

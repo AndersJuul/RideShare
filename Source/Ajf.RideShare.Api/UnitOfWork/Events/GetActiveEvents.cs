@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ajf.RideShare.Models;
 using Serilog;
 using TripGallery.API.UnitOfWork;
@@ -7,17 +8,17 @@ using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.UnitOfWork.Events
 {
-    public class GetEvents : IUnitOfWork<IEnumerable<Event>>, IDisposable
+    public class GetActiveEvents : IUnitOfWork<IEnumerable<Event>>, IDisposable
     {
-        IEventRepository _eventRepository;
-        readonly string _ownerId = null;
+        private readonly string _ownerId;
+        private IEventRepository _eventRepository;
 
-        private GetEvents()
+        private GetActiveEvents()
         {
             _eventRepository = new EventRepository();
         }
 
-        public GetEvents(string ownerId)
+        public GetActiveEvents(string ownerId)
             : this()
         {
             _ownerId = ownerId;
@@ -29,40 +30,36 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_eventRepository != null)
-                {
-                    _eventRepository.Dispose();
-                    _eventRepository = null;
-                }
-            }
-        }
-
         public UnitOfWorkResult<IEnumerable<Event>> Execute()
         {
-            Log.Logger.Debug("UOW.GetEvents.Execute(1)");
-
-            if (string.IsNullOrEmpty( _ownerId))
+            if (string.IsNullOrEmpty(_ownerId))
             {
-                Log.Logger.Debug("UOW.GetEvents.Execute(2)");
                 return new UnitOfWorkResult<IEnumerable<Event>>(null, UnitOfWorkStatus.Invalid);
             }
 
             if (_ownerId == null)
             {
-                Log.Logger.Debug("UOW.GetEvents.Execute(3)");
                 return new UnitOfWorkResult<IEnumerable<Event>>(null, UnitOfWorkStatus.Forbidden);
             }
 
-            Log.Logger.Debug("UOW.GetEvents.Execute(4)");
-            var events = _eventRepository.GetEvents(_ownerId);
+            var events = _eventRepository
+                .GetEvents(_ownerId)
+                .Where(x => x.Date > DateTime.Today)
+                .OrderBy(x => x.Date)
+                .Take(5);
 
             // return a dto
-            Log.Logger.Debug("UOW.GetEvents.Execute(5)");
             return new UnitOfWorkResult<IEnumerable<Event>>(events, UnitOfWorkStatus.Ok);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+                if (_eventRepository != null)
+                {
+                    _eventRepository.Dispose();
+                    _eventRepository = null;
+                }
         }
     }
 }
