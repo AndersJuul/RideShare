@@ -59,7 +59,7 @@ namespace Ajf.RideShare.Web.Controllers
                 {
                     return View("Error",
                         new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
-                            "Pictures", "Create"));
+                            "Events", "Create"));
                 }
             }
             catch (Exception ex)
@@ -121,7 +121,7 @@ namespace Ajf.RideShare.Web.Controllers
                 {
                     return View("Error",
                         new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
-                            "Pictures", "Create"));
+                            "Events", "Create"));
                 }
             }
             catch (Exception ex)
