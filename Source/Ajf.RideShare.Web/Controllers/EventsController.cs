@@ -85,7 +85,7 @@ namespace Ajf.RideShare.Web.Controllers
         {
             try
             {
-                throw new Exception("Dummy!");
+                //throw new Exception("Dummy!");
                 var httpClient = RideShareHttpClient.GetClient();
 
                 var serializedTrip = JsonConvert.SerializeObject(eventViewModel);
