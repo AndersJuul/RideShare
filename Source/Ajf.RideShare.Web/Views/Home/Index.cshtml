@@ -9,7 +9,6 @@
 <div class="btn btn-default leftMarginDefault bottomMarginDefault">@Html.ActionLink("Tilføj en samkørsel", "Create", "Events",null,new { @id = "addEvent"})</div>
 
 <div class="container">
-    Hello
     @if (User.Identity.IsAuthenticated)
     {
         foreach (var item in Model.Events)
