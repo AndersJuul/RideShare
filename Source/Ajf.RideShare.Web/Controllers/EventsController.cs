@@ -22,23 +22,19 @@ namespace Ajf.RideShare.Web.Controllers
                 Date = DateTime.Now,
                 ViewModelMode = ViewModelMode.Create
             };
-            return View("Edit", eventCreateViewModel);
+            return View("Details", eventCreateViewModel);
         }
 
-        //[Route("api/Events/Edit/{eventId}")]
-        //public async Task<IHttpActionResult> Edit(Guid eventId)
-        //{
-        //    return View(new EditEventViewModel());
-        //}
-        //public class EditEventViewModel
-        //{
-        //    public Guid EventId { get; set; }
-        //    public DateTime Date { get; set; }
-        //    public string Description { get; set; }
-        //}
         [Authorize]
         [Route("api/Events/Edit/{eventId}")]
         public async Task<ActionResult> Edit(Guid eventId)
+        {
+            return await
+                DetailsViewOfEvent(eventId, ViewModelMode.Edit)
+                    .ConfigureAwait(false);
+        }
+
+        private async Task<ActionResult> DetailsViewOfEvent(Guid eventId, ViewModelMode viewModelMode)
         {
             try
             {
@@ -53,9 +49,9 @@ namespace Ajf.RideShare.Web.Controllers
                     var @event = JsonConvert.DeserializeObject<Event>(responseString);
 
                     var eventViewModel = Mapper.Map<Event, EventViewModel>(@event);
-                    eventViewModel.ViewModelMode = ViewModelMode.View;
+                    eventViewModel.ViewModelMode = viewModelMode;
 
-                    return View(eventViewModel);
+                    return View("Details", eventViewModel);
                 }
                 return View("Error",
                     new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
@@ -65,6 +61,15 @@ namespace Ajf.RideShare.Web.Controllers
             {
                 return View("Error", new HandleErrorInfo(ex, "Events", "Create"));
             }
+        }
+
+        [Authorize]
+        [Route("api/Events/Details/{eventId}")]
+        public async Task<ActionResult> Details(Guid eventId)
+        {
+            return await
+                DetailsViewOfEvent(eventId, ViewModelMode.View)
+                    .ConfigureAwait(false);
         }
 
         [Authorize]
