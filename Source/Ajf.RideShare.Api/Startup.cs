@@ -46,20 +46,6 @@ namespace Ajf.RideShare.Api
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<PictureForCreation,
-                        Picture>()
-                    .ForMember(o => o.Id, o => o.Ignore())
-                    .ForMember(o => o.TripId, o => o.Ignore())
-                    .ForMember(o => o.OwnerId, o => o.Ignore())
-                    .ForMember(o => o.Uri, o => o.Ignore());
-
-
-                cfg.CreateMap<TripForCreation,
-                        Trip>()
-                    .ForMember(o => o.Id, o => o.Ignore())
-                    .ForMember(o => o.MainPictureUri, o => o.Ignore())
-                    .ForMember(o => o.Pictures, o => o.Ignore())
-                    .ForMember(o => o.OwnerId, o => o.Ignore());
 
                 cfg.CreateMap<EventForCreation, Event>()
                     .ForMember(o => o.EventId, o => o.Ignore())

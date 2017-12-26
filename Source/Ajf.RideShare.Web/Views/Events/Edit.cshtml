@@ -1,9 +1,34 @@
-﻿@model Ajf.RideShare.Web.Models.EventViewModel
+﻿@using Ajf.RideShare.Web.Models
+
+@model Ajf.RideShare.Web.Models.EventViewModel
+
 @{
-    ViewBag.Title = "RideShare - Rediger en samkørsel";
+    switch (Model.ViewModelMode)
+    {
+        case ViewModelMode.View:
+            ViewBag.Title = "RideShare - Vis en samkørsel";
+            break;
+        case ViewModelMode.Edit:
+            ViewBag.Title = "RideShare - Rediger en samkørsel";
+            break;
+        case ViewModelMode.Create:
+            ViewBag.Title = "RideShare - Opret en samkørsel";
+            break;
+    }
 }
 
-<h2 class="leftMarginSmaller">Rediger en samkørsel</h2>
+@switch (Model.ViewModelMode)
+{
+    case ViewModelMode.View:
+        <h2 class="leftMarginSmaller">Samkørsel</h2>
+        break;
+    case ViewModelMode.Edit:
+        <h2 class="leftMarginSmaller">Rediger en samkørsel</h2>
+        break;
+    case ViewModelMode.Create:
+        <h2 class="leftMarginSmaller">Opret en samkørsel</h2>
+        break;
+}
 
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -12,6 +37,7 @@
 
     @Html.HiddenFor(model => model.EventId)
     @Html.HiddenFor(model => model.OwnerId)
+    @Html.HiddenFor(model => model.ViewModelMode)
     <div class="form-horizontal leftMarginDefault">
 
         @Html.ValidationSummary()
@@ -19,25 +45,52 @@
         <div class="form-group">
             <div>Dato for samkørsel</div>
             <div>
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", id="txtDate" } })
-                @Html.ValidationMessage("Date")
+                @switch (Model.ViewModelMode)
+                {
+                    case ViewModelMode.View:
+                        @Html.DisplayFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", id = "txtDate" } })
+                        break;
+                    case ViewModelMode.Edit:
+                    case ViewModelMode.Create:
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", id="txtDate" } })
+                        @Html.ValidationMessage("Date")
+                        break;
+                }
             </div>
             <div>Beskrivelse</div>
             <div>
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "txtDescription" } })
-                @Html.ValidationMessage("Description")
+                @switch (Model.ViewModelMode)
+                {
+                    case ViewModelMode.View:
+                        @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "txtDescription" } })
+                        break;
+                    case ViewModelMode.Edit:
+                    case ViewModelMode.Create:
+                        @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control", id = "txtDescription"}})
+                        @Html.ValidationMessage("Description")
+                        break;
+                }
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit"/>
+                @switch (Model.ViewModelMode)
+                {
+                    case ViewModelMode.View:
+                        @Html.ActionLink("Luk","Index","Home")
+                        break;
+                    case ViewModelMode.Edit:
+                        <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit"/>
+                        break;
+                    case ViewModelMode.Create:
+                        <input type="submit" value="Opret" class="btn btn-default" id="btnSubmit" />
+                        break;
+                }
             </div>
         </div>
     </div>
 }
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
