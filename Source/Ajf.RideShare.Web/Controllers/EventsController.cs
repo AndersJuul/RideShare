@@ -79,6 +79,7 @@ namespace Ajf.RideShare.Web.Controllers
                     .ConfigureAwait(false);
         }
 
+        [Route("api/Events/Details/{eventId}")]
         [Authorize]
         [HttpPost]
         public async Task<ActionResult> Edit(EventViewModel eventViewModel)
