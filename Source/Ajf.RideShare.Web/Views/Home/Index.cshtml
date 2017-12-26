@@ -9,6 +9,7 @@
 <div class="btn btn-default leftMarginDefault bottomMarginDefault">@Html.ActionLink("Tilføj en samkørsel", "Create", "Events",null,new { @id = "addEvent"})</div>
 
 <div class="container">
+    Hello
     @if (User.Identity.IsAuthenticated)
     {
         foreach (var item in Model.Events)
@@ -16,8 +17,8 @@
             <div class="col-md-6 bottomMarginDefault">
 
                 <div>
-                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new { eventId = item.EventId }, new { @id = "btnEditEvent" })</div>
-                    
+                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new {eventId = item.EventId}, new {@id = "btnEditEvent"})</div>
+
                     <div>@item.Description</div>
 
                 </div>
