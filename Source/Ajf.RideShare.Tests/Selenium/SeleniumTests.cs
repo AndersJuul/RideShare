@@ -14,19 +14,13 @@ namespace Ajf.RideShare.Tests.Selenium
         {
             RunTest(() =>
             {
-                // -------------------
-                // Main page
-                // -------------------
-                Assert.AreEqual("RideShare - Hovedside", ChromeDriver.Title);
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
 
                 LoginKevin();
 
                 ChromeDriver.FindElement(By.Id("addEvent")).Click();
 
-                // -------------------
-                // Create new event page
-                // -------------------
-                Assert.AreEqual("RideShare - Opret en samkørsel", ChromeDriver.Title);
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
 
                 var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
                 txtDate.Clear();
@@ -38,17 +32,11 @@ namespace Ajf.RideShare.Tests.Selenium
 
                 ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
 
-                // -------------------
-                // Main page
-                // -------------------
-                Assert.AreEqual("RideShare - Hovedside", ChromeDriver.Title);
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
 
-                ChromeDriver.FindElementsById("btnEventDetails").First().Click();
+                ChromeDriver.FindElementsById("btnEditEvent").First().Click();
 
-                // -------------------
-                // Event details page
-                // -------------------
-                Assert.AreEqual("RideShare - Vis en samkørsel", ChromeDriver.Title);
+                Assert.AreEqual("RideShare", ChromeDriver.Title);
             });
         }
     }
