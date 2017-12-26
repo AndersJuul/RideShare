@@ -37,6 +37,10 @@ namespace Ajf.RideShare.Tests.Selenium
                 ChromeDriver.FindElementsById("btnViewEvent").First().Click();
 
                 Assert.AreEqual("RideShare - Vis en samkørsel", ChromeDriver.Title);
+
+                ChromeDriver.FindElementsById("btnEditEvent").First().Click();
+
+                Assert.AreEqual("RideShare - Rediger en samkørsel", ChromeDriver.Title);
             });
         }
     }

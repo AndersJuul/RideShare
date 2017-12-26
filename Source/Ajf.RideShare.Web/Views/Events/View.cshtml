@@ -78,7 +78,8 @@
                 @switch (Model.ViewModelMode)
                 {
                     case ViewModelMode.View:
-                        @Html.ActionLink("Luk","Index","Home")
+                        <div>@Html.ActionLink("Luk", "Index", "Home")</div>
+                        <div>@Html.ActionLink("Rediger", "Edit", "Events", new { eventId = Model.EventId }, new { @id = "btnEditEvent" })</div>
                         break;
                     case ViewModelMode.Edit:
                         <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit"/>
