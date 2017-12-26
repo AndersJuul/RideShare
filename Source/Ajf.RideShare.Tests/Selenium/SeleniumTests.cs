@@ -14,13 +14,13 @@ namespace Ajf.RideShare.Tests.Selenium
         {
             RunTest(() =>
             {
-                Assert.AreEqual("RideShare", ChromeDriver.Title);
+                Assert.AreEqual("RideShare - Index", ChromeDriver.Title);
 
                 LoginKevin();
 
                 ChromeDriver.FindElement(By.Id("addEvent")).Click();
 
-                Assert.AreEqual("RideShare", ChromeDriver.Title);
+                Assert.AreEqual("RideShare - Opret en samkørsel", ChromeDriver.Title);
 
                 var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
                 txtDate.Clear();
@@ -32,11 +32,11 @@ namespace Ajf.RideShare.Tests.Selenium
 
                 ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
 
-                Assert.AreEqual("RideShare", ChromeDriver.Title);
+                Assert.AreEqual("RideShare - Index", ChromeDriver.Title);
 
                 ChromeDriver.FindElementsById("btnEditEvent").First().Click();
 
-                Assert.AreEqual("RideShare", ChromeDriver.Title);
+                Assert.AreEqual("RideShare - Vis en samkørsel", ChromeDriver.Title);
             });
         }
     }

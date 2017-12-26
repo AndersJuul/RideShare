@@ -25,20 +25,41 @@ namespace Ajf.RideShare.Web.Controllers
             return View("Edit", eventCreateViewModel);
         }
 
-        //[Route("api/Events/Edit/{eventId}")]
-        //public async Task<IHttpActionResult> Edit(Guid eventId)
-        //{
-        //    return View(new EditEventViewModel());
-        //}
-        //public class EditEventViewModel
-        //{
-        //    public Guid EventId { get; set; }
-        //    public DateTime Date { get; set; }
-        //    public string Description { get; set; }
-        //}
         [Authorize]
         [Route("api/Events/Edit/{eventId}")]
         public async Task<ActionResult> Edit(Guid eventId)
+        {
+            try
+            {
+                var httpClient = RideShareHttpClient.GetClient();
+
+                var response = await httpClient.GetAsync("api/events/" + eventId)
+                    .ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var @event = JsonConvert.DeserializeObject<Event>(responseString);
+
+                    var eventViewModel = Mapper.Map<Event, EventViewModel>(@event);
+                    eventViewModel.ViewModelMode = ViewModelMode.Edit;
+
+                    return View(eventViewModel);
+                }
+                return View("Error",
+                    new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
+                        "Events", "Create"));
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Events", "Create"));
+            }
+        }
+
+
+        [Authorize]
+        [Route("api/Events/View/{eventId}")]
+        public async Task<ActionResult> View(Guid eventId)
         {
             try
             {
