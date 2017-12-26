@@ -28,9 +28,13 @@ namespace Ajf.RideShare.Tests.Selenium
                 // -------------------
                 Assert.AreEqual("RideShare - Opret en samkørsel", ChromeDriver.Title);
 
-                FillDateBox();
+                var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
+                txtDate.Clear();
+                txtDate.SendKeys(DateTime.Now.AddDays(3).ToString("yyyy-MM-dd HH:mm"));
 
-                FillDescriptionBox();
+                var txtDescription = ChromeDriver.FindElement(By.Id("txtDescription"));
+                txtDescription.Clear();
+                txtDescription.SendKeys("Selenium test Description "+  new Random().Next());
 
                 ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
 
@@ -39,40 +43,13 @@ namespace Ajf.RideShare.Tests.Selenium
                 // -------------------
                 Assert.AreEqual("RideShare - Hovedside", ChromeDriver.Title);
 
-                // Click top event (Oldest event shown)
                 ChromeDriver.FindElementsById("btnEventDetails").First().Click();
 
                 // -------------------
                 // Event details page
                 // -------------------
                 Assert.AreEqual("RideShare - Vis en samkørsel", ChromeDriver.Title);
-
-                // Click link to switch to edit mode
-                ChromeDriver.FindElementsById("btnEditEvent").First().Click();
-
-                FillDescriptionBox();
-
-                ChromeDriver.FindElement(By.Id("btnSubmit")).Click();
-
-                // -------------------
-                // Main page
-                // -------------------
-                Assert.AreEqual("RideShare - Hovedside", ChromeDriver.Title);
             });
-        }
-
-        private void FillDescriptionBox()
-        {
-            var txtDescription = ChromeDriver.FindElement(By.Id("txtDescription"));
-            txtDescription.Clear();
-            txtDescription.SendKeys("Selenium test Description " + new Random().Next());
-        }
-
-        private void FillDateBox()
-        {
-            var txtDate = ChromeDriver.FindElement(By.Id("txtDate"));
-            txtDate.Clear();
-            txtDate.SendKeys(DateTime.Now.AddDays(3).ToString("yyyy-MM-dd HH:mm"));
         }
     }
 }
