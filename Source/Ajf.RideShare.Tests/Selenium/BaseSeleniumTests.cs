@@ -32,6 +32,7 @@ namespace Ajf.RideShare.Tests.Selenium
         [SetUp]
         public void SetUp()
         {
+            //BaseUri = new Uri("http://ajf-qa-02/RideShare");
             BaseUri = new Uri(ConfigurationManager.AppSettings["UrlRideShareWeb"]);
 
             ChromeDriver = new ChromeDriver();

@@ -8,6 +8,7 @@ using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
 using AutoMapper;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace Ajf.RideShare.Web.Controllers
 {
@@ -53,12 +54,18 @@ namespace Ajf.RideShare.Web.Controllers
 
                     return View("Details", eventViewModel);
                 }
+                
+                var exceptionFromResponse = ExceptionHelper.GetExceptionFromResponse(response);
+
+                Log.Logger.Error(exceptionFromResponse, "Call to API was not successful.");
+
                 return View("Error",
-                    new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
+                    new HandleErrorInfo(exceptionFromResponse,
                         "Events", "Create"));
             }
             catch (Exception ex)
             {
+                Log.Logger.Error(ex, "During DetailsOfEvent");
                 return View("Error", new HandleErrorInfo(ex, "Events", "Create"));
             }
         }
@@ -94,6 +101,7 @@ namespace Ajf.RideShare.Web.Controllers
             }
             catch (Exception ex)
             {
+                Log.Logger.Error(ex,"During post to Edit");
                 return View("Error", new HandleErrorInfo(ex, "Events", "Edit"));
             }
         }
