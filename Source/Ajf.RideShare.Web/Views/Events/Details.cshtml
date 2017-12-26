@@ -52,7 +52,7 @@
                         break;
                     case ViewModelMode.Edit:
                     case ViewModelMode.Create:
-                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", id = "txtDate" } })
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", id="txtDate" } })
                         @Html.ValidationMessage("Date")
                         break;
                 }
@@ -66,7 +66,7 @@
                         break;
                     case ViewModelMode.Edit:
                     case ViewModelMode.Create:
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "txtDescription" } })
+                        @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control", id = "txtDescription"}})
                         @Html.ValidationMessage("Description")
                         break;
                 }
@@ -78,12 +78,12 @@
                 @switch (Model.ViewModelMode)
                 {
                     case ViewModelMode.View:
-                        <div>@Html.ActionLink("Luk", "Index", "Home")</div>
-                        <div>@Html.ActionLink("Rediger", "Edit", "Events", new { eventId = Model.EventId }, new { @id = "btnEditEvent" })</div>
+                        @Html.ActionLink("Luk", "Index", "Home")
+                        @Html.ActionLink("Rediger","Edit","Events", new { eventId = Model.EventId }, new { @id = "btnEditEvent" })
 
                         break;
                     case ViewModelMode.Edit:
-                        <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit" />
+                        <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit"/>
                         break;
                     case ViewModelMode.Create:
                         <input type="submit" value="Opret" class="btn btn-default" id="btnSubmit" />
