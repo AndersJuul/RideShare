@@ -14,10 +14,13 @@ namespace Ajf.RideShare.Web.Helpers
             {
                 return  new Exception("You're not allowed to do that.");
             }
-            else
-            {
-                return  new Exception("Something went wrong - please contact your administrator.");
-            }          
+
+            var readAsStringAsync = response
+                .Content
+                .ReadAsStringAsync()
+                .Result;
+
+            return  new Exception("Something went wrong - please contact your administrator."+response.StatusCode +" "+readAsStringAsync);
         }
     }
 }
