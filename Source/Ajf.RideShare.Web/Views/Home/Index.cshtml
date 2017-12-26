@@ -16,7 +16,7 @@
             <div class="col-md-6 bottomMarginDefault">
 
                 <div>
-                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new {eventId = item.EventId}, new {@id = "btnEditEvent"})</div>
+                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "View", "Events", new {eventId = item.EventId}, new {@id = "btnViewEvent"})</div>
 
                     <div>@item.Description</div>
 
@@ -24,5 +24,6 @@
             </div>
         }
     }
+    <br/>
     <img src="~/rideshare3.png"/>
 </div> 
