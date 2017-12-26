@@ -1,7 +1,7 @@
 ﻿@model Ajf.RideShare.Web.Models.HomeIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Hovedside";
 }
 
 <h2 class="leftMarginDefault">Hovedside - RideShare</h2>
@@ -16,7 +16,7 @@
             <div class="col-md-6 bottomMarginDefault">
 
                 <div>
-                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new { eventId = item.EventId }, new { @id = "btnEditEvent" })</div>
+                    <div class="h3">@Html.ActionLink(@item.Date.ToString("yyyy-MM-dd"), "Edit", "Events", new { eventId = item.EventId }, new { @id = "btnEventDetails" })</div>
                     
                     <div>@item.Description</div>
 
