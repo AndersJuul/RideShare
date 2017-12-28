@@ -78,9 +78,10 @@
                 @switch (Model.ViewModelMode)
                 {
                     case ViewModelMode.View:
-                        @Html.ActionLink("Luk","Index","Home")
+                        @Html.ActionLink("Luk","Index","Home",new { htmlAttributes = new { @class = "form-control", id = "btnCancel" } });
                         break;
-                    case ViewModelMode.Edit:
+                        case ViewModelMode.Edit:
+                            @Html.ActionLink("Afbryd", "Index", "Home", null, new { @class = "form-control", id = "btnCancel" } );
                         <input type="submit" value="Gem ændringer" class="btn btn-default" id="btnSubmit"/>
                         break;
                     case ViewModelMode.Create:

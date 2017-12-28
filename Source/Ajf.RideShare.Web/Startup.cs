@@ -46,7 +46,10 @@ namespace Ajf.RideShare.Web
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Event, EventViewModel>()
-                .ForMember(x => x.ViewModelMode, x => x.Ignore());
+                    .ForMember(x => x.ViewModelMode, x => x.Ignore())
+                    .ForMember(x => x.CarEmail, x => x.Ignore())
+                    .ForMember(x => x.CarName, x => x.Ignore())
+                    .ForMember(x => x.CarPhone, x => x.Ignore());
             });
 
             Mapper.Configuration.AssertConfigurationIsValid();

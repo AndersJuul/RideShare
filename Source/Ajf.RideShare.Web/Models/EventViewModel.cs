@@ -9,5 +9,8 @@ namespace Ajf.RideShare.Web.Models
         public string Description { get; set; }
         public string OwnerId { get; set; }
         public ViewModelMode ViewModelMode { get; set; }
+        public string CarName { get; set; }
+        public string CarPhone { get; set; }
+        public string CarEmail { get; set; }
     }
 }
