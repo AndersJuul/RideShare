@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Newtonsoft.Json.Serialization;
 
 namespace Ajf.RideShare.Api
@@ -19,13 +20,13 @@ namespace Ajf.RideShare.Api
                defaults: new { id = RouteParameter.Optional }
            );
 
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("*","*","*"));
 
             // clear the supported mediatypes of the xml formatter
             config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(
                 new MediaTypeHeaderValue("application/json-patch+json"));
- 
+
 
             // results should come out
             // - with indentation for readability
