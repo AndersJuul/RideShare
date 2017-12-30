@@ -49,7 +49,7 @@ namespace Ajf.RideShare.Tests.Selenium
         {
             ChromeDriver.FindElement(By.Id("btnLogin")).Click();
 
-            Assert.AreEqual("Ajf Security Token Service", ChromeDriver.Title);
+            Assert.AreEqual("Anders Juuls Firma Security Token Service", ChromeDriver.Title);
 
             var emailTextBox = ChromeDriver.FindElementById("username");
             emailTextBox.Clear();
