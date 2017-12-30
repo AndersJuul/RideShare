@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
+using Newtonsoft.Json.Serialization;
 
-namespace TripGallery.API
+namespace Ajf.RideShare.Api
 {
     public static class WebApiConfig
     {

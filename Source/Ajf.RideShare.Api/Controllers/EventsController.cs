@@ -12,9 +12,9 @@ using Serilog;
 
 namespace Ajf.RideShare.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors("*", "*", "GET, POST, DELETE")]
-    public class EventsController : RideShareApiController
+    public class EventsController : ApiController
     {
         [Route("api/Events/{sub}")]
         public async Task<IHttpActionResult> GetSingleEvent(string sub)
