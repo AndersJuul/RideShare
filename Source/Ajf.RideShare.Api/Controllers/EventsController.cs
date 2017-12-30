@@ -16,6 +16,7 @@ namespace Ajf.RideShare.Api.Controllers
     [EnableCors("*", "*", "GET, POST, DELETE")]
     public class EventsController : ApiController
     {
+        [HttpGet]
         [Route("api/Events/{sub}")]
         public async Task<IHttpActionResult> GetSingleEvent(string sub)
         {
@@ -46,6 +47,7 @@ namespace Ajf.RideShare.Api.Controllers
             }
         }
 
+        [HttpGet]
         [Route("api/Events/")]
         public async Task<IHttpActionResult> Get()
         {
