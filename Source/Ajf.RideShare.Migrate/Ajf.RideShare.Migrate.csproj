@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201712141651564_EventExtend.Designer.cs">
       <DependentUpon>201712141651564_EventExtend.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801031907485_AddCarsTable.cs" />
+    <Compile Include="Migrations\201801031907485_AddCarsTable.Designer.cs">
+      <DependentUpon>201801031907485_AddCarsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712141651564_EventExtend.resx">
       <DependentUpon>201712141651564_EventExtend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801031907485_AddCarsTable.resx">
+      <DependentUpon>201801031907485_AddCarsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

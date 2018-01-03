@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ajf.RideShare.Models
@@ -13,5 +14,7 @@ namespace Ajf.RideShare.Models
         public string OwnerId { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]
+        public ICollection<Car> Cars { get; set; }
     }
 }

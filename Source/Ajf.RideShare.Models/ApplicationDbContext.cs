@@ -19,8 +19,7 @@ namespace Ajf.RideShare.Models
         }
 
         public DbSet<Event> Events { get; set; }
-        //public DbSet<Car> Cars { get; set; }
-        //public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<Car> Cars { get; set; }
 
     }
 }
