@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Ajf.RideShare.Models;
 using AutoMapper;
 using TripGallery.API.UnitOfWork;
@@ -43,6 +44,7 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
             var id = Guid.NewGuid();
             @event.EventId = id;
             @event.OwnerId = _ownerId;
+            @event.Cars=new Collection<Car>();
 
             _eventRepository.InsertEvent(@event);
 

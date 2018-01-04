@@ -48,6 +48,7 @@ namespace Ajf.RideShare.Api
             {
 
                 cfg.CreateMap<EventForCreation, Event>()
+                    .ForMember(o => o.Cars, o => o.Ignore())
                     .ForMember(o => o.EventId, o => o.Ignore())
                     .ForMember(o => o.OwnerId, o => o.Ignore());
 
