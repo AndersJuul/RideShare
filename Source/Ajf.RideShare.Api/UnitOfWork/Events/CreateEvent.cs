@@ -12,13 +12,13 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
         private readonly string _ownerId;
         private IEventRepository _eventRepository;
 
-        private CreateEvent()
+        private CreateEvent(IEventRepository eventRepository)
         {
-            _eventRepository = new EventRepository();
+            _eventRepository = eventRepository;
         }
 
-        public CreateEvent(string ownerId)
-            : this()
+        public CreateEvent(string ownerId, IEventRepository eventRepository)
+            : this(eventRepository)
         {
             _ownerId = ownerId;
         }

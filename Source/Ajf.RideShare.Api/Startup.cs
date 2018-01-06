@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.IdentityModel.Tokens;
 using Ajf.Nuget.Logging;
+using Ajf.RideShare.Api.App_Start;
 using Ajf.RideShare.Models;
 using AutoMapper;
 using IdentityServer3.AccessTokenValidation;
@@ -26,6 +27,8 @@ namespace Ajf.RideShare.Api
             Log.Logger.Information("Starting...");
             Log.Logger.Information("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"] );
 
+            StructuremapWebApi.Start();
+
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseIdentityServerBearerTokenAuthentication(
@@ -38,6 +41,7 @@ namespace Ajf.RideShare.Api
             var config = WebApiConfig.Register();
 
             app.UseWebApi(config);
+
 
             InitAutoMapper();
         }

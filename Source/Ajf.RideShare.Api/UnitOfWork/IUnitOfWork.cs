@@ -1,5 +1,4 @@
-﻿
-namespace TripGallery.API.UnitOfWork
+﻿namespace Ajf.RideShare.Api.UnitOfWork
 {
 
     public interface IUnitOfWork<T, S>

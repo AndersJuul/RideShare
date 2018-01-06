@@ -1,7 +1,6 @@
 ﻿using System;
-using Ajf.RideShare.Api.UnitOfWork;
 
-namespace TripGallery.API.UnitOfWork
+namespace Ajf.RideShare.Api.UnitOfWork
 {
 
     public class UnitOfWorkResult<T> where T : class

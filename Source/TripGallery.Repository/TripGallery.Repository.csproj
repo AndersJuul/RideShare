@@ -135,10 +135,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarRepository.cs" />
     <Compile Include="Entities\Trip.cs" />
     <Compile Include="Entities\TripContext.cs" />
     <Compile Include="Entities\Picture.cs" />
     <Compile Include="EventRepository.cs" />
+    <Compile Include="ICarRepository.cs" />
     <Compile Include="IEventRepository.cs" />
     <Compile Include="ITripRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

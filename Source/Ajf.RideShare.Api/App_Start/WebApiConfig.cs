@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using Ajf.RideShare.Api.App_Start;
 
 namespace TripGallery.API
 {
@@ -12,6 +13,8 @@ namespace TripGallery.API
         public static HttpConfiguration Register()
         {
             var config = new HttpConfiguration();
+
+            StructuremapWebApi.Start();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -24,6 +27,7 @@ namespace TripGallery.API
 
             config.EnableCors();
 
+            
             // clear the supported mediatypes of the xml formatter
             config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(

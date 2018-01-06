@@ -9,6 +9,7 @@ using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Api.UnitOfWork.Events;
 using Ajf.RideShare.Models;
 using Serilog;
+using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.Controllers
 {
@@ -16,6 +17,13 @@ namespace Ajf.RideShare.Api.Controllers
     [EnableCors("*", "*", "GET, POST, DELETE")]
     public class EventsController : RideShareApiController
     {
+        private readonly IEventRepository _eventRepository;
+
+        public EventsController(IEventRepository eventRepository)
+        {
+            _eventRepository = eventRepository;
+        }
+
         [Route("api/Events/{sub}")]
         public async Task<IHttpActionResult> GetSingleEvent(string sub)
         {
@@ -87,7 +95,7 @@ namespace Ajf.RideShare.Api.Controllers
             {
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new CreateEvent(ownerId))
+                using (var uow = new CreateEvent(ownerId, _eventRepository))
                 {
                     var uowResult = uow.Execute(eventForCreation);
 

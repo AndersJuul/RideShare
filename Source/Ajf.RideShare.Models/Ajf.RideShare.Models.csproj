@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="CarForCreation.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="EventForCreation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

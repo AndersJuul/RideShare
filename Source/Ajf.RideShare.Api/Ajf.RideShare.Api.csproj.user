@@ -29,7 +29,7 @@
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost/Ajf.RideShare.Api/swagger/ui/index</StartExternalURL>
+          <StartExternalURL>http://localhost/Ajf.RideShare.Api/api/Events</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>
