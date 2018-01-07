@@ -93,6 +93,8 @@ namespace Ajf.RideShare.Api.Controllers
         {
             try
             {
+                await Task.FromResult(0);
+
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
                 using (var uow = new CreateEvent(ownerId, _eventRepository))

@@ -123,6 +123,8 @@ namespace Ajf.RideShare.Web.Controllers
         {
             try
             {
+                await Task.FromResult(0);
+
                 //var httpClient = RideShareHttpClient.GetClient();
 
                 //var serializedTrip = JsonConvert.SerializeObject(eventViewModel);
