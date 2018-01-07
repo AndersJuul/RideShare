@@ -25,8 +25,6 @@ namespace Ajf.RideShare.Api.DependencyResolution
     /// </summary>
     public class StructureMapWebApiDependencyResolver : StructureMapWebApiDependencyScope, IDependencyResolver
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StructureMapWebApiDependencyResolver"/> class.
         /// </summary>
@@ -37,10 +35,6 @@ namespace Ajf.RideShare.Api.DependencyResolution
             : base(container)
         {
         }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         /// <summary>
         /// The begin scope.
@@ -53,7 +47,5 @@ namespace Ajf.RideShare.Api.DependencyResolution
             IContainer child = this.Container.GetNestedContainer();
             return new StructureMapWebApiDependencyResolver(child);
         }
-
-        #endregion
     }
 }

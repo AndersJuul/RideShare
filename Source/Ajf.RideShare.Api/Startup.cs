@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IdentityModel.Tokens;
+using System.Web.Http;
 using Ajf.Nuget.Logging;
-using Ajf.RideShare.Api.App_Start;
+using Ajf.RideShare.Api.DependencyResolution;
 using Ajf.RideShare.Models;
 using AutoMapper;
 using IdentityServer3.AccessTokenValidation;
 using Owin;
 using Serilog;
 using TripGallery.API;
-using TripGallery.DTO;
-using Picture = TripGallery.Repository.Entities.Picture;
-using Trip = TripGallery.Repository.Entities.Trip;
 
 namespace Ajf.RideShare.Api
 {
@@ -25,9 +24,17 @@ namespace Ajf.RideShare.Api
                 .CreateLogger();
 
             Log.Logger.Information("Starting...");
-            Log.Logger.Information("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"] );
+            Log.Logger.Information("Version is... " + ConfigurationManager.AppSettings["ReleaseNumber"]);
 
-            StructuremapWebApi.Start();
+            // setup http configuration
+            var httpConfig = new HttpConfiguration();
+
+            //configure dependency injection
+            var container = IoC.Initialize();
+            container.AssertConfigurationIsValid();
+            Debug.WriteLine(container.WhatDoIHave());
+            Log.Logger.Debug(container.WhatDoIHave());
+            httpConfig.DependencyResolver = new StructureMapWebApiDependencyResolver(container);
 
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
@@ -38,10 +45,8 @@ namespace Ajf.RideShare.Api
                     RequiredScopes = new[] {"gallerymanagement"}
                 });
 
-            var config = WebApiConfig.Register();
-
-            app.UseWebApi(config);
-
+            WebApiConfig.Register(httpConfig);
+            app.UseWebApi(httpConfig);
 
             InitAutoMapper();
         }
@@ -50,12 +55,10 @@ namespace Ajf.RideShare.Api
         {
             Mapper.Initialize(cfg =>
             {
-
                 cfg.CreateMap<EventForCreation, Event>()
                     .ForMember(o => o.Cars, o => o.Ignore())
                     .ForMember(o => o.EventId, o => o.Ignore())
                     .ForMember(o => o.OwnerId, o => o.Ignore());
-
             });
             Mapper.Configuration.AssertConfigurationIsValid();
         }

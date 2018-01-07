@@ -10,12 +10,8 @@ namespace TripGallery.API
 {
     public static class WebApiConfig
     {
-        public static HttpConfiguration Register()
+        public static HttpConfiguration Register(HttpConfiguration config )
         {
-            var config = new HttpConfiguration();
-
-            StructuremapWebApi.Start();
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -43,7 +39,6 @@ namespace TripGallery.API
             json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             
             return config;
-
         }
     }
 }

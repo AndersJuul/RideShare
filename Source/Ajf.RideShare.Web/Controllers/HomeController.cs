@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Ajf.RideShare.Models;
@@ -9,8 +8,6 @@ using Ajf.RideShare.Web.Models;
 using AutoMapper;
 using Newtonsoft.Json;
 using Serilog;
-using TripGallery.DTO;
-using TripGallery.MVCClient.Helpers;
 
 namespace Ajf.RideShare.Web.Controllers
 {
@@ -50,11 +47,7 @@ namespace Ajf.RideShare.Web.Controllers
                     return View(vm);
                 }
 
-                Log.Logger.Error("Non-successful call to API: " + activeEvents.StatusCode);
-                foreach (var s in activeEventsAsString)
-                {
-                    Log.Logger.Error("Non-successful call to API: " + s);
-                }
+                Log.Logger.Error($"Non-successful call to API: {@activeEvents.StatusCode}, {activeEventsAsString}");
 
                 return View("Error",
                     new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(activeEvents),

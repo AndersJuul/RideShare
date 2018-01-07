@@ -18,6 +18,7 @@
 using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.DependencyResolution {
+    using Ajf.RideShare.Api.Controllers;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
 
@@ -30,10 +31,11 @@ namespace Ajf.RideShare.Api.DependencyResolution {
             Scan(
                 scan => {
                     scan.TheCallingAssembly();
-                    scan.AssemblyContainingType(typeof(EventRepository));
                     scan.WithDefaultConventions();
+
                 });
-            //For<IExample>().Use<Example>();
+            For<IEventRepository>().Use<EventRepository>();
+            For<EventsController>().Use(x=>new EventsController(new EventRepository()));
         }
 
         #endregion
