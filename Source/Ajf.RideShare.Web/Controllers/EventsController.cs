@@ -125,26 +125,35 @@ namespace Ajf.RideShare.Web.Controllers
             {
                 await Task.FromResult(0);
 
-                //var httpClient = RideShareHttpClient.GetClient();
+                var httpClient = RideShareHttpClient.GetClient();
 
-                //var serializedTrip = JsonConvert.SerializeObject(eventViewModel);
+                var serializedTrip = JsonConvert.SerializeObject(
+                    new CreateCarForEventViewModel
+                    {
+                        EventId = eventViewModel.EventId,
+                        Email = eventViewModel.CarEmail,
+                        Name = eventViewModel.CarName,
+                        Phone = eventViewModel.CarPhone,
+                        Description = "dummy" + DateTime.Now
+                    }
+                );
 
-                //var response = await httpClient.PutAsync("api/events/" + eventViewModel.EventId,
-                //        new StringContent(serializedTrip, Encoding.Unicode, "application/json"))
-                //    .ConfigureAwait(false);
+                var response = await httpClient.PostAsync("api/cars/",
+                        new StringContent(serializedTrip, Encoding.Unicode, "application/json"))
+                    .ConfigureAwait(false);
 
-                //if (response.IsSuccessStatusCode)
-                //    return RedirectToAction("Index", "Home");
-                //return View("Error",
-                //    new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
-                //        "Events", "Edit"));
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("View", "Events",
+                        new RouteValueDictionary {{"eventId", eventViewModel.EventId}});
+
+                return View("Error",
+                    new HandleErrorInfo(ExceptionHelper.GetExceptionFromResponse(response),
+                        "Events", "Edit"));
             }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Events", "Edit"));
             }
-
-            return RedirectToAction("View", "Events", new RouteValueDictionary {{"eventId", eventViewModel.EventId}});
         }
 
         [Authorize]

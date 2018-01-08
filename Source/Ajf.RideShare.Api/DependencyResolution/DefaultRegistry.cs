@@ -35,6 +35,7 @@ namespace Ajf.RideShare.Api.DependencyResolution {
 
                 });
             For<IEventRepository>().Use<EventRepository>();
+            For<ICarRepository>().Use<CarRepository>();
             For<EventsController>().Use(x=>new EventsController(new EventRepository()));
         }
 

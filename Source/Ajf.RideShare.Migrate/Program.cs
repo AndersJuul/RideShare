@@ -16,10 +16,12 @@ namespace Ajf.RideShare.Migrate
             {
                 var settings = new Configuration();
                 var migrator = new DbMigrator(settings);
+
                 foreach (var pendingMigration in migrator.GetPendingMigrations())
                 {
                     Log.Logger.Debug("Pending migration: " + pendingMigration);
                 }
+
                 migrator.Update();
             }
             catch (Exception e)

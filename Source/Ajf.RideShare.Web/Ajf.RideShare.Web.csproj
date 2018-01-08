@@ -216,6 +216,7 @@
     <Compile Include="Helpers\HttpClientExtensions.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />
     <Compile Include="Helpers\RideShareHttpClient.cs" />
+    <Compile Include="Models\CreateCarForEventViewModel.cs" />
     <Compile Include="Models\EventCreateViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\PictureCreateViewModel.cs" />

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Ajf.RideShare.Models;
 using AutoMapper;
-using TripGallery.API.UnitOfWork;
 using TripGallery.Repository;
 
-namespace Ajf.RideShare.Api.UnitOfWork.Events
+namespace Ajf.RideShare.Api.UnitOfWork.Cars
 {
     public class CreateCarForEvent : IUnitOfWork<Car, CarForCreation>, IDisposable
     {

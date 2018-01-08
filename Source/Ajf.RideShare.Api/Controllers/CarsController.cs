@@ -5,7 +5,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
 using Ajf.RideShare.Api.UnitOfWork;
-using Ajf.RideShare.Api.UnitOfWork.Events;
+using Ajf.RideShare.Api.UnitOfWork.Cars;
 using Ajf.RideShare.Models;
 using Serilog;
 using TripGallery.Repository;
@@ -33,7 +33,7 @@ namespace Ajf.RideShare.Api.Controllers
 
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new CreateCarForEvent(ownerId,_carRepository))
+                using (var uow = new CreateCarForEvent(ownerId, _carRepository))
                 {
                     var uowResult = uow.Execute(carForCreation);
 
@@ -61,5 +61,4 @@ namespace Ajf.RideShare.Api.Controllers
             }
         }
     }
-
 }

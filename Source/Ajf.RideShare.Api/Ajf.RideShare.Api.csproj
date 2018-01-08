@@ -281,7 +281,7 @@
     <Compile Include="Helpers\TokenIdentityHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UnitOfWork\Events\CreateCarForEvent.cs" />
+    <Compile Include="UnitOfWork\Cars\CreateCarForEvent.cs" />
     <Compile Include="UnitOfWork\Events\GetSingleEvent.cs" />
     <Compile Include="UnitOfWork\Events\UpdateEvent.cs" />
     <Compile Include="UnitOfWork\Events\GetActiveEvents.cs" />
@@ -290,7 +290,6 @@
     <Compile Include="UnitOfWork\Picture\DeletePicture.cs" />
     <Compile Include="UnitOfWork\Picture\GetPictures.cs" />
     <Compile Include="UnitOfWork\Events\CreateEvent.cs" />
-    <Compile Include="UnitOfWork\Trip\GetTrip.cs" />
     <Compile Include="UnitOfWork\Trip\GetTrips.cs" />
     <Compile Include="UnitOfWork\Trip\PartiallyUpdateTrip.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkResult.cs" />

@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201801031907485_AddCarsTable.Designer.cs">
       <DependentUpon>201801031907485_AddCarsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801081820087_ChangeCar.cs" />
+    <Compile Include="Migrations\201801081820087_ChangeCar.Designer.cs">
+      <DependentUpon>201801081820087_ChangeCar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -181,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801031907485_AddCarsTable.resx">
       <DependentUpon>201801031907485_AddCarsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801081820087_ChangeCar.resx">
+      <DependentUpon>201801081820087_ChangeCar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
