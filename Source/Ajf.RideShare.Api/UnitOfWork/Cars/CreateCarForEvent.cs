@@ -49,11 +49,7 @@ namespace Ajf.RideShare.Api.UnitOfWork.Cars
             var car = Mapper.Map<CarForCreation, Car>(input);
 
             // create guid
-            var id = Guid.NewGuid();
-            //car.EventId = id;
-            //car.OwnerId = _ownerId;
-            //car.Cars = new Collection<Car>();
-
+            car.CarId = Guid.NewGuid();
             _carRepository.AddCar(car);
 
             // return a dto
