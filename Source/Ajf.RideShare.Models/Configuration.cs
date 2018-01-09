@@ -1,10 +1,6 @@
-using System;
-using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
-using System.Linq;
-using Ajf.RideShare.Models;
 
-namespace Ajf.RideShare.Migrate
+namespace Ajf.RideShare.Models
 {
     public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {

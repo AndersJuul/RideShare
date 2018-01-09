@@ -141,7 +141,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
     <Compile Include="Migrations\201712122245391_AddEventTable.cs" />
     <Compile Include="Migrations\201712122245391_AddEventTable.Designer.cs">
       <DependentUpon>201712122245391_AddEventTable.cs</DependentUpon>
