@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ajf.RideShare.Models;
-using Serilog;
-using TripGallery.API.UnitOfWork;
 using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.UnitOfWork.Events
