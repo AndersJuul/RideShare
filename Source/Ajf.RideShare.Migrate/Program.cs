@@ -18,6 +18,8 @@ namespace Ajf.RideShare.Migrate
                 var settings = new Configuration();
                 var migrator = new DbMigrator(settings);
 
+                Log.Logger.Information("Migrating "+settings.TargetDatabase);
+
                 foreach (var pendingMigration in migrator.GetPendingMigrations())
                 {
                     Log.Logger.Debug("Pending migration: " + pendingMigration);
