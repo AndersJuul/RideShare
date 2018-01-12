@@ -33,6 +33,8 @@ namespace Ajf.RideShare.Web
 {
     public class Startup
     {
+        private const string _ClientId = "ridesharehybrid";
+
         public void Configuration(IAppBuilder app)
         {
             Log.Logger = StandardLoggerConfigurator
@@ -68,7 +70,7 @@ namespace Ajf.RideShare.Web
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-                ClientId = "tripgalleryhybrid",
+                ClientId = _ClientId,
                 Authority = ConfigurationManager.AppSettings["IdentityServerApplicationUrl"],
                 RedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
                 SignInAsAuthenticationType = "Cookies",
@@ -125,7 +127,7 @@ namespace Ajf.RideShare.Web
                         // request a refresh token
                         var tokenClientForRefreshToken = new TokenClient(
                             ConfigurationManager.AppSettings["IdentityServerApplicationUrl"] + "/connect/token",
-                            "tripgalleryhybrid",
+                            _ClientId,
                             Constants.TripGalleryClientSecret);
 
                         var refreshResponse = await
