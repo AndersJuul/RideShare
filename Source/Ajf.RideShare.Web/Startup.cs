@@ -66,12 +66,6 @@ namespace Ajf.RideShare.Web
                 SlidingExpiration = true
             });
 
-            app.Use((context, next) =>
-            {
-                Debug.WriteLine("Hello world");
-                return next.Invoke();
-            });
-
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
                 ClientId = "tripgalleryhybrid",
@@ -183,22 +177,6 @@ namespace Ajf.RideShare.Web
                     }
                 }
             });
-        }
-    }
-
-    public static class UserService
-    {
-        public static async Task CreateUserIfNotExisting(ClaimsIdentity newClaimsIdentity)
-        {
-            //.Select(x => x.ValueType).OrderBy(x => x).ToDictionary();
-            var dict = newClaimsIdentity.Claims.Select(t => new {t.Type, t.Value})
-                .ToDictionary(t => t.Type, t => t.Value);
-
-            var httpClient = RideShareHttpClient.GetClient(newClaimsIdentity);
-            var content = new StringContent(JsonConvert.SerializeObject(dict), Encoding.UTF8, "application/json");
-            var httpResponseMessage = await httpClient.PostAsync("api/userinfo/", content).ConfigureAwait(false);
-
-            Debug.WriteLine(httpResponseMessage.ToString());
         }
     }
 }
