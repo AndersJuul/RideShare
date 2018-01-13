@@ -103,7 +103,7 @@ namespace Ajf.RideShare.Web
 
                         // create a new claims, issuer + sub as unique identifier
                         var nameClaim = new Claim(JwtClaimTypes.Name,
-                            Constants.TripGalleryIssuerUri + subClaim.Value);
+                            Constants1.TripGalleryIssuerUri + subClaim.Value);
 
                         var newClaimsIdentity = new ClaimsIdentity(
                             n.AuthenticationTicket.Identity.AuthenticationType,
@@ -128,7 +128,7 @@ namespace Ajf.RideShare.Web
                         var tokenClientForRefreshToken = new TokenClient(
                             ConfigurationManager.AppSettings["IdentityServerApplicationUrl"] + "/connect/token",
                             _ClientId,
-                            Constants.TripGalleryClientSecret);
+                            Constants1.TripGalleryClientSecret);
 
                         var refreshResponse = await
                             tokenClientForRefreshToken.RequestAuthorizationCodeAsync(

@@ -1,7 +1,7 @@
 ﻿
 namespace TripGallery
 {
-    public class Constants
+    public class Constants1
     {
 
         //public const string TripGalleryMVC = "https://localhost/Ajf.RideShare.Web/";

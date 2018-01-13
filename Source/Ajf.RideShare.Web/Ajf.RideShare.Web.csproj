@@ -303,13 +303,9 @@
       <Project>{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}</Project>
       <Name>Ajf.RideShare.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TripGallery.Constants\TripGallery.Constants.csproj">
-      <Project>{1bec8dbc-04f3-4eea-b3d7-422d80a6acd1}</Project>
-      <Name>TripGallery.Constants</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TripGallery.DTO\TripGallery.DTO.csproj">
-      <Project>{bb37f09a-7fd4-4480-a065-4511a7899191}</Project>
-      <Name>TripGallery.DTO</Name>
+    <ProjectReference Include="..\Ajf.RideShare.Shared\Ajf.RideShare.Shared.csproj">
+      <Project>{1BEC8DBC-04F3-4EEA-B3D7-422D80A6ACD1}</Project>
+      <Name>Ajf.RideShare.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

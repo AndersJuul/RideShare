@@ -280,6 +280,10 @@
     <Compile Include="Helpers\ValueResolvers.cs" />
     <Compile Include="Helpers\TokenIdentityHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
+    <Compile Include="Repositories\ICarRepository.cs" />
+    <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UnitOfWork\Cars\CreateCarForEvent.cs" />
     <Compile Include="UnitOfWork\Events\GetSingleEvent.cs" />
@@ -310,18 +314,6 @@
     <ProjectReference Include="..\Ajf.RideShare.Models\Ajf.RideShare.Models.csproj">
       <Project>{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}</Project>
       <Name>Ajf.RideShare.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TripGallery.Constants\TripGallery.Constants.csproj">
-      <Project>{1bec8dbc-04f3-4eea-b3d7-422d80a6acd1}</Project>
-      <Name>TripGallery.Constants</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TripGallery.DTO\TripGallery.DTO.csproj">
-      <Project>{bb37f09a-7fd4-4480-a065-4511a7899191}</Project>
-      <Name>TripGallery.DTO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TripGallery.Repository\TripGallery.Repository.csproj">
-      <Project>{95c07fa1-f974-4e4a-a169-c4f4f881965e}</Project>
-      <Name>TripGallery.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
