@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IdentityModel.Tokens;
-using System.Linq;
-using System.Net.Http;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using Ajf.Nuget.Logging;
 using Ajf.RideShare.Models;
+using Ajf.RideShare.Shared;
 using Ajf.RideShare.Web;
 using Ajf.RideShare.Web.Helpers;
 using Ajf.RideShare.Web.Models;
@@ -22,18 +19,15 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Newtonsoft.Json;
 using Owin;
 using Serilog;
-using TripGallery;
 
 [assembly: OwinStartup(typeof(Startup))]
-
 namespace Ajf.RideShare.Web
 {
     public class Startup
     {
-        private const string _ClientId = "ridesharehybrid";
+        private const string ClientId = "ridesharehybrid";
 
         public void Configuration(IAppBuilder app)
         {
@@ -70,7 +64,7 @@ namespace Ajf.RideShare.Web
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-                ClientId = _ClientId,
+                ClientId = ClientId,
                 Authority = ConfigurationManager.AppSettings["IdentityServerApplicationUrl"],
                 RedirectUri = ConfigurationManager.AppSettings["UrlRideShareWeb"],
                 SignInAsAuthenticationType = "Cookies",
@@ -103,7 +97,7 @@ namespace Ajf.RideShare.Web
 
                         // create a new claims, issuer + sub as unique identifier
                         var nameClaim = new Claim(JwtClaimTypes.Name,
-                            Constants1.TripGalleryIssuerUri + subClaim.Value);
+                            Constants.AndersAtHomeIdentityServerIssuerUri + subClaim.Value);
 
                         var newClaimsIdentity = new ClaimsIdentity(
                             n.AuthenticationTicket.Identity.AuthenticationType,
@@ -127,8 +121,8 @@ namespace Ajf.RideShare.Web
                         // request a refresh token
                         var tokenClientForRefreshToken = new TokenClient(
                             ConfigurationManager.AppSettings["IdentityServerApplicationUrl"] + "/connect/token",
-                            _ClientId,
-                            Constants1.TripGalleryClientSecret);
+                            ClientId,
+                            Constants.RideShareWebClientSecret);
 
                         var refreshResponse = await
                             tokenClientForRefreshToken.RequestAuthorizationCodeAsync(
@@ -150,8 +144,6 @@ namespace Ajf.RideShare.Web
                         n.AuthenticationTicket = new AuthenticationTicket(
                             newClaimsIdentity,
                             n.AuthenticationTicket.Properties);
-
-                        //await UserService.CreateUserIfNotExisting(newClaimsIdentity);
                     },
                     RedirectToIdentityProvider = async n =>
                     {

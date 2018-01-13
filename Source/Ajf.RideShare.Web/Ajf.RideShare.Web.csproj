@@ -296,9 +296,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Ajf.RideShare.Models\Ajf.RideShare.Models.csproj">
       <Project>{C18D5D68-F1E5-4392-B0A9-DC8D74F1ECCA}</Project>
       <Name>Ajf.RideShare.Models</Name>

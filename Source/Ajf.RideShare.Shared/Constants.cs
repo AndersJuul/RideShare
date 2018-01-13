@@ -1,16 +1,10 @@
 ﻿
-namespace TripGallery
+namespace Ajf.RideShare.Shared
 {
-    public class Constants1
+    public class Constants
     {
-
-        //public const string TripGalleryMVC = "https://localhost/Ajf.RideShare.Web/";
-        //public const string TripGalleryMVCSTSCallback = "https://localhost/Ajf.RideShare.Webstscallback/";
-        public const string TripGalleryAngular = "https://localhost:44316/";
-
-        public const string TripGalleryClientSecret = "myrandomclientsecret";
-
-        public const string TripGalleryIssuerUri = "https://andersathome.dk/identity";
+        public const string RideShareWebClientSecret = "myrandomclientsecret";
+        public const string AndersAtHomeIdentityServerIssuerUri = "https://andersathome.dk/identity";
     }
 
 }

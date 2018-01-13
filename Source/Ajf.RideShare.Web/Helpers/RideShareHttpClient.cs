@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Web;
+using Ajf.RideShare.Shared;
 using IdentityModel.Client;
 using Serilog.Core;
 using TripGallery;
+using Constants = Ajf.RideShare.Shared.Constants;
 
 namespace Ajf.RideShare.Web.Helpers
 {
@@ -50,7 +52,7 @@ namespace Ajf.RideShare.Web.Helpers
             var tokenEndpointClient = new TokenClient(
                 ConfigurationManager.AppSettings["IdentityServerApplicationUrl"] + "/connect/token",
                 "tripgalleryhybrid",
-                Constants1.TripGalleryClientSecret);
+                Constants.RideShareWebClientSecret);
 
             var requestRefreshTokenResponse =
                  tokenEndpointClient
