@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Ajf.RideShare.Api;
@@ -10,9 +8,6 @@ using NUnit.Framework;
 
 namespace Ajf.RideShare.Tests.DbBasedTests
 {
-    public class TestInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
-    {
-    }
     [TestFixture]
     public abstract class IntegrationTestBase
     {
@@ -21,9 +16,9 @@ namespace Ajf.RideShare.Tests.DbBasedTests
         {
             Database.SetInitializer(new TestInitializer());
 
-            DbName = "RideShare.Test." + DateTime.Now.ToString("yyyy-MM-dd.HH.mm.ss");
+            DbName = "RideShare.Test."+Environment.MachineName + DateTime.Now.ToString("yyyy-MM-dd.HH.mm.ss");
             ConnectionString = $"Server=JuulServer2017;Database={DbName};User Id=rideshare;Password=rideshare";
-            DbContext = new ApplicationDbContext(){Database = { Connection = { ConnectionString = ConnectionString } } };
+            DbContext = new ApplicationDbContext {Database = { Connection = { ConnectionString = ConnectionString } } };
             DbContext.Database.Initialize(true);
 
             AutoMapperInitializor.Init();
