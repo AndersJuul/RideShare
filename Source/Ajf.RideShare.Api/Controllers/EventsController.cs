@@ -32,7 +32,7 @@ namespace Ajf.RideShare.Api.Controllers
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new GetSingleEvent(sub,ownerId))
+                using (var uow = new GetSingleEvent(sub,ownerId, _eventRepository))
                 {
                     var uowResult = uow.Execute();
 
@@ -134,7 +134,7 @@ namespace Ajf.RideShare.Api.Controllers
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new UpdateEvent(ownerId))
+                using (var uow = new UpdateEvent(ownerId,_eventRepository))
                 {
                     var uowResult = uow.Execute(@event);
 
