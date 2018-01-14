@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ajf.RideShare.Models;
 using Serilog;
@@ -13,16 +12,6 @@ namespace Ajf.RideShare.Api.Repositories
         public EventRepository(IDbContextProvider dbContextProvider)
         {
             _dbContextProvider = dbContextProvider;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
         }
 
         public void InsertEvent(Event @event)

@@ -4,7 +4,7 @@ using Ajf.RideShare.Models;
 
 namespace Ajf.RideShare.Api.Repositories
 {
-    public interface IEventRepository:IDisposable
+    public interface IEventRepository
     {
         void InsertEvent(Event @event);
         IEnumerable<Event> GetEvents(string ownerId);

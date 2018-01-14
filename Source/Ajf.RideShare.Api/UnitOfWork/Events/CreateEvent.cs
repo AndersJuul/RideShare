@@ -9,7 +9,7 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
     public class CreateEvent : IUnitOfWork<Event, EventForCreation>, IDisposable
     {
         private readonly string _ownerId;
-        private IEventRepository _eventRepository;
+        private readonly IEventRepository _eventRepository;
 
         private CreateEvent(IEventRepository eventRepository)
         {
@@ -53,12 +53,6 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-                if (_eventRepository != null)
-                {
-                    _eventRepository.Dispose();
-                    _eventRepository = null;
-                }
         }
     }
 }

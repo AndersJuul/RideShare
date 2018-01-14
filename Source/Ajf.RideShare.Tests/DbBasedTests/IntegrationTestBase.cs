@@ -16,11 +16,11 @@ namespace Ajf.RideShare.Tests.DbBasedTests
         {
             Database.SetInitializer(new TestInitializer());
 
-            DbName = "RideShare.Test."+Environment.MachineName + DateTime.Now.ToString("yyyy-MM-dd.HH.mm.ss");
-            ConnectionString = $"Server=JuulServer2017;Database={DbName};User Id=rideshare;Password=rideshare";
+            _dbName = "RideShare.Test."+Environment.MachineName + DateTime.Now.ToString("yyyy-MM-dd.HH.mm.ss");
+
+            ConnectionString = $"Server=JuulServer2017;Database={_dbName};User Id=rideshare;Password=rideshare";
             DbContext = new ApplicationDbContext {Database = { Connection = { ConnectionString = ConnectionString } } };
             DbContext.Database.Initialize(true);
-
 
             AutoMapperInitializor.Init();
         }
@@ -34,17 +34,17 @@ namespace Ajf.RideShare.Tests.DbBasedTests
             {
                 con.Open();
                 con.ChangeDatabase("master");
-                new SqlCommand(@"ALTER DATABASE [" + DbName + @"] SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
+                new SqlCommand(@"ALTER DATABASE [" + _dbName + @"] SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
                     con)
                     .ExecuteNonQuery();
-                new SqlCommand(@"DROP DATABASE [" + DbName + "]",
+                new SqlCommand(@"DROP DATABASE [" + _dbName + "]",
                     con)
                     .ExecuteNonQuery();
             }
-            Debug.WriteLine("Tore down test db: " + DbName);
+            Debug.WriteLine("Tore down test db: " + _dbName);
         }
 
         protected string ConnectionString;
-        protected string DbName;
+        private string _dbName;
     }
 }

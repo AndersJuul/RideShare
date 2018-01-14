@@ -9,7 +9,7 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
     public class GetActiveEvents : IUnitOfWork<IEnumerable<Event>>, IDisposable
     {
         private readonly string _ownerId;
-        private IEventRepository _eventRepository;
+        private readonly IEventRepository _eventRepository;
 
         public GetActiveEvents(string ownerId, IEventRepository eventRepository)            
         {
@@ -47,12 +47,6 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-                if (_eventRepository != null)
-                {
-                    _eventRepository.Dispose();
-                    _eventRepository = null;
-                }
         }
     }
 }

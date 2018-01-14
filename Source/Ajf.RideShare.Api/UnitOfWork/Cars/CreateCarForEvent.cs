@@ -8,7 +8,7 @@ namespace Ajf.RideShare.Api.UnitOfWork.Cars
     public class CreateCarForEvent : IUnitOfWork<Car, CarForCreation>, IDisposable
     {
         private readonly string _ownerId;
-        private ICarRepository _carRepository;
+        private readonly ICarRepository _carRepository;
 
         private CreateCarForEvent(ICarRepository carRepository)
         {
@@ -29,12 +29,6 @@ namespace Ajf.RideShare.Api.UnitOfWork.Cars
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-                if (_carRepository != null)
-                {
-                    _carRepository.Dispose();
-                    _carRepository = null;
-                }
         }
 
         public UnitOfWorkResult<Car> Execute(CarForCreation input)

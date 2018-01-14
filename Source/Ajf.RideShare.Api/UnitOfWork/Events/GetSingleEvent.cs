@@ -6,7 +6,7 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
 {
     public class GetSingleEvent : IUnitOfWork<Event>, IDisposable
     {
-        IEventRepository _eventRepository;
+        readonly IEventRepository _eventRepository;
         private readonly string _eventId;
         readonly string _ownerId;
 
@@ -25,14 +25,6 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                if (_eventRepository != null)
-                {
-                    _eventRepository.Dispose();
-                    _eventRepository = null;
-                }
-            }
         }
 
         public UnitOfWorkResult<Event> Execute()

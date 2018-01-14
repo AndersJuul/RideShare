@@ -1,5 +1,4 @@
-﻿using System;
-using Ajf.RideShare.Api.Repositories;
+﻿using Ajf.RideShare.Api.Repositories;
 using Ajf.RideShare.Models;
 
 namespace Ajf.RideShare.Tests.DbBasedTests
@@ -15,7 +14,16 @@ namespace Ajf.RideShare.Tests.DbBasedTests
 
         public ApplicationDbContext GetContext()
         {
-            return new ApplicationDbContext() { Database = { Connection = { ConnectionString = _connectionString } } };
+            return new ApplicationDbContext
+            {
+                Database =
+                {
+                    Connection =
+                    {
+                        ConnectionString = _connectionString
+                    }
+                }
+            };
         }
     }
 }

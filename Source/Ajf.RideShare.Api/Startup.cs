@@ -5,8 +5,6 @@ using System.IdentityModel.Tokens;
 using System.Web.Http;
 using Ajf.Nuget.Logging;
 using Ajf.RideShare.Api.DependencyResolution;
-using Ajf.RideShare.Models;
-using AutoMapper;
 using IdentityServer3.AccessTokenValidation;
 using Owin;
 using Serilog;
