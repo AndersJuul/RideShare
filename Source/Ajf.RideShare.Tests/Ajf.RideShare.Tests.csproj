@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Include="DbBasedTests\DbTestContextProvider.cs" />
     <Compile Include="DbBasedTests\IntegrationTestBase.cs" />
-    <Compile Include="DbBasedTests\CreateEventIntegrationTest.cs" />
+    <Compile Include="DbBasedTests\UnitOfWorkIntegrationTest.cs" />
     <Compile Include="DbBasedTests\TestInitializer.cs" />
     <Compile Include="UnitTests\BaseUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

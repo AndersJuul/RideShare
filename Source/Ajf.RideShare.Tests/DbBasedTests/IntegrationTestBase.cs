@@ -11,7 +11,7 @@ namespace Ajf.RideShare.Tests.DbBasedTests
     [TestFixture]
     public abstract class IntegrationTestBase
     {
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             Database.SetInitializer(new TestInitializer());
@@ -21,12 +21,13 @@ namespace Ajf.RideShare.Tests.DbBasedTests
             DbContext = new ApplicationDbContext {Database = { Connection = { ConnectionString = ConnectionString } } };
             DbContext.Database.Initialize(true);
 
+
             AutoMapperInitializor.Init();
         }
 
         public ApplicationDbContext DbContext { get; set; }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             using (var con = new SqlConnection(ConnectionString))
