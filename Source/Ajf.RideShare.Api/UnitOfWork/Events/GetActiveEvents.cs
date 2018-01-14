@@ -11,15 +11,10 @@ namespace Ajf.RideShare.Api.UnitOfWork.Events
         private readonly string _ownerId;
         private IEventRepository _eventRepository;
 
-        private GetActiveEvents()
-        {
-            _eventRepository = new EventRepository();
-        }
-
-        public GetActiveEvents(string ownerId)
-            : this()
+        public GetActiveEvents(string ownerId, IEventRepository eventRepository)            
         {
             _ownerId = ownerId;
+            _eventRepository = eventRepository;
         }
 
         public void Dispose()
