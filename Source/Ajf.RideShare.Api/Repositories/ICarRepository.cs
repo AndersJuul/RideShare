@@ -1,7 +1,7 @@
 ﻿using System;
 using Ajf.RideShare.Models;
 
-namespace TripGallery.Repository
+namespace Ajf.RideShare.Api.Repositories
 {
     public interface ICarRepository:IDisposable
     {

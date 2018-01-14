@@ -15,7 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using TripGallery.Repository;
+using Ajf.RideShare.Api.Repositories;
 
 namespace Ajf.RideShare.Api.DependencyResolution {
     using Ajf.RideShare.Api.Controllers;
@@ -36,7 +36,7 @@ namespace Ajf.RideShare.Api.DependencyResolution {
                 });
             For<IEventRepository>().Use<EventRepository>();
             For<ICarRepository>().Use<CarRepository>();
-            For<EventsController>().Use(x=>new EventsController(new EventRepository()));
+            For<EventsController>().Use(x=>new EventsController(new EventRepository(new DbContextProvider())));
         }
 
         #endregion

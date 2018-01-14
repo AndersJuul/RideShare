@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
+using Ajf.RideShare.Api.Repositories;
 using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Api.UnitOfWork.Events;
 using Ajf.RideShare.Models;
 using Serilog;
-using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.Controllers
 {

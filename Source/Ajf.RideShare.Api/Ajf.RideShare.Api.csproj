@@ -279,10 +279,13 @@
     <Compile Include="Helpers\IListExtensions.cs" />
     <Compile Include="Helpers\ValueResolvers.cs" />
     <Compile Include="Helpers\TokenIdentityHelper.cs" />
+    <Compile Include="AutoMapperInitializor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\DbContextProvider.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\ICarRepository.cs" />
+    <Compile Include="Repositories\IDbContextProvider.cs" />
     <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UnitOfWork\Cars\CreateCarForEvent.cs" />

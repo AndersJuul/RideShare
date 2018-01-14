@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ajf.RideShare.Api.Repositories;
 using Ajf.RideShare.Models;
-using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.UnitOfWork.Events
 {

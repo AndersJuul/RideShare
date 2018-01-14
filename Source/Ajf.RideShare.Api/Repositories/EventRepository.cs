@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using Ajf.RideShare.Models;
 using Serilog;
 
-namespace TripGallery.Repository
+namespace Ajf.RideShare.Api.Repositories
 {
     public class EventRepository : IEventRepository
     {
+        private readonly IDbContextProvider _dbContextProvider;
+
+        public EventRepository(IDbContextProvider dbContextProvider)
+        {
+            _dbContextProvider = dbContextProvider;
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -21,7 +27,7 @@ namespace TripGallery.Repository
 
         public void InsertEvent(Event @event)
         {
-            using (var db = new ApplicationDbContext())
+            using (var db = _dbContextProvider.GetContext())
             {
                 db.Events.Add(@event);
 
@@ -33,7 +39,7 @@ namespace TripGallery.Repository
         {
             Log.Logger.Debug("EventRepository.GetEvents.Execute(4)");
 
-            using (var db = new ApplicationDbContext())
+            using (var db = _dbContextProvider.GetContext())
             {
                 return db
                     .Events
@@ -44,7 +50,7 @@ namespace TripGallery.Repository
 
         public void UpdateEvent(Event @event)
         {
-            using (var db = new ApplicationDbContext())
+            using (var db = _dbContextProvider.GetContext())
             {
                 var single = db.Events.Single(x=>x.EventId==@event.EventId);
 
@@ -57,7 +63,7 @@ namespace TripGallery.Repository
 
         public Event GetSingleEvent(string eventId)
         {
-            using (var db = new ApplicationDbContext())
+            using (var db = _dbContextProvider.GetContext())
             {
                 var single = db.Events.Single(x => x.EventId.ToString() == eventId);
 

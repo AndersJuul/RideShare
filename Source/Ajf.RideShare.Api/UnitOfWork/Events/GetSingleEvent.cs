@@ -1,6 +1,6 @@
 ﻿using System;
+using Ajf.RideShare.Api.Repositories;
 using Ajf.RideShare.Models;
-using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.UnitOfWork.Events
 {

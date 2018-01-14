@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Ajf.RideShare.Models;
 
-namespace TripGallery.Repository
+namespace Ajf.RideShare.Api.Repositories
 {
     public interface IEventRepository:IDisposable
     {

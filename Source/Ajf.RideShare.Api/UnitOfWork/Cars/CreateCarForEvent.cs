@@ -1,7 +1,7 @@
 ﻿using System;
+using Ajf.RideShare.Api.Repositories;
 using Ajf.RideShare.Models;
 using AutoMapper;
-using TripGallery.Repository;
 
 namespace Ajf.RideShare.Api.UnitOfWork.Cars
 {

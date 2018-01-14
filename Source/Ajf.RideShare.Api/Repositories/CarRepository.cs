@@ -1,10 +1,17 @@
 ﻿using System;
 using Ajf.RideShare.Models;
 
-namespace TripGallery.Repository
+namespace Ajf.RideShare.Api.Repositories
 {
     public class CarRepository : ICarRepository
     {
+        private readonly IDbContextProvider _dbContextProvider;
+
+        public CarRepository(IDbContextProvider dbContextProvider)
+        {
+            _dbContextProvider = dbContextProvider;
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -16,7 +23,7 @@ namespace TripGallery.Repository
 
         public void AddCar(Car car)
         {
-            using (var db = new ApplicationDbContext())
+            using (var db = _dbContextProvider.GetContext())
             {
                 db.Cars.Add(car);
 

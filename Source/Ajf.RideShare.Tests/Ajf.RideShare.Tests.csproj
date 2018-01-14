@@ -84,8 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbBasedTests\DbTestContextProvider.cs" />
     <Compile Include="DbBasedTests\IntegrationTestBase.cs" />
-    <Compile Include="DbBasedTests\IntegrationTestBaseImpl.cs" />
+    <Compile Include="DbBasedTests\CreateEventIntegrationTest.cs" />
     <Compile Include="UnitTests\BaseUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium\BaseSeleniumTests.cs" />
@@ -109,6 +110,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ajf.RideShare.Api\Ajf.RideShare.Api.csproj">
+      <Project>{9CED9E31-53ED-4F00-A135-D7C2972B57D2}</Project>
+      <Name>Ajf.RideShare.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ajf.RideShare.Models\Ajf.RideShare.Models.csproj">
       <Project>{c18d5d68-f1e5-4392-b0a9-dc8d74f1ecca}</Project>
       <Name>Ajf.RideShare.Models</Name>
