@@ -6,6 +6,12 @@ namespace Ajf.RideShare.Api.Logic.Services
 {
     public class CarService : ICarService
     {
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public CarService(ApplicationDbContext applicationDbContext)
+        {
+            _applicationDbContext = applicationDbContext;
+        }
         public Car CreateCarForEvent(string ownerId, CarForCreation carForCreation)
         {
             // map to entity
@@ -14,12 +20,9 @@ namespace Ajf.RideShare.Api.Logic.Services
             // create guid
             car.CarId = Guid.NewGuid();
 
-            using (var db = new ApplicationDbContext())
-            {
-                db.Cars.Add(car);
+            _applicationDbContext.Cars.Add(car);
 
-                db.SaveChanges();
-            }
+            _applicationDbContext.SaveChanges();
 
             // return a dto
             return car;

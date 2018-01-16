@@ -7,58 +7,53 @@ namespace Ajf.RideShare.Api.Logic.Services
 {
     public class EventService : IEventService
     {
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public EventService(ApplicationDbContext applicationDbContext)
+        {
+            _applicationDbContext = applicationDbContext;
+        }
+
         public Event GetSingleEvent(string eventId)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var single = db.Events.Single(x => x.EventId.ToString() == eventId);
+            var single = _applicationDbContext.Events.Single(x => x.EventId.ToString() == eventId);
 
-                // return a dto
-                return single;
-            }
+            // return a dto
+            return single;
         }
 
         public IEnumerable<Event> GetEvents(string ownerId)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var events = db
-                    .Events
-                    .Where(x => x.OwnerId == ownerId)
-                    .Where(x => x.Date > DateTime.Today)
-                    .OrderBy(x => x.Date)
-                    .Take(5);
+            var events = _applicationDbContext
+                .Events
+                .Where(x => x.OwnerId == ownerId)
+                .Where(x => x.Date > DateTime.Today)
+                .OrderBy(x => x.Date)
+                .Take(5);
 
-                // return a dto
-                return events.ToArray();
-            }
+            // return a dto
+            return events.ToArray();
         }
 
         public Event AddEvent(Event @event)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Events.Add(@event);
+            _applicationDbContext.Events.Add(@event);
 
-                db.SaveChanges();
+            _applicationDbContext.SaveChanges();
 
-                return @event;
-            }
+            return @event;
         }
 
         public Event UpdateEvent(Event @event)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var single = db.Events.Single(x => x.EventId == @event.EventId);
+            var single = _applicationDbContext.Events.Single(x => x.EventId == @event.EventId);
 
-                single.Date = @event.Date;
-                single.Description = @event.Description;
+            single.Date = @event.Date;
+            single.Description = @event.Description;
 
-                db.SaveChanges();
+            _applicationDbContext.SaveChanges();
 
-                return @event;
-            }
+            return @event;
         }
     }
 }
