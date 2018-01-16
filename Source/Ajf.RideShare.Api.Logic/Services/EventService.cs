@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ajf.RideShare.Api.Logic.Queries;
 using Ajf.RideShare.Models;
+using Highway.Data;
 
 namespace Ajf.RideShare.Api.Logic.Services
 {
     public class EventService : IEventService
     {
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IRepository _repository;
 
-        public EventService(ApplicationDbContext applicationDbContext)
+        public EventService(IRepository repository)
         {
-            _applicationDbContext = applicationDbContext;
+            _repository = repository;
         }
 
         public Event GetSingleEvent(string eventId)
         {
-            var single = _applicationDbContext.Events.Single(x => x.EventId.ToString() == eventId);
+            var single = _repository.Find(new EventByEventId(eventId));
 
             // return a dto
             return single;
@@ -24,12 +26,7 @@ namespace Ajf.RideShare.Api.Logic.Services
 
         public IEnumerable<Event> GetEvents(string ownerId)
         {
-            var events = _applicationDbContext
-                .Events
-                .Where(x => x.OwnerId == ownerId)
-                .Where(x => x.Date > DateTime.Today)
-                .OrderBy(x => x.Date)
-                .Take(5);
+            var events = _repository.Find(new EventsByOwnerAndDate(ownerId, DateTime.Today, 5));
 
             // return a dto
             return events.ToArray();
@@ -37,21 +34,21 @@ namespace Ajf.RideShare.Api.Logic.Services
 
         public Event AddEvent(Event @event)
         {
-            _applicationDbContext.Events.Add(@event);
+            _repository.Context.Add(@event);
 
-            _applicationDbContext.SaveChanges();
+            _repository.Context.Commit();
 
             return @event;
         }
 
         public Event UpdateEvent(Event @event)
         {
-            var single = _applicationDbContext.Events.Single(x => x.EventId == @event.EventId);
-
+            var single = _repository.Find(new EventByEventId(@event.EventId.ToString()));
+                
             single.Date = @event.Date;
             single.Description = @event.Description;
 
-            _applicationDbContext.SaveChanges();
+            _repository.Context.Commit();
 
             return @event;
         }

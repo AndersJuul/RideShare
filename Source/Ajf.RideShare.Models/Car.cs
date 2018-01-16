@@ -1,9 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Highway.Data;
 
 namespace Ajf.RideShare.Models
 {
-    public class Car
+    public class Car : IIdentifiable<Guid>
     {
         [Key] public Guid CarId { get; set; }
 
@@ -14,5 +15,10 @@ namespace Ajf.RideShare.Models
         [Required] public string Email { get; set; }
 
         [Required] public string Phone { get; set; }
+        public Guid Id
+        {
+            get => CarId;
+            set => CarId=value;
+        }
     }
 }

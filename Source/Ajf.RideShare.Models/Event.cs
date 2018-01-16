@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Highway.Data;
 
 namespace Ajf.RideShare.Models
 {
-    public class Event
+    public class Event:IIdentifiable<Guid>
     {
         [Key]
         public Guid EventId { get; set; }
@@ -16,5 +17,11 @@ namespace Ajf.RideShare.Models
         public string Description { get; set; }
         [Required]
         public ICollection<Car> Cars { get; set; }
+
+        public Guid Id
+        {
+            get => EventId;
+            set => EventId=value;
+        }
     }
 }
