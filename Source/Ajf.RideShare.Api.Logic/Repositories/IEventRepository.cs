@@ -6,9 +6,9 @@ namespace Ajf.RideShare.Api.Repositories
 {
     public interface IEventRepository
     {
-        void InsertEvent(Event @event);
-        IEnumerable<Event> GetEvents(string ownerId);
-        void UpdateEvent(Event @event);
+        //void InsertEvent(Event @event);
+        //IEnumerable<Event> GetEvents(string ownerId);
+        //void UpdateEvent(Event @event);
         Event GetSingleEvent(string eventId);
     }
 }
