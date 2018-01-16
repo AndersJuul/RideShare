@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Ajf.RideShare.Api.Logic.Queries;
 using Ajf.RideShare.Api.Logic.Services;
 using Ajf.RideShare.Models;
+using Ajf.RideShare.Tests.Base;
 using Ajf.RideShare.Tests.DbBasedTests;
 using Highway.Data;
 using Highway.Data.Contexts;

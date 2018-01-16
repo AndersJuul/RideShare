@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Ploeh.AutoFixture;
 
-namespace Ajf.RideShare.Tests.UnitTests
+namespace Ajf.RideShare.Tests.Base
 {
     public class BaseUnitTests
     {

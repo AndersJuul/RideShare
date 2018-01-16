@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace TripGallery.API.Helpers
+namespace Ajf.RideShare.Api.Helpers
 {
     public static class IListExtensions
     {

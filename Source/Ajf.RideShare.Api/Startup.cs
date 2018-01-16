@@ -8,7 +8,6 @@ using Ajf.RideShare.Api.DependencyResolution;
 using IdentityServer3.AccessTokenValidation;
 using Owin;
 using Serilog;
-using TripGallery.API;
 
 namespace Ajf.RideShare.Api
 {

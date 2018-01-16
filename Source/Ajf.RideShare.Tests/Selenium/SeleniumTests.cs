@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Ajf.RideShare.Tests.Base;
 using NUnit.Framework;
 using OpenQA.Selenium;
 

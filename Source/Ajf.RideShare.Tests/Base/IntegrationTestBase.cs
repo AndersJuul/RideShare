@@ -4,9 +4,10 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using Ajf.RideShare.Api;
 using Ajf.RideShare.Models;
+using Ajf.RideShare.Tests.DbBasedTests;
 using NUnit.Framework;
 
-namespace Ajf.RideShare.Tests.DbBasedTests
+namespace Ajf.RideShare.Tests.Base
 {
     [TestFixture]
     public abstract class IntegrationTestBase

@@ -1,12 +1,11 @@
 using System;
 using System.Configuration;
-using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 
-namespace Ajf.RideShare.Tests.Selenium
+namespace Ajf.RideShare.Tests.Base
 {
     public class BaseSeleniumTests
     {
