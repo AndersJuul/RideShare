@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IoC.cs" company="Web Advanced">
+// <copyright file="DefaultRegistry.cs" company="Web Advanced">
 // Copyright 2012 Web Advanced (www.webadvanced.com)
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,17 +15,28 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Ajf.RideShare.Api.Repositories;
 
 namespace Ajf.RideShare.Api.DependencyResolution {
-    using StructureMap;
-	
-    public static class IoC {
-        public static IContainer Initialize() {
-            return new Container(c =>
-            {
-                c.AddRegistry<ApiRegistry>();
-                c.AddRegistry<ApiLogicRegistry>();
-            });
+    using Ajf.RideShare.Api.Controllers;
+    using StructureMap.Configuration.DSL;
+    using StructureMap.Graph;
+
+    public class ApiRegistry : Registry
+    {
+        #region Constructors and Destructors
+
+        public ApiRegistry()
+        {
+            Scan(
+                scan => {
+                    scan.TheCallingAssembly();
+                    scan.WithDefaultConventions();
+
+                });
+            //For<EventsController>().Use(x=>new EventsController(new EventRepository(new DbContextProvider())));
         }
+
+        #endregion
     }
 }

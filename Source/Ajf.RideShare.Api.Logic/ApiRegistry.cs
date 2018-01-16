@@ -18,27 +18,23 @@
 using Ajf.RideShare.Api.Repositories;
 
 namespace Ajf.RideShare.Api.DependencyResolution {
-    using Ajf.RideShare.Api.Controllers;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
 
-    public class DefaultRegistry : Registry
+    public class ApiLogicRegistry : Registry
     {
-        #region Constructors and Destructors
-
-        public DefaultRegistry()
+        public ApiLogicRegistry()
         {
             Scan(
                 scan => {
-                    scan.TheCallingAssembly();
+                    scan.AssemblyContainingType<EventRepository>();
                     scan.WithDefaultConventions();
 
                 });
-            For<IEventRepository>().Use<EventRepository>();
-            For<ICarRepository>().Use<CarRepository>();
-            For<EventsController>().Use(x=>new EventsController(new EventRepository(new DbContextProvider())));
+            //For<IEventRepository>().Use<EventRepository>();
+            //For<ICarRepository>().Use<CarRepository>();
+            //For<EventsController>().Use(x=>new EventsController(new EventRepository(new DbContextProvider())));
         }
 
-        #endregion
     }
 }

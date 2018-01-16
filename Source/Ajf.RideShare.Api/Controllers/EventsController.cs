@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -6,9 +7,8 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
 using Ajf.RideShare.Api.Repositories;
-using Ajf.RideShare.Api.UnitOfWork;
-using Ajf.RideShare.Api.UnitOfWork.Events;
 using Ajf.RideShare.Models;
+using AutoMapper;
 using Serilog;
 
 namespace Ajf.RideShare.Api.Controllers
@@ -19,7 +19,7 @@ namespace Ajf.RideShare.Api.Controllers
     {
         private readonly IEventRepository _eventRepository;
 
-        public EventsController(IEventRepository eventRepository)
+        public EventsController(IEventRepository eventRepository, IEventService eventService)
         {
             _eventRepository = eventRepository;
         }
@@ -32,18 +32,17 @@ namespace Ajf.RideShare.Api.Controllers
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new GetSingleEvent(sub,ownerId, _eventRepository))
+               if (string.IsNullOrEmpty(ownerId))
                 {
-                    var uowResult = uow.Execute();
+                    return StatusCode(HttpStatusCode.Forbidden);
+                }
 
-                    switch (uowResult.Status)
-                    {
-                        case UnitOfWorkStatus.Ok:
-                            return Ok(uowResult.Result);
+                using (var db = new ApplicationDbContext())
+                {
+                    var single = db.Events.Single(x => x.EventId.ToString() == sub);
 
-                        default:
-                            return InternalServerError();
-                    }
+                    // return a dto
+                    return Ok(single);
                 }
             }
             catch (Exception ex)
@@ -62,23 +61,19 @@ namespace Ajf.RideShare.Api.Controllers
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new GetActiveEvents(ownerId, _eventRepository))
+                if (ownerId == null)
                 {
-                    var uowResult = uow.Execute();
-
-                    var count = uowResult.Result?.Count() ?? 0;
-
-                    Log.Logger.Debug($"ActiveEvents returned {uowResult.Status} and {count}" );
-
-                    switch (uowResult.Status)
-                    {
-                        case UnitOfWorkStatus.Ok:
-                            return Ok(uowResult.Result);
-
-                        default:
-                            return InternalServerError();
-                    }
+                    return StatusCode(HttpStatusCode.Forbidden);
                 }
+
+                var events = _eventRepository
+                    .GetEvents(ownerId)
+                    .Where(x => x.Date > DateTime.Today)
+                    .OrderBy(x => x.Date)
+                    .Take(5);
+
+                // return a dto
+                return Ok(events);
             }
             catch (Exception ex)
             {
@@ -97,26 +92,25 @@ namespace Ajf.RideShare.Api.Controllers
 
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new CreateEvent(ownerId, _eventRepository))
-                {
-                    var uowResult = uow.Execute(eventForCreation);
+                if (eventForCreation== null)
+                    return BadRequest();
 
-                    switch (uowResult.Status)
-                    {
-                        case UnitOfWorkStatus.Ok:
-                            return Created
-                                (Request.RequestUri + "/" + uowResult.Result.EventId, uowResult.Result);
+                if (ownerId == null)
+                    return StatusCode(HttpStatusCode.Forbidden);
 
-                        case UnitOfWorkStatus.Forbidden:
-                            return StatusCode(HttpStatusCode.Forbidden);
+                // map to entity
+                var @event = Mapper.Map<EventForCreation, Event>(eventForCreation);
 
-                        case UnitOfWorkStatus.Invalid:
-                            return BadRequest();
+                // create guid
+                var id = Guid.NewGuid();
+                @event.EventId = id;
+                @event.OwnerId = ownerId;
+                @event.Cars = new Collection<Car>();
 
-                        default:
-                            return InternalServerError();
-                    }
-                }
+                _eventRepository.InsertEvent(@event);
+
+                // return a dto
+                return Ok(@event);
             }
             catch (Exception ex)
             {
@@ -134,26 +128,18 @@ namespace Ajf.RideShare.Api.Controllers
                 await Task.FromResult(0);
                 var ownerId = TokenIdentityHelper.GetOwnerIdFromToken();
 
-                using (var uow = new UpdateEvent(ownerId,_eventRepository))
-                {
-                    var uowResult = uow.Execute(@event);
 
-                    switch (uowResult.Status)
-                    {
-                        case UnitOfWorkStatus.Ok:
-                            return Created
-                                (Request.RequestUri + "/" + uowResult.Result.EventId, uowResult.Result);
+                if (@event == null)
+                    return BadRequest();
 
-                        case UnitOfWorkStatus.Forbidden:
-                            return StatusCode(HttpStatusCode.Forbidden);
+                if (ownerId == null || ownerId != @event.OwnerId)
+                    return Unauthorized();
 
-                        case UnitOfWorkStatus.Invalid:
-                            return BadRequest();
+                // create guid
+                _eventRepository.UpdateEvent(@event);
 
-                        default:
-                            return InternalServerError();
-                    }
-                }
+                // return a dto
+                return Ok(@event);
             }
             catch (Exception ex)
             {
@@ -162,4 +148,5 @@ namespace Ajf.RideShare.Api.Controllers
             }
         }
     }
+
 }

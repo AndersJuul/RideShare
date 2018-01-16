@@ -113,6 +113,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ajf.RideShare.Api.Logic\Ajf.RideShare.Api.Logic.csproj">
+      <Project>{583E06F3-E669-4F42-BFBC-E8C7CFE32390}</Project>
+      <Name>Ajf.RideShare.Api.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ajf.RideShare.Api\Ajf.RideShare.Api.csproj">
       <Project>{9CED9E31-53ED-4F00-A135-D7C2972B57D2}</Project>
       <Name>Ajf.RideShare.Api</Name>
