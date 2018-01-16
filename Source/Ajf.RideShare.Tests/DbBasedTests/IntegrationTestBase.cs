@@ -11,15 +11,25 @@ namespace Ajf.RideShare.Tests.DbBasedTests
     [TestFixture]
     public abstract class IntegrationTestBase
     {
+        [SetUp]
+        public void SetUp()
+        {
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+        }
+
         [OneTimeSetUp]
-        public void Setup()
+        public void OneTimeSetUp()
         {
             Database.SetInitializer(new TestInitializer());
 
-            _dbName = "RideShare.Test."+Environment.MachineName + DateTime.Now.ToString("yyyy-MM-dd.HH.mm.ss");
+            _dbName = "RideShare.Test." + Environment.MachineName + DateTime.Now.ToString("yyyy-MM-dd.HH.mm.ss");
 
             ConnectionString = $"Server=JuulServer2017;Database={_dbName};User Id=rideshare;Password=rideshare";
-            DbContext = new ApplicationDbContext {Database = { Connection = { ConnectionString = ConnectionString } } };
+            DbContext = new ApplicationDbContext {Database = {Connection = {ConnectionString = ConnectionString}}};
             DbContext.Database.Initialize(true);
 
             AutoMapperInitializor.Init();
@@ -28,19 +38,25 @@ namespace Ajf.RideShare.Tests.DbBasedTests
         public ApplicationDbContext DbContext { get; set; }
 
         [OneTimeTearDown]
-        public void TearDown()
+        public void OneTimeTearDown()
+        {
+            TearDownDatabase();
+        }
+
+        private void TearDownDatabase()
         {
             using (var con = new SqlConnection(ConnectionString))
             {
                 con.Open();
                 con.ChangeDatabase("master");
                 new SqlCommand(@"ALTER DATABASE [" + _dbName + @"] SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
-                    con)
+                        con)
                     .ExecuteNonQuery();
                 new SqlCommand(@"DROP DATABASE [" + _dbName + "]",
-                    con)
+                        con)
                     .ExecuteNonQuery();
             }
+
             Debug.WriteLine("Tore down test db: " + _dbName);
         }
 
