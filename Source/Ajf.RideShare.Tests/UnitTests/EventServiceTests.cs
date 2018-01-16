@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Ajf.RideShare.Api.Logic.Services;
 using Ajf.RideShare.Models;
 using Ajf.RideShare.Tests.DbBasedTests;
@@ -20,35 +22,37 @@ namespace Ajf.RideShare.Tests.UnitTests
         [Test]
         public void ThatServiceCreatesEvent()
         {
+            // Arrange
             var inMemoryDataContext = new InMemoryDataContext();
-
             var repository = new Repository(inMemoryDataContext);
             var before = repository.Find(new GetEvents()).Count();
-
             var sut = new EventService(repository);
             var @event = new Fixture().Build<Event>().Create();
 
+            // Act
             sut.AddEvent(@event);
 
+            // Assert
             var after = repository.Find(new GetEvents()).Count();
-
             Assert.That((after - before).Equals(1));
         }
 
         [Test]
-        public void ThatServicePassesGetResultFromRepository()
+        public void ThatServiceReturnsEventsByOwnerId()
         {
-            //// Arrange
-            //var eventRepository = MockRepository.GenerateMock<IEventRepository>();
-            //var events = _fixture.CreateMany<Event>().ToArray();
-            //eventRepository.Expect(x => x.GetEvents()).Return(events);
-            //var eventService = new EventService(eventRepository);
+            // Arrange
+            var @event = new Fixture().Build<Event>().With(x=>x.Date, DateTime.Now.AddDays(3)).Create();
+            var inMemoryDataContext = new InMemoryDataContext();
+            inMemoryDataContext.Add(@event);
+            inMemoryDataContext.Commit();
+            var repository = new Repository(inMemoryDataContext);
+            var sut = new EventService(repository);
+            
+            // Act
+            var events = sut.GetEvents(@event.OwnerId);
 
-            //// Act
-            //var result = eventService.GetEvents();
-
-            //// Assert
-            //Assert.AreEqual(events, result);
+            // Assert
+            Assert.AreEqual(1,events.Count());
         }
     }
 }

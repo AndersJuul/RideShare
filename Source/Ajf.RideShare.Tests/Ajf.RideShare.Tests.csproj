@@ -104,13 +104,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbBasedTests\DbTestContextProvider.cs" />
-    <Compile Include="DbBasedTests\IntegrationTestBase.cs" />
+    <Compile Include="Base\IntegrationTestBase.cs" />
     <Compile Include="DbBasedTests\IsolatedAttribute.cs" />
     <Compile Include="DbBasedTests\UnitOfWorkIntegrationTest.cs" />
     <Compile Include="DbBasedTests\TestInitializer.cs" />
-    <Compile Include="UnitTests\BaseUnitTests.cs" />
+    <Compile Include="Base\BaseUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selenium\BaseSeleniumTests.cs" />
+    <Compile Include="Base\BaseSeleniumTests.cs" />
     <Compile Include="Selenium\SeleniumTests.cs" />
     <Compile Include="UnitTests\EventServiceTests.cs" />
   </ItemGroup>
