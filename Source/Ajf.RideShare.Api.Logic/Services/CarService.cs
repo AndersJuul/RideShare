@@ -2,7 +2,7 @@
 using Ajf.RideShare.Models;
 using AutoMapper;
 
-namespace Ajf.RideShare.Api.Controllers
+namespace Ajf.RideShare.Api.Logic.Services
 {
     public class CarService : ICarService
     {

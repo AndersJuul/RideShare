@@ -16,6 +16,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
+using Ajf.RideShare.Api.Logic;
+
 namespace Ajf.RideShare.Api.DependencyResolution {
     using StructureMap;
 	

@@ -282,11 +282,6 @@
     <Compile Include="AutoMapperInitializor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\Trip\GetTrips.cs" />
-    <Compile Include="UnitOfWork\Trip\PartiallyUpdateTrip.cs" />
-    <Compile Include="UnitOfWork\UnitOfWorkResult.cs" />
-    <Compile Include="UnitOfWork\UnitOfWorkStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\tripstore.json" />

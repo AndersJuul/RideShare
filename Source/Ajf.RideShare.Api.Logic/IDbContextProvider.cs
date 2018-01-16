@@ -1,6 +1,6 @@
 ﻿using Ajf.RideShare.Models;
 
-namespace Ajf.RideShare.Api.Repositories
+namespace Ajf.RideShare.Api.Logic
 {
     public interface IDbContextProvider
     {

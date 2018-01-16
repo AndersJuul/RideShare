@@ -15,8 +15,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Ajf.RideShare.Api.Repositories;
-
 namespace Ajf.RideShare.Api.DependencyResolution {
     using Ajf.RideShare.Api.Controllers;
     using StructureMap.Configuration.DSL;

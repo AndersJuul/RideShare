@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
+using Ajf.RideShare.Api.Logic.Services;
 using Ajf.RideShare.Models;
 using AutoMapper;
 using Serilog;

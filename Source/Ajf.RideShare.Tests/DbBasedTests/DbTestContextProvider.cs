@@ -1,4 +1,4 @@
-﻿using Ajf.RideShare.Api.Repositories;
+﻿using Ajf.RideShare.Api.Logic;
 using Ajf.RideShare.Models;
 
 namespace Ajf.RideShare.Tests.DbBasedTests

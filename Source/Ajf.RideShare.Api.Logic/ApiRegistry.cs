@@ -15,26 +15,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Ajf.RideShare.Api.Repositories;
+using Ajf.RideShare.Api.Logic.Services;
+using StructureMap.Configuration.DSL;
 
-namespace Ajf.RideShare.Api.DependencyResolution {
-    using StructureMap.Configuration.DSL;
-    using StructureMap.Graph;
-
+namespace Ajf.RideShare.Api.Logic
+{
     public class ApiLogicRegistry : Registry
     {
         public ApiLogicRegistry()
         {
             Scan(
-                scan => {
-                    scan.AssemblyContainingType<EventRepository>();
+                scan =>
+                {
+                    scan.AssemblyContainingType<EventService>();
                     scan.WithDefaultConventions();
-
                 });
-            //For<IEventRepository>().Use<EventRepository>();
-            //For<ICarRepository>().Use<CarRepository>();
-            //For<EventsController>().Use(x=>new EventsController(new EventRepository(new DbContextProvider())));
         }
-
     }
 }

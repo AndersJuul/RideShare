@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ajf.RideShare.Models;
 
-namespace Ajf.RideShare.Api.Controllers
+namespace Ajf.RideShare.Api.Logic.Services
 {
     public interface IEventService
     {
