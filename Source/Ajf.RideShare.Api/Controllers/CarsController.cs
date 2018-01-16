@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ajf.RideShare.Api.Helpers;
-using Ajf.RideShare.Api.UnitOfWork;
 using Ajf.RideShare.Models;
 using Serilog;
 
@@ -40,7 +39,7 @@ namespace Ajf.RideShare.Api.Controllers
                 var car = _carService.CreateCarForEvent(ownerId, carForCreation);
 
                 return Created
-                    (Request.RequestUri + "/" + car.CarId, UnitOfWorkStatus.Ok);
+                    (Request.RequestUri + "/" + car.CarId, HttpStatusCode.Created);
             }
             catch (Exception ex)
             {
