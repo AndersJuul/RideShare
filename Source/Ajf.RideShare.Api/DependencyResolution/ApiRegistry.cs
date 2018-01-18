@@ -1,5 +1,6 @@
 using System.Configuration;
 using Highway.Data;
+using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 

@@ -16,6 +16,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Ajf.RideShare.Api.Logic.Services;
+using StructureMap;
 using StructureMap.Configuration.DSL;
 
 namespace Ajf.RideShare.Api.Logic
