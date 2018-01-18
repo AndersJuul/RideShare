@@ -1,5 +1,5 @@
-﻿using Highway.Data;
-using Ploeh.AutoFixture;
+﻿using AutoFixture;
+using Highway.Data;
 
 namespace Ajf.RideShare.Tests.UnitTests.Contexts
 {

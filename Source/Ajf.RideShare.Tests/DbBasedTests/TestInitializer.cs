@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using Ajf.RideShare.Models;
-using Ploeh.AutoFixture;
+using AutoFixture;
 
 namespace Ajf.RideShare.Tests.DbBasedTests
 {

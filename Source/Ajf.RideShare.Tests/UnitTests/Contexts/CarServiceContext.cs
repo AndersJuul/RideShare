@@ -1,8 +1,8 @@
 ﻿using Ajf.RideShare.Api.Logic;
 using Ajf.RideShare.Api.Logic.Services;
+using AutoFixture;
 using Highway.Data;
 using Highway.Data.Contexts;
-using Ploeh.AutoFixture;
 
 namespace Ajf.RideShare.Tests.UnitTests.Contexts
 {

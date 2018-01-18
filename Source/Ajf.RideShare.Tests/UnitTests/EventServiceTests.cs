@@ -3,8 +3,8 @@ using System.Linq;
 using Ajf.RideShare.Api.Logic.Queries;
 using Ajf.RideShare.Models;
 using Ajf.RideShare.Tests.UnitTests.Contexts;
+using AutoFixture;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
 
 namespace Ajf.RideShare.Tests.UnitTests
 {
