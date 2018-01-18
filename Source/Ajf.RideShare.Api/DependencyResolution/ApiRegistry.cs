@@ -12,7 +12,8 @@ namespace Ajf.RideShare.Api.DependencyResolution
         public ApiRegistry()
         {
             var apiMappingSource = new ApiMappingSource();
-            var connectionString = ConfigurationManager.ConnectionStrings["RideShareConnection"].ConnectionString;
+            var connectionStringSettings = ConfigurationManager.ConnectionStrings["RideShareConnection"];
+            var connectionString = connectionStringSettings != null ? connectionStringSettings.ConnectionString : "Server=JuulServer2017;Database=RideShare.Web-DEV;User Id=rideshare;Password=rideshare";
             Scan(
                 scan =>
                 {

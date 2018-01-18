@@ -71,6 +71,12 @@
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.3.0.0.108\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.3.0.0.108\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -103,7 +109,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbBasedTests\DbTestContextProvider.cs" />
     <Compile Include="Base\IntegrationTestBase.cs" />
     <Compile Include="DbBasedTests\IsolatedAttribute.cs" />
     <Compile Include="DbBasedTests\UnitOfWorkIntegrationTest.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="UnitTests\Contexts\CarServiceContext.cs" />
     <Compile Include="UnitTests\EventServiceTests.cs" />
     <Compile Include="UnitTests\Contexts\ServiceContext.cs" />
+    <Compile Include="UnitTests\IocTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config">

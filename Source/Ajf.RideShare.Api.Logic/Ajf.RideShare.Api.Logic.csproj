@@ -78,17 +78,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiRegistry.cs" />
+    <Compile Include="ApiLogicRegistry.cs" />
     <Compile Include="AutoMapperInitializor.cs" />
     <Compile Include="Queries\GetCars.cs" />
     <Compile Include="Queries\GetEvents.cs" />
     <Compile Include="Services\CarService.cs" />
-    <Compile Include="DbContextProvider.cs" />
     <Compile Include="Queries\EventByEventId.cs" />
     <Compile Include="Queries\EventsByOwnerAndDate.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ICarService.cs" />
-    <Compile Include="IDbContextProvider.cs" />
     <Compile Include="Services\IEventService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
