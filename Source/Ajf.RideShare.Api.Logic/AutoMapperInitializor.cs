@@ -1,7 +1,7 @@
 using Ajf.RideShare.Models;
 using AutoMapper;
 
-namespace Ajf.RideShare.Api
+namespace Ajf.RideShare.Api.Logic
 {
     public static class AutoMapperInitializor
     {

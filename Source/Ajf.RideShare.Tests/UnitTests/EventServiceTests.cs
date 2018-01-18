@@ -2,6 +2,7 @@
 using System.Linq;
 using Ajf.RideShare.Api.Logic.Queries;
 using Ajf.RideShare.Models;
+using Ajf.RideShare.Tests.UnitTests.Contexts;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
@@ -19,7 +20,7 @@ namespace Ajf.RideShare.Tests.UnitTests
             var @event = context.Fixture.Build<Event>().Create();
 
             // Act
-            context.Sut.AddEvent(@event);
+            context.EventService.AddEvent(@event);
 
             // Assert
             var after = context.Repository.Find(new GetEvents()).Count();
@@ -31,10 +32,11 @@ namespace Ajf.RideShare.Tests.UnitTests
         {
             // Arrange
             var ownerId = Guid.NewGuid();
-            var context = EventServiceContext.GivenContext().WithSingleEvent(ownerId);
+            var context = EventServiceContext.GivenContext();
+            context.WithSingleEvent(ownerId);
 
             // Act
-            var events = context.Sut.GetEvents(ownerId.ToString());
+            var events = context.EventService.GetEvents(ownerId.ToString());
 
             // Assert
             Assert.AreEqual(1, events.Count());

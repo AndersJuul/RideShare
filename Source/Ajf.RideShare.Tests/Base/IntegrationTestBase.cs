@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Ajf.RideShare.Api;
+using Ajf.RideShare.Api.Logic;
 using Ajf.RideShare.Models;
 using Ajf.RideShare.Tests.DbBasedTests;
 using NUnit.Framework;

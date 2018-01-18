@@ -111,8 +111,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\BaseSeleniumTests.cs" />
     <Compile Include="Selenium\SeleniumTests.cs" />
-    <Compile Include="UnitTests\EventServiceContext.cs" />
+    <Compile Include="UnitTests\CarServiceTests.cs" />
+    <Compile Include="UnitTests\Contexts\EventServiceContext.cs" />
+    <Compile Include="UnitTests\Contexts\CarServiceContext.cs" />
     <Compile Include="UnitTests\EventServiceTests.cs" />
+    <Compile Include="UnitTests\Contexts\ServiceContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config">

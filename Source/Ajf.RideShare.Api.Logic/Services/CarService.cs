@@ -1,17 +1,19 @@
 ﻿using System;
 using Ajf.RideShare.Models;
 using AutoMapper;
+using Highway.Data;
 
 namespace Ajf.RideShare.Api.Logic.Services
 {
     public class CarService : ICarService
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-
-        public CarService(ApplicationDbContext applicationDbContext)
+        public CarService(IRepository repository)
         {
-            _applicationDbContext = applicationDbContext;
+            Repository = repository;
         }
+
+        public IRepository Repository { get; }
+
         public Car CreateCarForEvent(string ownerId, CarForCreation carForCreation)
         {
             // map to entity
@@ -20,9 +22,8 @@ namespace Ajf.RideShare.Api.Logic.Services
             // create guid
             car.CarId = Guid.NewGuid();
 
-            _applicationDbContext.Cars.Add(car);
-
-            _applicationDbContext.SaveChanges();
+            Repository.Context.Add(car);
+            Repository.Context.Commit();
 
             // return a dto
             return car;

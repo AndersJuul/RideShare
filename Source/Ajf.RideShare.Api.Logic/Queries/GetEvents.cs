@@ -3,7 +3,7 @@ using Highway.Data;
 
 namespace Ajf.RideShare.Api.Logic.Queries
 {
-    public class GetEvents:Query<Event>
+    public class GetEvents : Query<Event>
     {
         public GetEvents()
         {

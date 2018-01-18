@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiRegistry.cs" />
+    <Compile Include="AutoMapperInitializor.cs" />
+    <Compile Include="Queries\GetCars.cs" />
     <Compile Include="Queries\GetEvents.cs" />
     <Compile Include="Services\CarService.cs" />
     <Compile Include="DbContextProvider.cs" />
