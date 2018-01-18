@@ -1,41 +1,28 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Ajf.RideShare.Api.Logic.Queries;
-using Ajf.RideShare.Api.Logic.Services;
 using Ajf.RideShare.Models;
-using Ajf.RideShare.Tests.Base;
-using Ajf.RideShare.Tests.DbBasedTests;
-using Highway.Data;
-using Highway.Data.Contexts;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
 namespace Ajf.RideShare.Tests.UnitTests
 {
     [TestFixture]
-    public class EventServiceTests:BaseUnitTests
+    public class EventServiceTests
     {
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-        }
         [Test]
         public void ThatServiceCreatesEvent()
         {
             // Arrange
-            var inMemoryDataContext = new InMemoryDataContext();
-            var repository = new Repository(inMemoryDataContext);
-            var before = repository.Find(new GetEvents()).Count();
-            var sut = new EventService(repository);
-            var @event = new Fixture().Build<Event>().Create();
+            var context = EventServiceContext.GivenContext();
+            var before = context.Repository.Find(new GetEvents()).Count();
+            var @event = context.Fixture.Build<Event>().Create();
 
             // Act
-            sut.AddEvent(@event);
+            context.Sut.AddEvent(@event);
 
             // Assert
-            var after = repository.Find(new GetEvents()).Count();
+            var after = context.Repository.Find(new GetEvents()).Count();
             Assert.That((after - before).Equals(1));
         }
 
@@ -43,18 +30,14 @@ namespace Ajf.RideShare.Tests.UnitTests
         public void ThatServiceReturnsEventsByOwnerId()
         {
             // Arrange
-            var @event = new Fixture().Build<Event>().With(x=>x.Date, DateTime.Now.AddDays(3)).Create();
-            var inMemoryDataContext = new InMemoryDataContext();
-            inMemoryDataContext.Add(@event);
-            inMemoryDataContext.Commit();
-            var repository = new Repository(inMemoryDataContext);
-            var sut = new EventService(repository);
-            
+            var ownerId = Guid.NewGuid();
+            var context = EventServiceContext.GivenContext().WithSingleEvent(ownerId);
+
             // Act
-            var events = sut.GetEvents(@event.OwnerId);
+            var events = context.Sut.GetEvents(ownerId.ToString());
 
             // Assert
-            Assert.AreEqual(1,events.Count());
+            Assert.AreEqual(1, events.Count());
         }
     }
 }
