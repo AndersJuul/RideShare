@@ -3,7 +3,6 @@ using System.Linq;
 using Ajf.RideShare.Api.Logic.Queries;
 using Ajf.RideShare.Models;
 using Ajf.RideShare.Tests.UnitTests.Contexts;
-using Highway.Data;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
@@ -12,6 +11,38 @@ namespace Ajf.RideShare.Tests.UnitTests
     [TestFixture]
     public class EventServiceTests
     {
+        [Test]
+        public void ThatServiceCanGetSingleEvent()
+        {
+            // Arrange
+            var context = EventServiceContext.GivenContext();
+            var singleEvent = context.WithSingleEvent(Guid.NewGuid());
+
+            // Act
+            var retrievedEvent = context.EventService.GetSingleEvent(singleEvent.EventId.ToString());
+
+            // Assert
+            Assert.AreSame(singleEvent, retrievedEvent);
+        }
+
+        [Test]
+        public void ThatServiceCanUpdateEvent()
+        {
+            // Arrange
+            var ownerId = Guid.NewGuid();
+            var context = EventServiceContext.GivenContext();
+            var singleEvent = context.WithSingleEvent(ownerId);
+            var description = context.Fixture.Create<string>();
+
+            // Act
+            singleEvent.Description = description;
+            var events = context.EventService.UpdateEvent(singleEvent);
+
+            // Assert
+            Assert.AreEqual(description,
+                context.Repository.Find(new EventByEventId(singleEvent.EventId.ToString())).Description);
+        }
+
         [Test]
         public void ThatServiceCreatesEvent()
         {
@@ -41,31 +72,6 @@ namespace Ajf.RideShare.Tests.UnitTests
 
             // Assert
             Assert.AreEqual(1, events.Count());
-        }
-
-        [Test]
-        public void ThatServiceCanUpdateEvent()
-        {
-            // Arrange
-            var ownerId = Guid.NewGuid();
-            var context = EventServiceContext.GivenContext();
-            var singleEvent = context.WithSingleEvent(ownerId);
-            var description = context.Fixture.Create<string>();
-
-            // Act
-            singleEvent.Description = description;
-            var events = context.EventService.UpdateEvent(singleEvent);
-
-            // Assert
-            Assert.AreEqual(description, context.Repository.Find(new GetEventById(singleEvent.EventId)).Description);
-        }
-    }
-
-    public class GetEventById : Scalar<Event>
-    {
-        public GetEventById(Guid eventId)
-        {
-            ContextQuery = context => context.AsQueryable<Event>().SingleOrDefault(x => x.EventId == eventId);
         }
     }
 }
