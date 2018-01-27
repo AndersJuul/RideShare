@@ -34,7 +34,7 @@ namespace Ajf.RideShare.Tests.Base
             DbContext = new ApplicationDbContext {Database = {Connection = {ConnectionString = ConnectionString}}};
             DbContext.Database.Initialize(true);
 
-            AutoMapperInitializor.Init();
+            //AutoMapperInitializor.Init();
         }
 
         public ApplicationDbContext DbContext { get; set; }
